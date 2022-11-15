@@ -77,7 +77,7 @@
 			"conf/asplos": { "venue": "ASPOLS", "rank": "A" },
 		};
 
-		function search(query, firstHit, pageSize, total, match_total, html) {
+		function search(query, firstHit, pageSize, total, matchTotal, html) {
 			let request_url = "https://dblp.uni-trier.de/search/publ/api?q=" +
 				query + "&format=jsonp&c=0&f=" + firstHit + "&h=" + pageSize + "&callback=?";
 			$.getJSON(request_url, function (data) {
@@ -110,7 +110,7 @@
 						+ venue + ", " + year + ", "
 						+ "<a href=\"" + paper.ee + "\">URL</a>"
 						+ "</li>";
-					match_total++;	
+					matchTotal++;	
 				}
 
 				total = result["hits"]["@total"];
@@ -118,26 +118,31 @@
 					$("#result").append("<ol>" + html + "</ol>");
 					$("#tips").html("共匹配到"
 						+ "<strong style='color:red;'>"
-						+ match_total
+						+ matchTotal
 						+ "</strong>"
 						+ "条记录");
 					return ;
 				}
 
 				// recursion
-				search(query, firstHit + pageSize, pageSize, total, match_total, html);
+				search(query, firstHit + pageSize, pageSize, total, matchTotal, html);
 			});
 		}
 		function doSearch() {
-			if ($("#q").val() == "") {
+			let query = $.trim($("#q").val());
+			if (query == "") {
 				return ;
 			}
+			// init
 			$("#result").empty();
 			$("#tips").html("搜索中...");
-			
-			var firstHit = 0;
-			var pageSize = 1000;
-			search($("#q").val(), firstHit, pageSize, 0, 0, "");
+
+			let firstHit = 0;
+			let pageSize = 1000;
+			let total = 0;
+			let matchTotal = 0;
+			let html = "";
+			search(query, firstHit, pageSize, total, matchTotal, html);
 		}
 
 		$(function () {
