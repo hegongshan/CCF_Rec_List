@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>DBLP & CCF</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="description" content="Description">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style type="text/css">
+		li {
+			line-height: 40px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			padding-left: 20px;
+			color: #31708f;
+			/* background-color: #d9edf7; */
+			border: 1px solid transparent;
+			border-radius: 4px;
+		}
+
+		input {
+			width: 300px;
+			height: 40px;
+			border-radius: 2px;
+			font-size: 20px;
+		}
+
+		button {
+			height: 40px;
+			font-size: 14px;
+			padding: 6px 12px;
+			color: #fff;
+			background-color: #337ab7;
+			border: 1px solid transparent;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<h1>DBLP + CCF List</h1>
+		<input id="q" type="text" placeholder="请输入关键词" />
+		<button id="search">搜索</button>
+		<div id="tips"></div>
+		<div id="result"></div>
+	</div>
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script>
+		let CCF_LIST = {
+			// Storage
+			"conf/fast": { "venue": "FAST", "rank": "A" },
+			"conf/usenix": { "venue": "USENIX ATC", "rank": "A" },
+			"conf/osdi": { "venue": "OSDI", "rank": "A" },
+			"conf/sosp": { "venue": "SOSP", "rank": "A" },
+			"conf/sc": { "venue": "SC", "rank": "A" },
+			"conf/eurosys": { "venue": "EuroSys", "rank": "B" },
+			"conf/mss": { "venue": "MSST", "rank": "B" },
+			"conf/systor": { "venue": "SYSTOR", "rank": "C" },
+			"journals/tos": { "venue": "TOS", "rank": "A" },
+
+			// Computer System
+			"journals/tc": { "venue": "TC", "rank": "A" },
+			"journals/tocs": { "venue": "TOCS", "rank": "A" },
+
+			// Database
+			"journals/pvldb": { "venue": "VLDB", "rank": "A" },
+			"conf/vldb": { "venue": "VLDB Workshop", "rank": "A" },
+			"conf/sigmod": { "venue": "SIGMOD", "rank": "A" },
+			"conf/icde": { "venue": "ICDE", "rank": "A" },
+
+			// Computer Architecture
+			"conf/isca": { "venue": "ISCA", "rank": "A" },
+			"conf/micro": { "venue": "MICRO", "rank": "A" },
+			"conf/hpca": { "venue": "HPCA", "rank": "A" },
+			"conf/asplos": { "venue": "ASPOLS", "rank": "A" },
+		};
+
+		function search(query, firstHit, pageSize, total, match_total, html) {
+			let request_url = "https://dblp.uni-trier.de/search/publ/api?q=" +
+				query + "&format=jsonp&c=0&f=" + firstHit + "&h=" + pageSize + "&callback=?";
+			$.getJSON(request_url, function (data) {
+				let result = data["result"];
+				if (parseInt(result["status"]["@code"]) != 200) {
+					return;
+				}
+
+				paperList = result["hits"]["hit"];
+				for (var i = 0; i < paperList.length; i++) {
+					let paper = paperList[i]["info"];
+					let slashIdx = paper["key"].lastIndexOf("/");
+					let venue_dblp_url = paper["key"].substr(0, slashIdx);
+
+					if (!CCF_LIST.hasOwnProperty(venue_dblp_url)) {
+						continue;
+					}
+
+					let first_author;
+					if (paper.authors.author instanceof Array) {
+						first_author = paper.authors.author[0].text;
+					} else {
+						first_author = paper.authors.author.text;
+					}
+					let title = paper["title"];
+					let year = parseInt(paper["year"]);
+					let venue = CCF_LIST[venue_dblp_url]["venue"];
+					html += "<li>" + first_author + " et al., "
+						+ "<strong style='font-weight:bold;'>" + title + "</strong>, "
+						+ venue + ", " + year + ", "
+						+ "<a href=\"" + paper.ee + "\">URL</a>"
+						+ "</li>";
+					match_total++;	
+				}
+
+				total = result["hits"]["@total"];
+				if (firstHit + pageSize >= total) {
+					$("#result").append("<ol>" + html + "</ol>");
+					$("#tips").html("共匹配到"
+						+ "<strong style='color:red;'>"
+						+ match_total
+						+ "</strong>"
+						+ "条记录");
+					return ;
+				}
+
+				// recursion
+				search(query, firstHit + pageSize, pageSize, total, match_total, html);
+			});
+		}
+		function doSearch() {
+			if ($("#q").val() == "") {
+				return ;
+			}
+			$("#result").empty();
+			$("#tips").html("搜索中...");
+			
+			var firstHit = 0;
+			var pageSize = 1000;
+			search($("#q").val(), firstHit, pageSize, 0, 0, "");
+		}
+
+		$(function () {
+			$("#search").click(function () {
+				doSearch();
+			});
+			$("#q").keydown(function (event) {
+				if (event.keyCode == 13) {	
+					doSearch();
+				}
+			})
+		}); 
+	</script>
+</body>
+
+</html>
