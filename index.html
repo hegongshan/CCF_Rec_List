@@ -86,35 +86,37 @@
 					return;
 				}
 
-				paperList = result["hits"]["hit"];
-				for (var i = 0; i < paperList.length; i++) {
-					let paper = paperList[i]["info"];
-					let slashIdx = paper["key"].lastIndexOf("/");
-					let venue_dblp_url = paper["key"].substr(0, slashIdx);
+				total = result["hits"]["@total"];
+				if (total > 0) {
+					paperList = result["hits"]["hit"];
+					for (var i = 0; i < paperList.length; i++) {
+						let paper = paperList[i]["info"];
+						let slashIdx = paper["key"].lastIndexOf("/");
+						let venue_dblp_url = paper["key"].substr(0, slashIdx);
 
-					if (!CCF_LIST.hasOwnProperty(venue_dblp_url)) {
-						continue;
-					}
+						if (!CCF_LIST.hasOwnProperty(venue_dblp_url)) {
+							continue;
+						}
 
-					let first_author;
-					if (paper.authors.author instanceof Array) {
-						first_author = paper.authors.author[0].text;
-					} else {
-						first_author = paper.authors.author.text;
+						let first_author;
+						if (paper.authors.author instanceof Array) {
+							first_author = paper.authors.author[0].text;
+						} else {
+							first_author = paper.authors.author.text;
+						}
+						let title = paper["title"];
+						let year = parseInt(paper["year"]);
+						let venue = CCF_LIST[venue_dblp_url]["venue"];
+						html += "<li>[CCF " + CCF_LIST[venue_dblp_url]["rank"] + "] "
+							+ first_author + " et al., "
+							+ "<strong style='font-weight:bold;'>" + title + "</strong>, "
+							+ venue + "'" + year + ", "
+							+ "<a href=\"" + paper.ee + "\">URL</a>"
+							+ "</li>";
+						matchTotal++;
 					}
-					let title = paper["title"];
-					let year = parseInt(paper["year"]);
-					let venue = CCF_LIST[venue_dblp_url]["venue"];
-					html += "<li>[CCF " + CCF_LIST[venue_dblp_url]["rank"] + "] "
-						+ first_author + " et al., "
-						+ "<strong style='font-weight:bold;'>" + title + "</strong>, "
-						+ venue + "'" + year + ", "
-						+ "<a href=\"" + paper.ee + "\">URL</a>"
-						+ "</li>";
-					matchTotal++;
 				}
 
-				total = result["hits"]["@total"];
 				if (firstHit + pageSize >= total) {
 					$("#result").append("<ol>" + html + "</ol>");
 					$("#tips").html("共匹配到"
