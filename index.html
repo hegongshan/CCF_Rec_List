@@ -105,12 +105,13 @@
 					let title = paper["title"];
 					let year = parseInt(paper["year"]);
 					let venue = CCF_LIST[venue_dblp_url]["venue"];
-					html += "<li>" + first_author + " et al., "
+					html += "<li>[CCF " + CCF_LIST[venue_dblp_url]["rank"] + "] "
+						+ first_author + " et al., "
 						+ "<strong style='font-weight:bold;'>" + title + "</strong>, "
-						+ venue + ", " + year + ", "
+						+ venue + "'" + year + ", "
 						+ "<a href=\"" + paper.ee + "\">URL</a>"
 						+ "</li>";
-					matchTotal++;	
+					matchTotal++;
 				}
 
 				total = result["hits"]["@total"];
@@ -129,7 +130,9 @@
 			});
 		}
 		function doSearch() {
-			let query = $.trim($("#q").val());
+			// trim and check whether q is null or not
+			let query = $("#q").val();
+			query = $.trim(query);
 			if (query == "") {
 				return ;
 			}
