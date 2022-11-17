@@ -137,12 +137,19 @@
 						}
 						let title = paper["title"];
 						let year = parseInt(paper["year"]);
+						let url;
+						if (paper["ee"]) { 
+							url = paper["ee"];
+						} else {
+							// not available
+							url = "javascript:void(0)";
+						}
 						let venue = CCF_LIST[venue_dblp_url]["venue"];
 						html += "<li>[CCF " + CCF_LIST[venue_dblp_url]["rank"] + "] "
 							+ first_author + ", et al. "
 							+ "<strong style='font-weight:bold;'>" + title + "</strong>, "
 							+ venue + "'" + year + ", "
-							+ "<a href=\"" + paper.ee + "\">URL</a>"
+							+ "<a href='" + url + "'>URL</a>"
 							+ "</li>";
 						matchTotal++;
 					}
