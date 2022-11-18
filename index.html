@@ -53,8 +53,30 @@
 		<div id="result"></div>
 	</div>
 	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+	<script src="ccf_rec_list.js"></script>
 	<script src="search.js"></script>
-	<script>
+	<script id="paper-info-template" type="text/html">
+		<ol>
+		{{each paperList}}
+			{{set paper = $value}}
+			<li>
+				[CCF {{paper.ccfRank}}] 
+				{{paper.firstAuthor}} , et al. 
+				<strong style='font-weight:bold;'>{{paper.title}}</strong>, 
+				{{paper.venue}}'{{paper.year}}, 
+				<a href="{{paper.url}}">URL</a>
+				<br/>
+				<a style="text-decoration:underline;font-family:bold;" 
+					onclick="queryAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
+				<br/>
+				<span id="{{paper.abstractId}}tips"></span>
+				<p id="{{paper.abstractId}}"></p>
+			</li>
+		{{/each}}
+		</ol>
+	</script>
+	<script type="text/javascript">
 		$(function () {
 			$("#search").click(function () {
 				doSearch();

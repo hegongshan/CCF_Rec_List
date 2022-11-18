@@ -1,70 +1,13 @@
-let CCF_LIST = {
-    // Storage
-    "conf/fast": { "venue": "FAST", "rank": "A" },
-    "conf/usenix": { "venue": "USENIX ATC", "rank": "A" },
-    "conf/osdi": { "venue": "OSDI", "rank": "A" },
-    "conf/sosp": { "venue": "SOSP", "rank": "A" },
-    "conf/sc": { "venue": "SC", "rank": "A" },
-    "conf/eurosys": { "venue": "EuroSys", "rank": "B" },
-    "conf/mss": { "venue": "MSST", "rank": "B" },
-    "conf/systor": { "venue": "SYSTOR", "rank": "C" },
-    "journals/tos": { "venue": "TOS", "rank": "A" },
-    "journals/tpds": { "venue": "TPDS", "rank": "A" },
-
-    // Computer System
-    "journals/tocs": { "venue": "TOCS", "rank": "A" },
-    "journals/tc": { "venue": "TC", "rank": "A" },
-    "journals/tcad": { "venue": "TCAD", "rank": "A" },
-    "conf/ppopp": { "venue": "PPoPP", "rank": "A"},
-    "conf/dac": { "venue": "DAC", "rank": "A"},
-    
-    "conf/cloud": { "venue": "SoCC", "rank": "B"},
-    "conf/spaa": { "venue": "SPAA", "rank": "B"},
-    "conf/podc": { "venue": "PODC", "rank": "B"},
-    "conf/fpga": { "venue": "FPGA", "rank": "B"},
-    "conf/cgo": { "venue": "CGO", "rank": "B"},
-    "conf/date": { "venue": "DATE", "rank": "B"},
-    "conf/cluster": { "venue": "CLUSTER", "rank": "B"},
-    "conf/iccd": { "venue": "ICCD", "rank": "B"},
-    "conf/iccad": { "venue": "ICCAD", "rank": "B"},
-    "conf/icdcs": { "venue": "ICDCS", "rank": "B"},
-    "conf/codes": { "venue": "CODES+ISSS", "rank": "B"},
-    "conf/hipeac": { "venue": "HiPEAC", "rank": "B"},
-    "conf/IEEEpact": { "venue": "PACT", "rank": "B"},
-    "conf/icpp": { "venue": "ICPP", "rank": "B"},
-    "conf/ics": { "venue": "ICS", "rank": "B"},
-    "conf/ipps": { "venue": "IPDPS", "rank": "B"},
-    "conf/vee": { "venue": "VEE", "rank": "B"},
-    "conf/hpdc": { "venue": "HPDC", "rank": "B"},
-    "conf/itc": { "venue": "ITC", "rank": "B"},
-    "conf/lisa": { "venue": "LISA", "rank": "B"},
-    "conf/rtas": { "venue": "RTAS", "rank": "B"},
-    
-    // performance analysis
-    "conf/sigmetrics": { "venue": "SIGMETRICS", "rank": "B"},
-    "conf/performance": { "venue": "Performance", "rank": "B"},
-    "conf/ispass": { "venue": "ISPASS", "rank": "C"},
-
-    // Database
-    "journals/pvldb": { "venue": "VLDB", "rank": "A" },
-    "conf/vldb": { "venue": "VLDB Workshop", "rank": "A" },
-    "conf/sigmod": { "venue": "SIGMOD", "rank": "A" },
-    "conf/icde": { "venue": "ICDE", "rank": "A" },
-
-    // Computer Architecture
-    "conf/isca": { "venue": "ISCA", "rank": "A" },
-    "conf/micro": { "venue": "MICRO", "rank": "A" },
-    "conf/hpca": { "venue": "HPCA", "rank": "A" },
-    "conf/asplos": { "venue": "ASPOLS", "rank": "A" },
-
-    // survey
-    "journals/csur": { "venue": "CSUR", "rank": "not in recommended list (It's equivalent to Rank A)" }
-};
-
-function search(query, firstHit, pageSize, total, matchTotal, html) {
-    let request_url = "https://dblp.uni-trier.de/search/publ/api?q=" +
-        query + "&format=jsonp&c=0&f=" + firstHit + "&h=" + pageSize + "&callback=?";
-    $.getJSON(request_url, function (data) {
+function search(query, firstHit, pageSize, total, paperList) {
+    let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
+    let inputData = {
+        "q": query,
+        "c": 0,
+        "f": firstHit,
+        "h": pageSize,
+        "format": "jsonp"
+    };
+    $.getJSON(request_url, inputData, function (data) {
         let result = data["result"];
         if (parseInt(result["status"]["@code"]) != 200) {
             return;
@@ -72,72 +15,68 @@ function search(query, firstHit, pageSize, total, matchTotal, html) {
 
         total = result["hits"]["@total"];
         if (total > 0) {
-            paperList = result["hits"]["hit"];
-            for (var i = 0; i < paperList.length; i++) {
-                let paper = paperList[i]["info"];
+            let curPaperList = result["hits"]["hit"];
+            for (var i = 0; i < curPaperList.length; i++) {
+                let paper = curPaperList[i]["info"];
                 let slashIdx = paper["key"].lastIndexOf("/");
-                let venue_dblp_url = paper["key"].substr(0, slashIdx);
+                let venueDBLPURL = paper["key"].substr(0, slashIdx);
 
-                if (!CCF_LIST.hasOwnProperty(venue_dblp_url)) {
+                if (!CCF_LIST.hasOwnProperty(venueDBLPURL)) {
                     continue;
                 }
 
-                let first_author;
+                let firstAuthor;
                 if (paper.authors.author instanceof Array) {
-                    first_author = paper.authors.author[0].text;
+                    firstAuthor = paper.authors.author[0].text;
                 } else {
-                    first_author = paper.authors.author.text;
+                    firstAuthor = paper.authors.author.text;
                 }
-                let title = paper["title"];
-                let year = parseInt(paper["year"]);
+                let title = paper["title"].replace(/['"\.]+/g, "");
                 let url;
-                if (paper["ee"]) { 
+                if (paper["ee"]) {
                     url = paper["ee"];
                 } else {
                     // not available
                     url = "javascript:void(0)";
                 }
-                let venue = CCF_LIST[venue_dblp_url]["venue"];
-                let abstractId = title.substr(0, title.length - 1)
-                                        .replace(/[^a-zA-Z]+/g, "_");
-                let queryFn = "queryAbstract(" 
-                    + "'" + paper["doi"] + "'," 
-                    + "'" + title + "',"
-                    + "'#" + abstractId + "')";
-                html += "<li>[CCF " + CCF_LIST[venue_dblp_url]["rank"] + "] "
-                    + first_author + ", et al. "
-                    + "<strong style='font-weight:bold;'>" + title + "</strong>, "
-                    + venue + "'" + year + ", "
-                    + "<a href='" + url + "'>URL</a><br/>"
-                    + "<a style='text-decoration:underline;font-family:bold;' onclick=\"" + queryFn + "\">Abstract</a><br/>"
-                    + "<span id='" + abstractId + "tips'></span>"
-                    + "<p id='" + abstractId + "'></p>"
-                    + "</li>";
-                matchTotal++;
+
+                paperList[title] = {
+                    "ccfRank": CCF_LIST[venueDBLPURL]["rank"],
+                    "title": title,
+                    "firstAuthor": firstAuthor,
+                    "venue": CCF_LIST[venueDBLPURL]["venue"],
+                    "year": paper["year"],
+                    "url": url,
+                    "doi": paper["doi"],
+                    "abstractId": title.replace(/[^a-zA-Z]+/g, "_")
+                };
             }
         }
 
         if (firstHit + pageSize >= total) {
-            $("#result").append("<ol>" + html + "</ol>");
+            let html = template.render($("#paper-info-template").html(), {
+                "paperList": paperList
+            });
+            $("#result").append(html);
             $("#tips").html("共匹配到"
                 + "<strong style='color:red;'>"
-                + matchTotal
+                + Object.keys(paperList).length
                 + "</strong>"
                 + "条记录");
-            return ;
+            return;
         }
 
         // recursion
-        search(query, firstHit + pageSize, pageSize, total, matchTotal, html);
+        search(query, firstHit + pageSize, pageSize, total, paperList);
     });
 }
 
 function doSearch() {
-    // trim and check whether q is null or not
+    // trim and check whether or not q is null
     let query = $("#q").val();
     query = $.trim(query);
     if (query == "") {
-        return ;
+        return;
     }
     // init
     $("#result").empty();
@@ -146,12 +85,11 @@ function doSearch() {
     let firstHit = 0;
     let pageSize = 1000;
     let total = 0;
-    let matchTotal = 0;
-    let html = "";
-    search(query, firstHit, pageSize, total, matchTotal, html);
+    let paperList = {};
+    search(query, firstHit, pageSize, total, paperList);
 }
 
-function queryAbstract(paperDOI, paperTitle=null, abstractSelector) {
+function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
     // read cache if exists
     let abstractTag = $(abstractSelector);
     if (abstractTag.html()) {
@@ -169,7 +107,7 @@ function queryAbstract(paperDOI, paperTitle=null, abstractSelector) {
     };
 
     let isQuery = false;
-    if (paperDOI != 'undefined') {
+    if (paperDOI) {
         semanticScholarUrl += "DOI:" + paperDOI;
     } else {
         semanticScholarUrl += "search";
@@ -179,22 +117,22 @@ function queryAbstract(paperDOI, paperTitle=null, abstractSelector) {
         isQuery = true;
     }
 
-    let loadingTips = $(abstractSelector+"tips")
+    let loadingTips = $(abstractSelector + "tips")
     loadingTips.html("加载中...");
     // $.ajaxSettings.async = false;
-    $.getJSON(semanticScholarUrl, inputData, function(data){
+    $.getJSON(semanticScholarUrl, inputData, function (data) {
         let abstract;
         if (isQuery) {
             if (data["total"] == 0) {
-                return ;
+                return;
             }
 
             let paper = data["data"][0];
             // maybe
             abstract = paper["abstract"];
             console.log(paper["title"],
-                paper["title"].toLowerCase().replace(/[^a-zA-Z]+/g, "_") == 
-                abstractSelector.toLowerCase().replace("#", ""));      
+                paper["title"].toLowerCase().replace(/[^a-zA-Z]+/g, "_") ==
+                abstractSelector.toLowerCase().replace("#", ""));
         } else {
             if (!data["abstract"]) {
                 return;
