@@ -25,7 +25,11 @@
 			height: 40px;
 			border-radius: 2px;
 			font-size: 20px;
-			/* margin-left: 20px; */
+		}
+
+		select {
+			height: 40px;
+			line-height: 40px; 
 		}
 
 		button {
@@ -47,9 +51,17 @@
 <body>
 	<div id="app">
 		<h1>CCF Recommended List</h1>
-		<input id="q" type="text" placeholder="请输入关键词" />
-		<button id="search">搜索</button>
-		<div id="tips"></div>
+		<div>
+			<input id="q" type="search" placeholder="请输入关键词" />
+			Rank: <select name="rank" id="rank">
+				<option value="A|B|C" selected>All</option>
+				<option value="A">CCF A</option>
+				<option value="B">CCF B</option>
+				<option value="C">CCF C</option>
+			</select>
+			<button id="search">搜索</button>
+			<span id="tips"></span>
+		</div>
 		<div id="result"></div>
 	</div>
 	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>

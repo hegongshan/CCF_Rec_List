@@ -1,4 +1,4 @@
-function search(query, firstHit, pageSize, total, paperList) {
+function search(query, firstHit, pageSize, total, paperList, rank) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         "q": query,
@@ -21,7 +21,8 @@ function search(query, firstHit, pageSize, total, paperList) {
                 let slashIdx = paper["key"].lastIndexOf("/");
                 let venueDBLPURL = paper["key"].substr(0, slashIdx);
 
-                if (!CCF_LIST.hasOwnProperty(venueDBLPURL)) {
+                if (!CCF_LIST.hasOwnProperty(venueDBLPURL) || 
+                    (rank != "A|B|C" && CCF_LIST[venueDBLPURL]["rank"] != rank)) {
                     continue;
                 }
 
@@ -67,17 +68,18 @@ function search(query, firstHit, pageSize, total, paperList) {
         }
 
         // recursion
-        search(query, firstHit + pageSize, pageSize, total, paperList);
+        search(query, firstHit + pageSize, pageSize, total, paperList, rank);
     });
 }
 
 function doSearch() {
     // trim and check whether or not q is null
-    let query = $("#q").val();
-    query = $.trim(query);
+    let query = $("#q").val().trim();
     if (query == "") {
         return;
     }
+    let rank = $("#rank").find("option:selected").val().trim();
+
     // init
     $("#result").empty();
     $("#tips").html("搜索中...");
@@ -86,7 +88,7 @@ function doSearch() {
     let pageSize = 1000;
     let total = 0;
     let paperList = {};
-    search(query, firstHit, pageSize, total, paperList);
+    search(query, firstHit, pageSize, total, paperList, rank);
 }
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
