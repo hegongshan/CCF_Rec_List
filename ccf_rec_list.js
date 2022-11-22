@@ -57,6 +57,10 @@ let CCF_LIST = {
     "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/asplos": { "venue": "ASPOLS", "rank": "A" },
 
-    // survey
-    "journals/csur": { "venue": "CSUR", "rank": "not in recommended list (It's equivalent to Rank A)" }
+    // Survey
+    // They are Not in recommended list, but equivalent to Rank A.
+    // ACM Computing Surveys
+    "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
+    // Communications of the ACM
+    "journals/cacm": { "venue": "Commun. ACM", "rank": "A" }
 };
