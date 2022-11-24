@@ -57,10 +57,31 @@ let CCF_LIST = {
     "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/asplos": { "venue": "ASPOLS", "rank": "A" },
 
+    // Artificial Intelligence
+    "conf/aaai": { "venue": "AAAI", "rank": "A" },
+    "conf/nips": { "venue": "NeurIPS", "rank": "A" },
+    "conf/icml": { "venue": "ICML", "rank": "A" },
+    "conf/ijcai": { "venue": "IJCAI", "rank": "A" },
+    "conf/www": { "venue": "WWW", "rank": "A" },
+
+    "conf/cikm": { "venue": "CIKM", "rank": "B"},
+    "conf/wsdm": { "venue": "WSDM", "rank": "B"},
+    "conf/icdm": { "venue": "ICDM", "rank": "B"},
+
+    /* 
+     * --------------------------------------------------------------------------------------
+     * 
+     * The following journals or conferences are Not in the recommended list, but should in.
+     *
+     * --------------------------------------------------------------------------------------
+    */
     // Survey
-    // They are Not in recommended list, but equivalent to Rank A.
+    // They are equivalent to Rank A.
     // ACM Computing Surveys
     "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
     // Communications of the ACM
-    "journals/cacm": { "venue": "Commun. ACM", "rank": "A" }
+    "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
+
+    // They are equivalent to Rank B.
+    "conf/recsys": { "venue": "RecSys", "rank": "B" },
 };
