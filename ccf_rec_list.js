@@ -81,7 +81,14 @@ let CCF_LIST = {
     "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
     // Communications of the ACM
     "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
+    "conf/iclr": {"venue": "ICLR", "rank": "A"},
 
     // They are equivalent to Rank B.
     "conf/recsys": { "venue": "RecSys", "rank": "B" },
 };
+
+let CCF_VENUE_RANK_LIST = new Map();
+for (let key in CCF_LIST) {
+    CCF_VENUE_RANK_LIST.set(CCF_LIST[key].venue, CCF_LIST[key].rank);
+}
+console.log(CCF_VENUE_RANK_LIST);

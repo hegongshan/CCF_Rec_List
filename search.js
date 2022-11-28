@@ -20,19 +20,40 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 let paper = curPaperList[i]["info"];
                 let slashIdx = paper["key"].lastIndexOf("/");
                 let venueDBLPURL = paper["key"].substr(0, slashIdx);
+                let venueName = null;
+                let venueNameMatchCCFList = false;
 
-                if (!CCF_LIST.hasOwnProperty(venueDBLPURL) || 
-                    (rank != "A|B|C" && CCF_LIST[venueDBLPURL]["rank"] != rank)) {
+                // Whether the key or venue hits or not
+                let venueURLMatchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
+                if (paper.venue) {
+                    venueName = paper["venue"].toUpperCase();
+                    venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
+                }
+                let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
+                // Whether the rank match CCF Rank or not
+                let matchFiltering = (rank == "A|B|C" || CCF_LIST[venueDBLPURL]["rank"] == rank);
+                if (!matchCCFList || !matchFiltering) {
                     continue;
                 }
 
-                let firstAuthor;
-                if (paper.authors.author instanceof Array) {
-                    firstAuthor = paper.authors.author[0].text;
+                let ccfRank;
+                if (venueURLMatchCCFList) {
+                    ccfRank = CCF_LIST[venueDBLPURL]["rank"];
+                    venueName = CCF_LIST[venueDBLPURL]["venue"];
                 } else {
-                    firstAuthor = paper.authors.author.text;
+                    ccfRank = CCF_VENUE_RANK_LIST[venueName];
                 }
-                let title = paper["title"].replace(/['"\.]+/g, "");
+
+                let firstAuthor = '';
+                if (paper.authors) {
+                    if (paper.authors.author instanceof Array) {
+                        firstAuthor = paper.authors.author[0].text;
+                    } else {
+                        firstAuthor = paper.authors.author.text;
+                    }
+                }
+                let title = paper["title"].replace(/['"\.]+/g, "")
+                    .replace(/&apos;/g, "'");
                 let url;
                 if (paper["ee"]) {
                     url = paper["ee"];
@@ -42,10 +63,10 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 }
 
                 paperList[title] = {
-                    "ccfRank": CCF_LIST[venueDBLPURL]["rank"],
+                    "ccfRank": ccfRank,
                     "title": title,
                     "firstAuthor": firstAuthor,
-                    "venue": CCF_LIST[venueDBLPURL]["venue"],
+                    "venue": venueName,
                     "year": paper["year"],
                     "url": url,
                     "doi": paper["doi"],
