@@ -91,4 +91,3 @@ let CCF_VENUE_RANK_LIST = new Map();
 for (let key in CCF_LIST) {
     CCF_VENUE_RANK_LIST.set(CCF_LIST[key].venue, CCF_LIST[key].rank);
 }
-console.log(CCF_VENUE_RANK_LIST);

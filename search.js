@@ -76,15 +76,15 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
         }
 
         if (firstHit + pageSize >= total) {
+            let tips = template.render($("#tips-info-template").html(), {
+                "count": Object.keys(paperList).length
+            });
+            $("#tips").html(tips);
+            
             let html = template.render($("#paper-info-template").html(), {
                 "paperList": paperList
             });
             $("#result").append(html);
-            $("#tips").html("共匹配到"
-                + "<strong style='color:red;'>"
-                + Object.keys(paperList).length
-                + "</strong>"
-                + "条记录");
             return;
         }
 
