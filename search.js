@@ -80,7 +80,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 "count": Object.keys(paperList).length
             });
             $("#tips").html(tips);
-            
+
             let html = template.render($("#paper-info-template").html(), {
                 "paperList": paperList
             });
@@ -94,9 +94,11 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
 }
 
 function doSearch() {
-    // trim and check whether or not q is null
+    // trim q
     let query = $("#q").val().trim();
-    if (query == "") {
+    // 1.check whether q is null or not 
+    // 2.ensure that string q is not a chinese character sequence
+    if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
         return;
     }
     let rank = $("#rank").find("option:selected").val().trim();
