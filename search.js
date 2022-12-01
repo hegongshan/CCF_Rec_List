@@ -30,9 +30,15 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                     venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
                 }
                 let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
+                if (!matchCCFList) {
+                    continue;
+                }
+
                 // Whether the rank match CCF Rank or not
-                let matchFiltering = (rank == "A|B|C" || CCF_LIST[venueDBLPURL]["rank"] == rank);
-                if (!matchCCFList || !matchFiltering) {
+                let matchFiltering = (rank == "A|B|C" || 
+                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) || 
+                    (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank));
+                if (!matchFiltering) {
                     continue;
                 }
 
