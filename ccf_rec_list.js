@@ -5,7 +5,7 @@ let CCF_LIST = {
     "conf/osdi": { "venue": "OSDI", "rank": "A" },
     "conf/sosp": { "venue": "SOSP", "rank": "A" },
     "conf/sc": { "venue": "SC", "rank": "A" },
-    "conf/eurosys": { "venue": "EuroSys", "rank": "B" },
+    "conf/eurosys": { "venue": "EuroSys", "rank": "A" },
     "conf/mss": { "venue": "MSST", "rank": "B" },
     "conf/systor": { "venue": "SYSTOR", "rank": "C" },
     "journals/tos": { "venue": "TOS", "rank": "A" },
@@ -67,6 +67,8 @@ let CCF_LIST = {
     "conf/cikm": { "venue": "CIKM", "rank": "B"},
     "conf/wsdm": { "venue": "WSDM", "rank": "B"},
     "conf/icdm": { "venue": "ICDM", "rank": "B"},
+    
+    "conf/recsys": { "venue": "RecSys", "rank": "B" },
 
     /* 
      * --------------------------------------------------------------------------------------
@@ -84,7 +86,6 @@ let CCF_LIST = {
     "conf/iclr": {"venue": "ICLR", "rank": "A"},
 
     // They are equivalent to Rank B.
-    "conf/recsys": { "venue": "RecSys", "rank": "B" },
 };
 
 let CCF_VENUE_RANK_LIST = new Map();
