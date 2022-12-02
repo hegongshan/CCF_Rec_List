@@ -58,8 +58,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                         firstAuthor = paper.authors.author.text;
                     }
                 }
-                let title = paper["title"].replace(/['"\.]+/g, "")
-                    .replace(/&apos;/g, "'");
+                let title = paper["title"].replace(/['"\.]+/g, "");
                 let url;
                 if (paper["ee"]) {
                     url = paper["ee"];
