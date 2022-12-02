@@ -23,10 +23,20 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 let venueName = null;
                 let venueNameMatchCCFList = false;
 
+                // Ignore some irrelvant information
+                if (paper.title && 
+                        paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)) {
+                    continue;
+                }
+
                 // Whether the key or venue hits or not
                 let venueURLMatchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
                 if (paper.venue) {
-                    venueName = paper["venue"].toUpperCase();
+                    if (paper.venue instanceof Array) {
+                        venueName = paper.venue[0].toUpperCase();
+                    } else {
+                        venueName = paper.venue.toUpperCase();
+                    }
                     venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
                 }
                 let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
@@ -58,7 +68,8 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                         firstAuthor = paper.authors.author.text;
                     }
                 }
-                let title = paper["title"].replace(/['"\.]+/g, "");
+                let title = paper["title"].replace(/['"\.]+/g, "")
+			.replace(/'"/g, "&apos;");
                 let url;
                 if (paper["ee"]) {
                     url = paper["ee"];
