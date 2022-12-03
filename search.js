@@ -23,7 +23,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 let venueName = null;
                 let venueNameMatchCCFList = false;
 
-                // Ignore some irrelvant information
+                // Ignore some irrelevant information
                 if (paper.title &&
                     paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)) {
                     continue;
