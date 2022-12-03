@@ -25,11 +25,13 @@
 			height: 40px;
 			border-radius: 2px;
 			font-size: 20px;
+			vertical-align: middle;
 		}
 
 		select {
 			height: 40px;
-			line-height: 40px; 
+			line-height: 40px;
+			vertical-align: middle;
 		}
 
 		button {
@@ -39,6 +41,7 @@
 			color: #fff;
 			background-color: #337ab7;
 			border: 1px solid transparent;
+			vertical-align: middle;
 		}
 
 		p {
@@ -69,7 +72,10 @@
 	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
 	<script src="ccf_rec_list.js"></script>
 	<script src="search.js"></script>
-	<script id="tips-info-template" type="text/html">
+	<script id="loading-tips-info-template" type="text/html">
+		<img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
+	</script>
+	<script id="response-tips-info-template" type="text/html">
 		共匹配到<strong style="color:red;"">{{count}}</strong>条记录
 	</script>
 	<script id="paper-info-template" type="text/html">

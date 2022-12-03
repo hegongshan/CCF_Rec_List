@@ -24,8 +24,8 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 let venueNameMatchCCFList = false;
 
                 // Ignore some irrelvant information
-                if (paper.title && 
-                        paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)) {
+                if (paper.title &&
+                    paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)) {
                     continue;
                 }
 
@@ -45,8 +45,8 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                 }
 
                 // Whether the rank match CCF Rank or not
-                let matchFiltering = (rank == "A|B|C" || 
-                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) || 
+                let matchFiltering = (rank == "A|B|C" ||
+                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
                     (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank));
                 if (!matchFiltering) {
                     continue;
@@ -68,8 +68,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
                         firstAuthor = paper.authors.author.text;
                     }
                 }
-                let title = paper["title"].replace(/['"\.]+/g, "")
-			.replace(/'"/g, "&apos;");
+                let title = paper["title"].replace(/['"\.]+/g, "");
                 let url;
                 if (paper["ee"]) {
                     url = paper["ee"];
@@ -92,7 +91,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
         }
 
         if (firstHit + pageSize >= total) {
-            let tips = template.render($("#tips-info-template").html(), {
+            let tips = template.render($("#response-tips-info-template").html(), {
                 "count": Object.keys(paperList).length
             });
             $("#tips").html(tips);
@@ -121,7 +120,7 @@ function doSearch() {
 
     // init
     $("#result").empty();
-    $("#tips").html("搜索中...");
+    $("#tips").html($("#loading-tips-info-template").html());
 
     let firstHit = 0;
     let pageSize = 1000;
