@@ -14,7 +14,9 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
         }
 
         total = result["hits"]["@total"];
-        if (total > 0) {
+        let size = result["hits"]["@sent"];
+        // When reaching the upper limit -- 100000 hits
+        if (total > 0 && size > 0) {
             let curPaperList = result["hits"]["hit"];
             for (var i = 0; i < curPaperList.length; i++) {
                 let paper = curPaperList[i]["info"];
@@ -90,7 +92,7 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
             }
         }
 
-        if (firstHit + pageSize >= total) {
+        if (firstHit + pageSize >= total || size == 0) {
             let tips = template.render($("#response-tips-info-template").html(), {
                 "count": Object.keys(paperList).length
             });
