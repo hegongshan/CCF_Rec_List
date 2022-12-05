@@ -1,4 +1,4 @@
-function search(query, firstHit, pageSize, total, paperList, rank) {
+function doSearch(query, firstHit, pageSize, total, paperList, rank) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         "q": query,
@@ -106,11 +106,11 @@ function search(query, firstHit, pageSize, total, paperList, rank) {
         }
 
         // recursion
-        search(query, firstHit + pageSize, pageSize, total, paperList, rank);
+        doSearch(query, firstHit + pageSize, pageSize, total, paperList, rank);
     });
 }
 
-function doSearch() {
+function search() {
     // trim q
     let query = $("#q").val().trim();
     // 1.check whether q is null or not 
@@ -128,7 +128,7 @@ function doSearch() {
     let pageSize = 1000;
     let total = 0;
     let paperList = {};
-    search(query, firstHit, pageSize, total, paperList, rank);
+    doSearch(query, firstHit, pageSize, total, paperList, rank);
 }
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
@@ -143,44 +143,56 @@ function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
         return;
     }
 
+    // init
+    let loadingTips = $(abstractSelector + "tips")
+    loadingTips.html($("#loading-tips-info-template").html());
+    let errorMsg = "没找到摘要=_=";
+
+    // query
+    if (!paperDOI) {
+        doQueryAbstract(false, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+    } else {
+        doQueryAbstract(true, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+    }
+}
+
+function doQueryAbstract(isDOIQuery = true, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg) {
     let semanticScholarUrl = "https://api.semanticscholar.org/graph/v1/paper/";
     let inputData = {
         "fields": "title,abstract"
     };
 
-    let isQuery = false;
-    if (paperDOI) {
+    if (isDOIQuery) {
         semanticScholarUrl += "DOI:" + paperDOI;
     } else {
         semanticScholarUrl += "search";
         inputData["query"] = paperTitle;
         inputData["limit"] = 1;
         inputData["fieldsOfStudy"] = "Computer Science";
-        isQuery = true;
     }
 
-    let loadingTips = $(abstractSelector + "tips")
-    loadingTips.html("加载中...");
     // $.ajaxSettings.async = false;
     $.getJSON(semanticScholarUrl, inputData, function (data) {
+
         let abstract;
-        if (isQuery) {
-            if (data["total"] == 0) {
+        if (isDOIQuery) {
+            if (!data["abstract"]) {
+                // search by title
+                doQueryAbstract(false, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+                return;
+            }
+            abstract = data["abstract"];
+        } else {
+            if (data["total"] == 0 || !data["data"][0]["abstract"]) {
+                abstractTag.html(errorMsg);
+                loadingTips.empty();
                 return;
             }
 
             let paper = data["data"][0];
-            // maybe
             abstract = paper["abstract"];
-            console.log(paper["title"],
-                paper["title"].toLowerCase().replace(/[^a-zA-Z]+/g, "_") ==
-                abstractSelector.toLowerCase().replace("#", ""));
-        } else {
-            if (!data["abstract"]) {
-                return;
-            }
-            abstract = data["abstract"];
         }
+
         abstractTag.html(abstract);
         loadingTips.empty();
     });
