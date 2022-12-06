@@ -70,6 +70,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                         firstAuthor = paper.authors.author.text;
                     }
                 }
+                firstAuthor = firstAuthor.replace(/\d+/g,"").trim();
                 let title = paper["title"].replace(/['"\.]+/g, "");
                 let url;
                 if (paper["ee"]) {
