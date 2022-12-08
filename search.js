@@ -47,10 +47,14 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                 }
 
                 // Whether the rank match CCF Rank or not
-                let matchFiltering = (rank == "A|B|C" ||
-                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
-                    (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank));
-                if (!matchFiltering) {
+                let matchAll = (rank == "A|B|C");
+                let rankList = new Set(["A", "B"]);
+                let matchAB = (rank == "A|B") && 
+                    ((venueURLMatchCCFList && rankList.has(CCF_LIST[venueDBLPURL]["rank"])) || 
+                    (venueNameMatchCCFList && rankList.has(CCF_VENUE_RANK_LIST[venueName])));
+                let matchRank = ((venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
+                        (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank));
+                if (!(matchAll || matchAB || matchRank)) {
                     continue;
                 }
 
@@ -119,16 +123,16 @@ function search() {
     if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
         return;
     }
-    let rank = $("#rank").find("option:selected").val().trim();
 
     // init
-    $("#result").empty();
     $("#tips").html($("#loading-tips-info-template").html());
+    $("#result").empty();
 
     let firstHit = 0;
     let pageSize = 1000;
     let total = 0;
     let paperList = {};
+    let rank = $("#rank").find("option:selected").val().trim();
     doSearch(query, firstHit, pageSize, total, paperList, rank);
 }
 
