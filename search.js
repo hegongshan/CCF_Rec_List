@@ -42,12 +42,12 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
                 }
                 let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
-                if (!matchCCFList) {
+                /*if (!matchCCFList) {
                     continue;
-                }
+                }*/
 
                 // Whether the rank match CCF Rank or not
-                let matchAll = (rank == "A|B|C");
+                let matchAll = (rank == "all");
                 let rankList = new Set(["A", "B"]);
                 let matchAB = (rank == "A|B") && 
                     ((venueURLMatchCCFList && rankList.has(CCF_LIST[venueDBLPURL]["rank"])) || 
