@@ -54,7 +54,7 @@ let ARCH_DCP_SS = {
     "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/micro": { "venue": "MICRO", "rank": "A" },
     "conf/sc": { "venue": "SC", "rank": "A" },
-    "conf/asplos": { "venue": "ASPOLS", "rank": "A" },
+    "conf/asplos": { "venue": "ASPLOS", "rank": "A" },
     "conf/isca": { "venue": "ISCA", "rank": "A" },
     "conf/usenix": { "venue": "USENIX ATC", "rank": "A" },
     "conf/eurosys": { "venue": "EuroSys", "rank": "A" },
@@ -132,6 +132,64 @@ let TCSE_SS_PDL = {
     "conf/ispass": { "venue": "ISPASS", "rank": "C"},
 };
 
+ * ------------------------------------------------------------
+ * 
+ * 计算机网络
+ *
+ * ------------------------------------------------------------
+ */
+let CN = {
+    /*
+     * Journal
+     */
+    // Rank A
+    "journal/jsac":{"venue": "JSAC", "rank": "A"},
+    "journal/tmc":{"venue": "TMC", "rank": "A"},
+    "journal/ton":{"venue": "TON", "rank": "A"},
+                   
+    // Rank B
+    "journal/tott":{"venue": "TOIT", "rank": "B"},
+    "journal/tomm":{"venue": "TOMM", "rank": "B"},
+    "journal/tosn":{"venue": "TOSN", "rank": "B"},
+    "journal/cn":{"venue": "CN", "rank": "B"},
+    "journal/tocm":{"venue": "TCOM", "rank": "B"},
+    "journal/twc":{"venue": "TWC", "rank": "B"},
+
+    "journal/ad_hoc_netw":{"venue": "AD HOC NETW", "rank": "C"},
+    "journal/cc":{"venue": "CC", "rank": "C"},
+    "journal/tnsm":{"venue": "TNSM", "rank": "C"},
+    "journal/iet_commun":{"venue": "IET COMMUN", "rank": "C"},
+    "journal/j_netw_comput_appl":{"venue": "J NETW COMPUT APPL", "rank": "C"},
+    "journal/monet":{"venue": "MONET", "rank": "C"},
+    "journal/networks":{"venue": "Networks", "rank": "C"},
+    "journal/ppna":{"venue": "PPNA", "rank": "C"},
+    "journal/wcmc":{"venue": "WCMC", "rank": "C"},
+    "journal/wirel_netw":{"venue": "WIREL NETW", "rank": "C"},
+    "journal/iot":{"venue": "IOT", "rank": "C"},
+    
+
+     /*
+     * Conference
+     */
+    //Rank A
+    "conf/sigcomm": { "venue": "SIGCOMM", "rank": "A"},
+    "conf/mobicom": { "venue": "MobiCom", "rank": "A" },
+    "conf/infocom": { "venue": "INFOCOM", "rank": "A" },
+    "conf/nsdi": { "venue": "NSDI", "rank": "A" },
+
+    //Rank B
+    "conf/sensys": { "venue": "SenSys", "rank": "B" },
+    "conf/conext": { "venue": "CoNEXT", "rank": "B" },
+    "conf/secon": { "venue": "SECON", "rank": "B" },
+    "conf/ipsn": { "venue": "IPSN", "rank": "B" },
+    "conf/mobisys": { "venue": "MobiSys", "rank": "B" },
+    "conf/mobihoc": { "venue": "MobiHoc", "rank": "B" },
+    "conf/nossdav": { "venue": "NOSSDAV", "rank": "B" },
+    "conf/iwqos": { "venue": "IWQoS", "rank": "B" },
+    "conf/IMC": { "venue": "IMC", "rank": "B" },
+    "conf/icnp": { "venue": "ICNP", "rank": "B" },
+}
+
 /* 
  * ------------------------------------------------------------
  * 
@@ -200,7 +258,7 @@ let OTHERS  = {
  *
  * ------------------------------------------------------------
  */
-let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, OTHERS];
+let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, CN,OTHERS];
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
