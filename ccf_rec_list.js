@@ -148,8 +148,8 @@ let CN = {
     "journal/ton":{"venue": "TON", "rank": "A"},
                    
     // Rank B
-    "journal/tott":{"venue": "TOIT", "rank": "B"},
-    "journal/tomm":{"venue": "TOMM", "rank": "B"},
+    "journal/toit":{"venue": "TOIT", "rank": "B"},
+    "journal/tomccap":{"venue": "TOMM", "rank": "B"},
     "journal/tosn":{"venue": "TOSN", "rank": "B"},
     "journal/cn":{"venue": "CN", "rank": "B"},
     "journal/tocm":{"venue": "TCOM", "rank": "B"},
@@ -158,14 +158,14 @@ let CN = {
     "journal/adhoc":{"venue": "Ad Hoc Networks", "rank": "C"},
     "journal/cc":{"venue": "CC", "rank": "C"},
     "journal/tnsm":{"venue": "TNSM", "rank": "C"},
-    "journal/iet-commun":{"venue": "IET Communications", "rank": "C"},
-    "journal/j_netw_comput_appl":{"venue": "J NETW COMPUT APPL", "rank": "C"},
+    "journal/iet-comm":{"venue": "IET Communications", "rank": "C"},
+    "journal/jnca":{"venue": "JNCA", "rank": "C"},
     "journal/monet":{"venue": "MONET", "rank": "C"},
     "journal/networks":{"venue": "Networks", "rank": "C"},
     "journal/ppna":{"venue": "PPNA", "rank": "C"},
-    "journal/wcmc":{"venue": "WCMC", "rank": "C"},
+    "journal/wicomm":{"venue": "WCMC", "rank": "C"},
     "journal/winet":{"venue": "Wireless Networks", "rank": "C"},
-    "journal/iot":{"venue": "IOT", "rank": "C"},
+    "journal/iotj":{"venue": "IOT", "rank": "C"},
     
 
      /*
@@ -194,7 +194,7 @@ let CN = {
     "conf/apnoms": { "venue": "APNOMS", "rank": "C" },
     "conf/forte": { "venue": "FORTE", "rank": "C" },
     "conf/lcn": { "venue": "LCN", "rank": "C" },
-    "conf/gloabecom": { "venue": "GLOBECOM", "rank": "C" },
+    "conf/globecom": { "venue": "GLOBECOM", "rank": "C" },
     "conf/icc": { "venue": "ICC", "rank": "C" },
     "conf/icccn": { "venue": "ICCCN", "rank": "C" },
     "conf/mass": { "venue": "MASS", "rank": "C" },
@@ -209,25 +209,22 @@ let CN = {
     "conf/wswim": { "venue": "MSWiM", "rank": "C" },
     "conf/wasa": { "venue": "WASA", "rank": "C" },
     "conf/hotnets": { "venue": "HotNets", "rank": "C" },
-    "conf/apnet": { "venue": "HotNets", "APNet": "C" },
+    "conf/apnet": { "venue": "APNet", "rank": "C" },
 };
 
 let CIS = {
-    /*
-     *Journal
-     */
-    //Rank A
-    "journals/tdsc": { "venue": "TDSC", "rank": "A" },
+    // Journal
+    // Rank A
+    "journals/tdsc": { "venue": "TDSC", "rank": "A" }, 
     "journals/tifs": { "venue": "TIFS", "rank": "A" },
     "journals/joc": { "venue": "Journal of Cryptology", "rank": "A" },
 
-    //Rank B
-    "journals/tops": { "venue": "TOPS", "rank": "B" },
-    "journals/tdsc": { "venue": "TDSC", "rank": "B" },
+    // Rank B
+    "journals/tissec": { "venue": "TOPS", "rank": "B" },
     "journals/composec": { "venue": "Computers & Security", "rank": "B" },
     "journals/dcc": { "venue": "Designs,Codes and Cryptography", "rank": "B" },
 
-    //Rank C
+    // Rank C
     "journals/clsr": { "venue": "CLSR", "rank": "C" },
     "journals/ejisec": { "venue": "EURASIP Journal on Information Security", "rank": "C" },
     "journals/iet-ifs": { "venue": "IET Information Security", "rank": "C" },
@@ -235,60 +232,58 @@ let CIS = {
     "journals/ijics": { "venue": "IJICS", "rank": "C" },
     "journals/ijisp": { "venue": "IJISP", "rank": "C" },
     "journals/jisa": { "venue": "JISA", "rank": "C" },
-    "journals/snc": { "venue": "SCN", "rank": "C" },
+    "journals/scn": { "venue": "SCN", "rank": "C" },
     "journals/cybersec": { "venue": "Cybersecurity", "rank": "C" },
 
-    /*
-    *Conference
-    */
-    //Rank A
-    "conf/ccs": { "venue": "CCS", "APNet": "A" },
-    "conf/eurocrypt": { "venue": "EUROCRYPT", "APNet": "A" },
-    "conf/sp": { "venue": "S&P", "APNet": "A" },
-    "conf/crypto": { "venue": "CRYPTO", "APNet": "A" },
-    "conf/uss": { "venue": "USENIX Security", "APNet": "A" },
-    "conf/ndss": { "venue": "NDSS", "APNet": "A" },
+    // Conference
+    // Rank A
+    "conf/ccs": { "venue": "CCS", "rank": "A" },
+    "conf/eurocrypt": { "venue": "EUROCRYPT", "rank": "A" },
+    "conf/sp": { "venue": "S&P", "rank": "A" },
+    "conf/crypto": { "venue": "CRYPTO", "rank": "A" },
+    "conf/uss": { "venue": "USENIX Security", "rank": "A" },
+    "conf/ndss": { "venue": "NDSS", "rank": "A" },
 
-    //Rank B
-    "conf/acsac": { "venue": "ACSAC", "APNet": "B" },
-     conf/ASIACRYPT": { "venue": "asiacrypt", "APNet": "B" },
-     conf/esorics": { "venue": "ESORICS", "APNet": "B" },
-     conf/fse": { "venue": "FSE", "APNet": "B" },
-     conf/csfw": { "venue": "CSFW", "APNet": "B" },
-     conf/srds": { "venue": "SRDS", "APNet": "B" },
-     conf/ches": { "venue": "CHES", "APNet": "B" },
-     conf/dsn": { "venue": "DSN", "APNet": "B" },
-     conf/raid": { "venue": "RAID", "APNet": "B" },
-     conf/pkc": { "venue": "PKC", "APNet": "B" },
-     conf/tcc": { "venue": "TCC", "APNet": "B" },
+    // Rank B
+    "conf/acsac": { "venue": "ACSAC", "rank": "B" },
+    "conf/asiacrypt": { "venue": "ASIACRYPT", "rank": "B" },
+    "conf/esorics": { "venue": "ESORICS", "rank": "B" },
+    "conf/fse": { "venue": "FSE", "rank": "B" },
+    "conf/csfw": { "venue": "CSFW", "rank": "B" },
+    "conf/srds": { "venue": "SRDS", "rank": "B" },
+    "conf/ches": { "venue": "CHES", "rank": "B" },
+    "conf/dsn": { "venue": "DSN", "rank": "B" },
+    "conf/raid": { "venue": "RAID", "rank": "B" },
+    "conf/pkc": { "venue": "PKC", "rank": "B" },
+    "conf/tcc": { "venue": "TCC", "rank": "B" },
 
-    //Rank C
-    "conf/wisec": { "venue": "WiSec", "APNet": "C" },
-    "conf/sacmat": { "venue": "SACMAT", "APNet": "C" },
-    "conf/drm": { "venue": "DRM", "APNet": "C" },
-    "conf/ih": { "venue": "IH&MMSec", "APNet": "C" },
-    "conf/ccs": { "venue": "AisaCCS", "APNet": "C" },
-    "conf/acisp": { "venue": "ACISP", "APNet": "C" },
-    "conf/ctrsa": { "venue": "CT-RSA", "APNet": "C" },
-    "conf/dimva": { "venue": "DIMVA", "APNet": "C" },
-    "conf/dfrws": { "venue": "DFRWS", "APNet": "C" },
-    "conf/fc": { "venue": "FC", "APNet": "C" },
-    "conf/trustcom": { "venue": "TrustCom", "APNet": "C" },
-    "conf/sec": { "venue": "SEC", "APNet": "B" },
-    "conf/ifip11-9": { "venue": "IFIP WG 11.9", "APNet": "C" },
-    "conf/isw": { "venue": "ISC", "APNet": "C" },
-    "conf/icdf2c": { "venue": "ICDF2C", "APNet": "C" },
-    "conf/icics": { "venue": "ICICS", "APNet": "C" },
-    "conf/securecomm": { "venue": "SecureComm", "APNet": "C" },
-    "conf/nspw": { "venue": "NSPW", "APNet": "C" },
-    "conf/pam": { "venue": "PAM", "APNet": "C" },
-    "conf/pet": { "venue": "PETS", "APNet": "C" },
-    "conf/sacrypt": { "venue": "SAC", "APNet": "C" },
-    "conf/soups": { "venue": "SOUPS", "APNet": "C" },
-    "conf/hotsec": { "venue": "HotSec", "APNet": "C" },
-    "conf/eurosp": { "venue": "EuroS&P", "APNet": "C" },
-    "conf/cisc": { "venue": "Inscrypt", "APNet": "C" },
-    "conf/acsac": { "venue": "ACSAC", "APNet": "C" },
+    // Rank C
+    "conf/wisec": { "venue": "WiSec", "rank": "C" },
+    "conf/sacmat": { "venue": "SACMAT", "rank": "C" },
+    "conf/drm": { "venue": "DRM", "rank": "C" },
+    "conf/ih": { "venue": "IH&MMSec", "rank": "C" },
+    "conf/acns": { "venue": "ACNS", "rank": "C" },
+    "conf/aisaccs": { "venue": "AsiaCCS", "rank": "C" }, 
+    "conf/acisp": { "venue": "ACISP", "rank": "C" },
+    "conf/ctrsa": { "venue": "CT-RSA", "rank": "C" },
+    "conf/dimva": { "venue": "DIMVA", "rank": "C" },
+    "conf/dfrws": { "venue": "DFRWS", "rank": "C" },
+    "conf/fc": { "venue": "FC", "rank": "C" },
+    "conf/trustcom": { "venue": "TrustCom", "rank": "C" },
+    "conf/sec": { "venue": "SEC", "rank": "B" }, 
+    "conf/ifip11-9": { "venue": "IFIP WG 11.9", "rank": "C" },
+    "conf/isw": { "venue": "ISC", "rank": "C" },
+    "conf/icdf2c": { "venue": "ICDF2C", "rank": "C" },
+    "conf/icics": { "venue": "ICICS", "rank": "C" },
+    "conf/securecomm": { "venue": "SecureComm", "rank": "C" },
+    "conf/nspw": { "venue": "NSPW", "rank": "C" },
+    "conf/pam": { "venue": "PAM", "rank": "C" },
+    "conf/pet": { "venue": "PETS", "rank": "C" },
+    "conf/sacrypt": { "venue": "SAC", "rank": "C" },
+    "conf/soups": { "venue": "SOUPS", "rank": "C" },
+    "conf/hotsec": { "venue": "HotSec", "rank": "C" },
+    "conf/eurosp": { "venue": "EuroS&P", "rank": "C" },
+    "conf/cisc": { "venue": "Inscrypt", "rank": "C" },
 };
 
 /* 
