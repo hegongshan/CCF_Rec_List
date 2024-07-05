@@ -54,7 +54,7 @@ let ARCH_DCP_SS = {
     "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/micro": { "venue": "MICRO", "rank": "A" },
     "conf/sc": { "venue": "SC", "rank": "A" },
-    "conf/asplos": { "venue": "ASPOLS", "rank": "A" },
+    "conf/asplos": { "venue": "ASPLOS", "rank": "A" },
     "conf/isca": { "venue": "ISCA", "rank": "A" },
     "conf/usenix": { "venue": "USENIX ATC", "rank": "A" },
     "conf/eurosys": { "venue": "EuroSys", "rank": "A" },
@@ -132,6 +132,160 @@ let TCSE_SS_PDL = {
     "conf/ispass": { "venue": "ISPASS", "rank": "C"},
 };
 
+ * ------------------------------------------------------------
+ * 
+ * 计算机网络
+ *
+ * ------------------------------------------------------------
+ */
+let CN = {
+    /*
+     * Journal
+     */
+    // Rank A
+    "journal/jsac":{"venue": "JSAC", "rank": "A"},
+    "journal/tmc":{"venue": "TMC", "rank": "A"},
+    "journal/ton":{"venue": "TON", "rank": "A"},
+                   
+    // Rank B
+    "journal/toit":{"venue": "TOIT", "rank": "B"},
+    "journal/tomccap":{"venue": "TOMM", "rank": "B"},
+    "journal/tosn":{"venue": "TOSN", "rank": "B"},
+    "journal/cn":{"venue": "CN", "rank": "B"},
+    "journal/tocm":{"venue": "TCOM", "rank": "B"},
+    "journal/twc":{"venue": "TWC", "rank": "B"},
+
+    "journal/adhoc":{"venue": "Ad Hoc Networks", "rank": "C"},
+    "journal/cc":{"venue": "CC", "rank": "C"},
+    "journal/tnsm":{"venue": "TNSM", "rank": "C"},
+    "journal/iet-comm":{"venue": "IET Communications", "rank": "C"},
+    "journal/jnca":{"venue": "JNCA", "rank": "C"},
+    "journal/monet":{"venue": "MONET", "rank": "C"},
+    "journal/networks":{"venue": "Networks", "rank": "C"},
+    "journal/ppna":{"venue": "PPNA", "rank": "C"},
+    "journal/wicomm":{"venue": "WCMC", "rank": "C"},
+    "journal/winet":{"venue": "Wireless Networks", "rank": "C"},
+    "journal/iotj":{"venue": "IOT", "rank": "C"},
+    
+
+     /*
+     * Conference
+     */
+    //Rank A
+    "conf/sigcomm": { "venue": "SIGCOMM", "rank": "A"},
+    "conf/mobicom": { "venue": "MobiCom", "rank": "A" },
+    "conf/infocom": { "venue": "INFOCOM", "rank": "A" },
+    "conf/nsdi": { "venue": "NSDI", "rank": "A" },
+
+    //Rank B
+    "conf/sensys": { "venue": "SenSys", "rank": "B" },
+    "conf/conext": { "venue": "CoNEXT", "rank": "B" },
+    "conf/secon": { "venue": "SECON", "rank": "B" },
+    "conf/ipsn": { "venue": "IPSN", "rank": "B" },
+    "conf/mobisys": { "venue": "MobiSys", "rank": "B" },
+    "conf/mobihoc": { "venue": "MobiHoc", "rank": "B" },
+    "conf/nossdav": { "venue": "NOSSDAV", "rank": "B" },
+    "conf/iwqos": { "venue": "IWQoS", "rank": "B" },
+    "conf/imc": { "venue": "IMC", "rank": "B" },
+    "conf/icnp": { "venue": "ICNP", "rank": "B" },
+
+    //Rank C
+    "conf/ancs": { "venue": "ANCS", "rank": "C" },
+    "conf/apnoms": { "venue": "APNOMS", "rank": "C" },
+    "conf/forte": { "venue": "FORTE", "rank": "C" },
+    "conf/lcn": { "venue": "LCN", "rank": "C" },
+    "conf/globecom": { "venue": "GLOBECOM", "rank": "C" },
+    "conf/icc": { "venue": "ICC", "rank": "C" },
+    "conf/icccn": { "venue": "ICCCN", "rank": "C" },
+    "conf/mass": { "venue": "MASS", "rank": "C" },
+    "conf/p2p": { "venue": "P2P", "rank": "C" },
+    "conf/ipccc": { "venue": "IPCCC", "rank": "C" },
+    "conf/wowmom": { "venue": "WoWMoM", "rank": "C" },
+    "conf/iscc": { "venue": "ISCC", "rank": "C" },
+    "conf/wcnc": { "venue": "WCNC", "rank": "C" },
+    "conf/networking": { "venue": "Networking", "rank": "C" },
+    "conf/im": { "venue": "IM", "rank": "C" },
+    "conf/msn": { "venue": "MSN", "rank": "C" },
+    "conf/wswim": { "venue": "MSWiM", "rank": "C" },
+    "conf/wasa": { "venue": "WASA", "rank": "C" },
+    "conf/hotnets": { "venue": "HotNets", "rank": "C" },
+    "conf/apnet": { "venue": "APNet", "rank": "C" },
+};
+
+let CIS = {
+    // Journal
+    // Rank A
+    "journals/tdsc": { "venue": "TDSC", "rank": "A" }, 
+    "journals/tifs": { "venue": "TIFS", "rank": "A" },
+    "journals/joc": { "venue": "Journal of Cryptology", "rank": "A" },
+
+    // Rank B
+    "journals/tissec": { "venue": "TOPS", "rank": "B" },
+    "journals/composec": { "venue": "Computers & Security", "rank": "B" },
+    "journals/dcc": { "venue": "Designs,Codes and Cryptography", "rank": "B" },
+
+    // Rank C
+    "journals/clsr": { "venue": "CLSR", "rank": "C" },
+    "journals/ejisec": { "venue": "EURASIP Journal on Information Security", "rank": "C" },
+    "journals/iet-ifs": { "venue": "IET Information Security", "rank": "C" },
+    "journals/imcs": { "venue": "IMCS", "rank": "C" },
+    "journals/ijics": { "venue": "IJICS", "rank": "C" },
+    "journals/ijisp": { "venue": "IJISP", "rank": "C" },
+    "journals/jisa": { "venue": "JISA", "rank": "C" },
+    "journals/scn": { "venue": "SCN", "rank": "C" },
+    "journals/cybersec": { "venue": "Cybersecurity", "rank": "C" },
+
+    // Conference
+    // Rank A
+    "conf/ccs": { "venue": "CCS", "rank": "A" },
+    "conf/eurocrypt": { "venue": "EUROCRYPT", "rank": "A" },
+    "conf/sp": { "venue": "S&P", "rank": "A" },
+    "conf/crypto": { "venue": "CRYPTO", "rank": "A" },
+    "conf/uss": { "venue": "USENIX Security", "rank": "A" },
+    "conf/ndss": { "venue": "NDSS", "rank": "A" },
+
+    // Rank B
+    "conf/acsac": { "venue": "ACSAC", "rank": "B" },
+    "conf/asiacrypt": { "venue": "ASIACRYPT", "rank": "B" },
+    "conf/esorics": { "venue": "ESORICS", "rank": "B" },
+    "conf/fse": { "venue": "FSE", "rank": "B" },
+    "conf/csfw": { "venue": "CSFW", "rank": "B" },
+    "conf/srds": { "venue": "SRDS", "rank": "B" },
+    "conf/ches": { "venue": "CHES", "rank": "B" },
+    "conf/dsn": { "venue": "DSN", "rank": "B" },
+    "conf/raid": { "venue": "RAID", "rank": "B" },
+    "conf/pkc": { "venue": "PKC", "rank": "B" },
+    "conf/tcc": { "venue": "TCC", "rank": "B" },
+
+    // Rank C
+    "conf/wisec": { "venue": "WiSec", "rank": "C" },
+    "conf/sacmat": { "venue": "SACMAT", "rank": "C" },
+    "conf/drm": { "venue": "DRM", "rank": "C" },
+    "conf/ih": { "venue": "IH&MMSec", "rank": "C" },
+    "conf/acns": { "venue": "ACNS", "rank": "C" },
+    "conf/aisaccs": { "venue": "AsiaCCS", "rank": "C" }, 
+    "conf/acisp": { "venue": "ACISP", "rank": "C" },
+    "conf/ctrsa": { "venue": "CT-RSA", "rank": "C" },
+    "conf/dimva": { "venue": "DIMVA", "rank": "C" },
+    "conf/dfrws": { "venue": "DFRWS", "rank": "C" },
+    "conf/fc": { "venue": "FC", "rank": "C" },
+    "conf/trustcom": { "venue": "TrustCom", "rank": "C" },
+    "conf/sec": { "venue": "SEC", "rank": "B" }, 
+    "conf/ifip11-9": { "venue": "IFIP WG 11.9", "rank": "C" },
+    "conf/isw": { "venue": "ISC", "rank": "C" },
+    "conf/icdf2c": { "venue": "ICDF2C", "rank": "C" },
+    "conf/icics": { "venue": "ICICS", "rank": "C" },
+    "conf/securecomm": { "venue": "SecureComm", "rank": "C" },
+    "conf/nspw": { "venue": "NSPW", "rank": "C" },
+    "conf/pam": { "venue": "PAM", "rank": "C" },
+    "conf/pet": { "venue": "PETS", "rank": "C" },
+    "conf/sacrypt": { "venue": "SAC", "rank": "C" },
+    "conf/soups": { "venue": "SOUPS", "rank": "C" },
+    "conf/hotsec": { "venue": "HotSec", "rank": "C" },
+    "conf/eurosp": { "venue": "EuroS&P", "rank": "C" },
+    "conf/cisc": { "venue": "Inscrypt", "rank": "C" },
+};
+
 /* 
  * ------------------------------------------------------------
  * 
@@ -200,7 +354,7 @@ let OTHERS  = {
  *
  * ------------------------------------------------------------
  */
-let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, OTHERS];
+let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, CN, CIS, OTHERS];
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
