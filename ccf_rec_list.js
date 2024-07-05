@@ -155,16 +155,16 @@ let CN = {
     "journal/tocm":{"venue": "TCOM", "rank": "B"},
     "journal/twc":{"venue": "TWC", "rank": "B"},
 
-    "journal/ad_hoc_netw":{"venue": "AD HOC NETW", "rank": "C"},
+    "journal/adhoc":{"venue": "Ad Hoc Networks", "rank": "C"},
     "journal/cc":{"venue": "CC", "rank": "C"},
     "journal/tnsm":{"venue": "TNSM", "rank": "C"},
-    "journal/iet_commun":{"venue": "IET COMMUN", "rank": "C"},
+    "journal/iet-commun":{"venue": "IET Communications", "rank": "C"},
     "journal/j_netw_comput_appl":{"venue": "J NETW COMPUT APPL", "rank": "C"},
     "journal/monet":{"venue": "MONET", "rank": "C"},
     "journal/networks":{"venue": "Networks", "rank": "C"},
     "journal/ppna":{"venue": "PPNA", "rank": "C"},
     "journal/wcmc":{"venue": "WCMC", "rank": "C"},
-    "journal/wirel_netw":{"venue": "WIREL NETW", "rank": "C"},
+    "journal/winet":{"venue": "Wireless Networks", "rank": "C"},
     "journal/iot":{"venue": "IOT", "rank": "C"},
     
 
@@ -186,9 +186,110 @@ let CN = {
     "conf/mobihoc": { "venue": "MobiHoc", "rank": "B" },
     "conf/nossdav": { "venue": "NOSSDAV", "rank": "B" },
     "conf/iwqos": { "venue": "IWQoS", "rank": "B" },
-    "conf/IMC": { "venue": "IMC", "rank": "B" },
+    "conf/imc": { "venue": "IMC", "rank": "B" },
     "conf/icnp": { "venue": "ICNP", "rank": "B" },
-}
+
+    //Rank C
+    "conf/ancs": { "venue": "ANCS", "rank": "C" },
+    "conf/apnoms": { "venue": "APNOMS", "rank": "C" },
+    "conf/forte": { "venue": "FORTE", "rank": "C" },
+    "conf/lcn": { "venue": "LCN", "rank": "C" },
+    "conf/gloabecom": { "venue": "GLOBECOM", "rank": "C" },
+    "conf/icc": { "venue": "ICC", "rank": "C" },
+    "conf/icccn": { "venue": "ICCCN", "rank": "C" },
+    "conf/mass": { "venue": "MASS", "rank": "C" },
+    "conf/p2p": { "venue": "P2P", "rank": "C" },
+    "conf/ipccc": { "venue": "IPCCC", "rank": "C" },
+    "conf/wowmom": { "venue": "WoWMoM", "rank": "C" },
+    "conf/iscc": { "venue": "ISCC", "rank": "C" },
+    "conf/wcnc": { "venue": "WCNC", "rank": "C" },
+    "conf/networking": { "venue": "Networking", "rank": "C" },
+    "conf/im": { "venue": "IM", "rank": "C" },
+    "conf/msn": { "venue": "MSN", "rank": "C" },
+    "conf/wswim": { "venue": "MSWiM", "rank": "C" },
+    "conf/wasa": { "venue": "WASA", "rank": "C" },
+    "conf/hotnets": { "venue": "HotNets", "rank": "C" },
+    "conf/apnet": { "venue": "HotNets", "APNet": "C" },
+};
+
+let CIS = {
+    /*
+     *Journal
+     */
+    //Rank A
+    "journals/tdsc": { "venue": "TDSC", "rank": "A" },
+    "journals/tifs": { "venue": "TIFS", "rank": "A" },
+    "journals/joc": { "venue": "Journal of Cryptology", "rank": "A" },
+
+    //Rank B
+    "journals/tops": { "venue": "TOPS", "rank": "B" },
+    "journals/tdsc": { "venue": "TDSC", "rank": "B" },
+    "journals/composec": { "venue": "Computers & Security", "rank": "B" },
+    "journals/dcc": { "venue": "Designs,Codes and Cryptography", "rank": "B" },
+
+    //Rank C
+    "journals/clsr": { "venue": "CLSR", "rank": "C" },
+    "journals/ejisec": { "venue": "EURASIP Journal on Information Security", "rank": "C" },
+    "journals/iet-ifs": { "venue": "IET Information Security", "rank": "C" },
+    "journals/imcs": { "venue": "IMCS", "rank": "C" },
+    "journals/ijics": { "venue": "IJICS", "rank": "C" },
+    "journals/ijisp": { "venue": "IJISP", "rank": "C" },
+    "journals/jisa": { "venue": "JISA", "rank": "C" },
+    "journals/snc": { "venue": "SCN", "rank": "C" },
+    "journals/cybersec": { "venue": "Cybersecurity", "rank": "C" },
+
+    /*
+    *Conference
+    */
+    //Rank A
+    "conf/ccs": { "venue": "CCS", "APNet": "A" },
+    "conf/eurocrypt": { "venue": "EUROCRYPT", "APNet": "A" },
+    "conf/sp": { "venue": "S&P", "APNet": "A" },
+    "conf/crypto": { "venue": "CRYPTO", "APNet": "A" },
+    "conf/uss": { "venue": "USENIX Security", "APNet": "A" },
+    "conf/ndss": { "venue": "NDSS", "APNet": "A" },
+
+    //Rank B
+    "conf/acsac": { "venue": "ACSAC", "APNet": "B" },
+     conf/ASIACRYPT": { "venue": "asiacrypt", "APNet": "B" },
+     conf/esorics": { "venue": "ESORICS", "APNet": "B" },
+     conf/fse": { "venue": "FSE", "APNet": "B" },
+     conf/csfw": { "venue": "CSFW", "APNet": "B" },
+     conf/srds": { "venue": "SRDS", "APNet": "B" },
+     conf/ches": { "venue": "CHES", "APNet": "B" },
+     conf/dsn": { "venue": "DSN", "APNet": "B" },
+     conf/raid": { "venue": "RAID", "APNet": "B" },
+     conf/pkc": { "venue": "PKC", "APNet": "B" },
+     conf/tcc": { "venue": "TCC", "APNet": "B" },
+
+    //Rank C
+    "conf/wisec": { "venue": "WiSec", "APNet": "C" },
+    "conf/sacmat": { "venue": "SACMAT", "APNet": "C" },
+    "conf/drm": { "venue": "DRM", "APNet": "C" },
+    "conf/ih": { "venue": "IH&MMSec", "APNet": "C" },
+    "conf/ccs": { "venue": "AisaCCS", "APNet": "C" },
+    "conf/acisp": { "venue": "ACISP", "APNet": "C" },
+    "conf/ctrsa": { "venue": "CT-RSA", "APNet": "C" },
+    "conf/dimva": { "venue": "DIMVA", "APNet": "C" },
+    "conf/dfrws": { "venue": "DFRWS", "APNet": "C" },
+    "conf/fc": { "venue": "FC", "APNet": "C" },
+    "conf/trustcom": { "venue": "TrustCom", "APNet": "C" },
+    "conf/sec": { "venue": "SEC", "APNet": "B" },
+    "conf/ifip11-9": { "venue": "IFIP WG 11.9", "APNet": "C" },
+    "conf/isw": { "venue": "ISC", "APNet": "C" },
+    "conf/icdf2c": { "venue": "ICDF2C", "APNet": "C" },
+    "conf/icics": { "venue": "ICICS", "APNet": "C" },
+    "conf/securecomm": { "venue": "SecureComm", "APNet": "C" },
+    "conf/nspw": { "venue": "NSPW", "APNet": "C" },
+    "conf/pam": { "venue": "PAM", "APNet": "C" },
+    "conf/pet": { "venue": "PETS", "APNet": "C" },
+    "conf/sacrypt": { "venue": "SAC", "APNet": "C" },
+    "conf/soups": { "venue": "SOUPS", "APNet": "C" },
+    "conf/hotsec": { "venue": "HotSec", "APNet": "C" },
+    "conf/eurosp": { "venue": "EuroS&P", "APNet": "C" },
+    "conf/cisc": { "venue": "Inscrypt", "APNet": "C" },
+    "conf/acsac": { "venue": "ACSAC", "APNet": "C" },
+};
 
 /* 
  * ------------------------------------------------------------
@@ -258,7 +359,7 @@ let OTHERS  = {
  *
  * ------------------------------------------------------------
  */
-let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, CN,OTHERS];
+let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, CN, CIS, OTHERS];
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
