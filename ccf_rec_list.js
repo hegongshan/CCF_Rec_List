@@ -1,11 +1,21 @@
 /* 
  * ------------------------------------------------------------
  * 
- * 计算机体系结构/并行与分布计算/存储系统
+ * Begin:  The CCF Recommendation List
  *
  * ------------------------------------------------------------
  */
-let ARCH_DCP_SS = {
+
+/* 
+ * ------------------------------------------------------------
+ * 
+ * 计算机体系结构/并行与分布计算/存储系统
+ *
+ * (Computer Architecture/Parallel and Distributed Computing/Storage System)
+ * 
+ * ------------------------------------------------------------
+ */
+let ARCH_PDC_SS = {
     /*
      * Journal
      */
@@ -122,10 +132,12 @@ let ARCH_DCP_SS = {
  * ------------------------------------------------------------
  * 
  * 软件工程/系统软件/程序设计语言
- *
+ * 
+ * (Software Engineering/System Software/Programming Language)
+ * 
  * ------------------------------------------------------------
  */
-let TCSE_SS_PDL = {
+let SE_SS_PL = {
     "conf/osdi": { "venue": "OSDI", "rank": "A" },
     "conf/sosp": { "venue": "SOSP", "rank": "A" },
 
@@ -135,11 +147,13 @@ let TCSE_SS_PDL = {
 /* 
  * ------------------------------------------------------------
  * 
- * 数据库/数据挖掘/内容检索
+ * 数据库/数据挖掘/内容检索 
+ *
+ * (Database/Data Mining/Content Retrieval)
  *
  * ------------------------------------------------------------
  */
-let DM_CS = {
+let DB_DM_CR = {
     "journals/pvldb": { "venue": "VLDB", "rank": "A" },
 
     // Conference
@@ -160,7 +174,7 @@ let DM_CS = {
 /* 
  * ------------------------------------------------------------
  * 
- * 人工智能
+ * 人工智能 (Artificial Intelligence)
  *
  * ------------------------------------------------------------
  */
@@ -171,16 +185,24 @@ let AI = {
     "conf/ijcai": { "venue": "IJCAI", "rank": "A" },
 };
 
-let CROSS_COMPRE_EMERGING = {
+/* 
+ * ------------------------------------------------------------
+ * 
+ * 交叉/综合/新兴 (Interdisciplinary and Emerging)
+ *
+ * ------------------------------------------------------------
+ */
+let INTERDISCIPLINARY_EMERGING = {
     "conf/www": { "venue": "WWW", "rank": "A" },
 };
 
 /* 
- * --------------------------------------------------------------------------------------
+ * -------------------------------------------------------------------------
  * 
- * The following journals or conferences are Not in the recommended list, but should in.
+ * The following journals or conferences are Not in the CCF recommendation list, 
+ * but should in.
  *
- * --------------------------------------------------------------------------------------
+ * -------------------------------------------------------------------------
 */
 let OTHERS  = {
     // They are equivalent to Rank A.
@@ -196,11 +218,12 @@ let OTHERS  = {
 /* 
  * ------------------------------------------------------------
  * 
- * End. The CCF Recommended List
+ * End: The CCF Recommendation List
  *
  * ------------------------------------------------------------
  */
-let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, OTHERS];
+
+let categoryList = [ARCH_PDC_SS, SE_SS_PL, DB_DM_CR, AI, INTERDISCIPLINARY_EMERGING, OTHERS];
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
