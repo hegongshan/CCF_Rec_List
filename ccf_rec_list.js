@@ -16,9 +16,7 @@
  * ------------------------------------------------------------
  */
 let ARCH_PDC_SS = {
-    /*
-     * Journal
-     */
+    // Journal
     // Rank A
     "journals/tocs": { "venue": "TOCS", "rank": "A" },
     "journals/tos": { "venue": "TOS", "rank": "A" },
@@ -26,7 +24,7 @@ let ARCH_PDC_SS = {
     "journals/tc": { "venue": "TC", "rank": "A" },
     "journals/tpds": { "venue": "TPDS", "rank": "A" },
     "journals/taco": { "venue": "TACO", "rank": "A" },
-    
+
     // Rank B
     "journals/taas": { "venue": "TAAS", "rank": "B" },
     "journals/todaes": { "venue": "TODAES", "rank": "B" },
@@ -52,15 +50,13 @@ let ARCH_PDC_SS = {
     "journals/tcasI": { "venue": "TCASI", "rank": "C" },
     "journals/ccfthpc": { "venue": "CCF-THPC", "rank": "C" },
     "journals/tsusc": { "venue": "TSUSC", "rank": "C" },
-    
 
-    /*
-     * Conference
-     */
+
+    // Conference
     // Rank A 
-    "conf/ppopp": { "venue": "PPoPP", "rank": "A"},
+    "conf/ppopp": { "venue": "PPoPP", "rank": "A" },
     "conf/fast": { "venue": "FAST", "rank": "A" },
-    "conf/dac": { "venue": "DAC", "rank": "A"},
+    "conf/dac": { "venue": "DAC", "rank": "A" },
     "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/micro": { "venue": "MICRO", "rank": "A" },
     "conf/sc": { "venue": "SC", "rank": "A" },
@@ -70,33 +66,33 @@ let ARCH_PDC_SS = {
     "conf/eurosys": { "venue": "EuroSys", "rank": "A" },
 
     // Rank B
-    "conf/cloud": { "venue": "SoCC", "rank": "B"},
-    "conf/spaa": { "venue": "SPAA", "rank": "B"},
-    "conf/podc": { "venue": "PODC", "rank": "B"},
-    "conf/fpga": { "venue": "FPGA", "rank": "B"},
-    "conf/cgo": { "venue": "CGO", "rank": "B"},
-    "conf/date": { "venue": "DATE", "rank": "B"},
-    "conf/hotchips": { "venue": "Hot Chips", "rank": "B"},
-    "conf/cluster": { "venue": "CLUSTER", "rank": "B"},
-    "conf/iccd": { "venue": "ICCD", "rank": "B"},
-    "conf/iccad": { "venue": "ICCAD", "rank": "B"},
-    "conf/icdcs": { "venue": "ICDCS", "rank": "B"},
-    "conf/codes": { "venue": "CODES+ISSS", "rank": "B"},
-    "conf/hipeac": { "venue": "HiPEAC", "rank": "B"},
+    "conf/cloud": { "venue": "SoCC", "rank": "B" },
+    "conf/spaa": { "venue": "SPAA", "rank": "B" },
+    "conf/podc": { "venue": "PODC", "rank": "B" },
+    "conf/fpga": { "venue": "FPGA", "rank": "B" },
+    "conf/cgo": { "venue": "CGO", "rank": "B" },
+    "conf/date": { "venue": "DATE", "rank": "B" },
+    "conf/hotchips": { "venue": "Hot Chips", "rank": "B" },
+    "conf/cluster": { "venue": "CLUSTER", "rank": "B" },
+    "conf/iccd": { "venue": "ICCD", "rank": "B" },
+    "conf/iccad": { "venue": "ICCAD", "rank": "B" },
+    "conf/icdcs": { "venue": "ICDCS", "rank": "B" },
+    "conf/codes": { "venue": "CODES+ISSS", "rank": "B" },
+    "conf/hipeac": { "venue": "HiPEAC", "rank": "B" },
 
-    "conf/sigmetrics": { "venue": "SIGMETRICS", "rank": "B"},
-    "conf/IEEEpact": { "venue": "PACT", "rank": "B"},
-    "conf/icpp": { "venue": "ICPP", "rank": "B"},
-    "conf/ics": { "venue": "ICS", "rank": "B"},
-    "conf/vee": { "venue": "VEE", "rank": "B"},
-    "conf/ipps": { "venue": "IPDPS", "rank": "B"},
-    "conf/performance": { "venue": "Performance", "rank": "B"},
-    "conf/hpdc": { "venue": "HPDC", "rank": "B"},
-    "conf/itc": { "venue": "ITC", "rank": "B"},
-    "conf/lisa": { "venue": "LISA", "rank": "B"},
+    "conf/sigmetrics": { "venue": "SIGMETRICS", "rank": "B" },
+    "conf/IEEEpact": { "venue": "PACT", "rank": "B" },
+    "conf/icpp": { "venue": "ICPP", "rank": "B" },
+    "conf/ics": { "venue": "ICS", "rank": "B" },
+    "conf/vee": { "venue": "VEE", "rank": "B" },
+    "conf/ipps": { "venue": "IPDPS", "rank": "B" },
+    "conf/performance": { "venue": "Performance", "rank": "B" },
+    "conf/hpdc": { "venue": "HPDC", "rank": "B" },
+    "conf/itc": { "venue": "ITC", "rank": "B" },
+    "conf/lisa": { "venue": "LISA", "rank": "B" },
     "conf/mss": { "venue": "MSST", "rank": "B" },
-    "conf/rtas": { "venue": "RTAS", "rank": "B"},
-    "conf/europar": { "venue": "Euro-Par", "rank": "B"},
+    "conf/rtas": { "venue": "RTAS", "rank": "B" },
+    "conf/europar": { "venue": "Euro-Par", "rank": "B" },
 
     // Rank C
     "conf/cf": { "venue": "CF", "rank": "C" },
@@ -138,10 +134,13 @@ let ARCH_PDC_SS = {
  * ------------------------------------------------------------
  */
 let SE_SS_PL = {
+    // Conference
+    // Rank A
     "conf/osdi": { "venue": "OSDI", "rank": "A" },
     "conf/sosp": { "venue": "SOSP", "rank": "A" },
 
-    "conf/ispass": { "venue": "ISPASS", "rank": "C"},
+    // Rank C
+    "conf/ispass": { "venue": "ISPASS", "rank": "C" },
 };
 
 /* 
@@ -154,6 +153,8 @@ let SE_SS_PL = {
  * ------------------------------------------------------------
  */
 let DB_DM_CR = {
+    // Journal
+    // Rank A
     "journals/pvldb": { "venue": "VLDB", "rank": "A" },
 
     // Conference
@@ -165,9 +166,9 @@ let DB_DM_CR = {
     "conf/vldb": { "venue": "VLDB Workshop", "rank": "A" },
 
     // Rank B
-    "conf/cikm": { "venue": "CIKM", "rank": "B"},
-    "conf/wsdm": { "venue": "WSDM", "rank": "B"},
-    "conf/icdm": { "venue": "ICDM", "rank": "B"},
+    "conf/cikm": { "venue": "CIKM", "rank": "B" },
+    "conf/wsdm": { "venue": "WSDM", "rank": "B" },
+    "conf/icdm": { "venue": "ICDM", "rank": "B" },
     "conf/recsys": { "venue": "RecSys", "rank": "B" },
 };
 
@@ -179,6 +180,8 @@ let DB_DM_CR = {
  * ------------------------------------------------------------
  */
 let AI = {
+    // Conference
+    // Rank A
     "conf/aaai": { "venue": "AAAI", "rank": "A" },
     "conf/nips": { "venue": "NeurIPS", "rank": "A" },
     "conf/icml": { "venue": "ICML", "rank": "A" },
@@ -204,13 +207,14 @@ let INTERDISCIPLINARY_EMERGING = {
  *
  * -------------------------------------------------------------------------
 */
-let OTHERS  = {
+let OTHERS = {
     // They are equivalent to Rank A.
     // ACM Computing Surveys
     "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
     // Communications of the ACM
     "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
-    "conf/iclr": {"venue": "ICLR", "rank": "A"},
+
+    "conf/iclr": { "venue": "ICLR", "rank": "A" },
 
     // They are equivalent to Rank B.
 };

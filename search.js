@@ -1,11 +1,11 @@
 function doSearch(query, firstHit, pageSize, total, paperList, rank) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
-        "q": query,
-        "c": 0,
-        "f": firstHit,
-        "h": pageSize,
-        "format": "jsonp"
+        q: query,
+        c: 0,
+        f: firstHit,
+        h: pageSize,
+        format: "jsonp",
     };
     $.getJSON(request_url, inputData, function (data) {
         let result = data["result"];
@@ -26,8 +26,10 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                 let venueNameMatchCCFList = false;
 
                 // Ignore some irrelevant information
-                if (paper.title &&
-                    paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)) {
+                if (
+                    paper.title &&
+                    paper.title.match(/[p|P]roceeding|[w|W]orkshop|[c|C]onference/g)
+                ) {
                     continue;
                 }
 
@@ -43,17 +45,21 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                 }
                 let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
                 /*if (!matchCCFList) {
-                    continue;
-                }*/
+                            continue;
+                        }*/
 
                 // Whether the rank match CCF Rank or not
-                let matchAll = (rank == "all");
+                let matchAll = rank == "all";
                 let rankList = new Set(["A", "B"]);
-                let matchAB = (rank == "A|B") && 
-                    ((venueURLMatchCCFList && rankList.has(CCF_LIST[venueDBLPURL]["rank"])) || 
-                    (venueNameMatchCCFList && rankList.has(CCF_VENUE_RANK_LIST[venueName])));
-                let matchRank = ((venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
-                        (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank));
+                let matchAB =
+                    rank == "A|B" &&
+                    ((venueURLMatchCCFList &&
+                        rankList.has(CCF_LIST[venueDBLPURL]["rank"])) ||
+                        (venueNameMatchCCFList &&
+                            rankList.has(CCF_VENUE_RANK_LIST[venueName])));
+                let matchRank =
+                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
+                    (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank);
                 if (!(matchAll || matchAB || matchRank)) {
                     continue;
                 }
@@ -66,7 +72,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     ccfRank = CCF_VENUE_RANK_LIST[venueName];
                 }
 
-                let firstAuthor = '';
+                let firstAuthor = "";
                 if (paper.authors) {
                     if (paper.authors.author instanceof Array) {
                         firstAuthor = paper.authors.author[0].text;
@@ -74,7 +80,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                         firstAuthor = paper.authors.author.text;
                     }
                 }
-                firstAuthor = firstAuthor.replace(/\d+/g,"").trim();
+                firstAuthor = firstAuthor.replace(/\d+/g, "").trim();
                 let title = paper["title"].replace(/['"\.]+/g, "");
                 let url;
                 if (paper["ee"]) {
@@ -85,26 +91,26 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                 }
 
                 paperList[title] = {
-                    "ccfRank": ccfRank,
-                    "title": title,
-                    "firstAuthor": firstAuthor,
-                    "venue": venueName,
-                    "year": paper["year"],
-                    "url": url,
-                    "doi": paper["doi"],
-                    "abstractId": title.replace(/[^a-zA-Z]+/g, "_")
+                    ccfRank: ccfRank,
+                    title: title,
+                    firstAuthor: firstAuthor,
+                    venue: venueName,
+                    year: paper["year"],
+                    url: url,
+                    doi: paper["doi"],
+                    abstractId: title.replace(/[^a-zA-Z]+/g, "_"),
                 };
             }
         }
 
         if (firstHit + pageSize >= total || size == 0) {
             let tips = template.render($("#response-tips-info-template").html(), {
-                "count": Object.keys(paperList).length
+                count: Object.keys(paperList).length,
             });
             $("#tips").html(tips);
 
             let html = template.render($("#paper-info-template").html(), {
-                "paperList": paperList
+                paperList: paperList,
             });
             $("#result").append(html);
             return;
@@ -118,7 +124,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
 function search() {
     // trim q
     let query = $("#q").val().trim();
-    // 1.check whether q is null or not 
+    // 1.check whether q is null or not
     // 2.ensure that string q is not a chinese character sequence
     if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
         return;
@@ -149,22 +155,43 @@ function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
     }
 
     // init
-    let loadingTips = $(abstractSelector + "tips")
+    let loadingTips = $(abstractSelector + "tips");
     loadingTips.html($("#loading-tips-info-template").html());
     let errorMsg = "没找到摘要=_=";
 
     // query
     if (!paperDOI) {
-        doQueryAbstract(false, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+        doQueryAbstract(
+            false,
+            paperDOI,
+            paperTitle,
+            abstractTag,
+            loadingTips,
+            errorMsg
+        );
     } else {
-        doQueryAbstract(true, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+        doQueryAbstract(
+            true,
+            paperDOI,
+            paperTitle,
+            abstractTag,
+            loadingTips,
+            errorMsg
+        );
     }
 }
 
-function doQueryAbstract(isDOIQuery = true, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg) {
+function doQueryAbstract(
+    isDOIQuery = true,
+    paperDOI,
+    paperTitle,
+    abstractTag,
+    loadingTips,
+    errorMsg
+) {
     let semanticScholarUrl = "https://api.semanticscholar.org/graph/v1/paper/";
     let inputData = {
-        "fields": "title,abstract"
+        fields: "title,abstract",
     };
 
     if (isDOIQuery) {
@@ -178,12 +205,18 @@ function doQueryAbstract(isDOIQuery = true, paperDOI, paperTitle, abstractTag, l
 
     // $.ajaxSettings.async = false;
     $.getJSON(semanticScholarUrl, inputData, function (data) {
-
         let abstract;
         if (isDOIQuery) {
             if (!data["abstract"]) {
                 // search by title
-                doQueryAbstract(false, paperDOI, paperTitle, abstractTag, loadingTips, errorMsg);
+                doQueryAbstract(
+                    false,
+                    paperDOI,
+                    paperTitle,
+                    abstractTag,
+                    loadingTips,
+                    errorMsg
+                );
                 return;
             }
             abstract = data["abstract"];
