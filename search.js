@@ -90,7 +90,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     url = "javascript:void(0)";
                 }
 
-                paperList[title] = {
+                paperList.push({
                     ccfRank: ccfRank,
                     title: title,
                     firstAuthor: firstAuthor,
@@ -99,9 +99,21 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     url: url,
                     doi: paper["doi"],
                     abstractId: title.replace(/[^a-zA-Z]+/g, "_"),
-                };
+                });
             }
         }
+
+	// 排序
+	// TODO: 允许用户在网页上指定排序方式
+	paperList.sort(function(a, b) {
+	    if (a.year != b.year) {
+	        return b.year - a.year;
+	    }
+	    if (a.venue != b.venue) {
+	        return a.venue - b.venue;
+	    }
+	    return a.title > b.title;
+	});
 
         if (firstHit + pageSize >= total || size == 0) {
             let tips = template.render($("#response-tips-info-template").html(), {
@@ -137,7 +149,7 @@ function search() {
     let firstHit = 0;
     let pageSize = 1000;
     let total = 0;
-    let paperList = {};
+    let paperList = [];
     let rank = $("#rank").find("option:selected").val().trim();
     doSearch(query, firstHit, pageSize, total, paperList, rank);
 }
