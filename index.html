@@ -8,30 +8,34 @@
 	<meta name="description" content="Description">
 	<meta name="viewport"
 		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
 	<style type="text/css">
-		li {
+		#app {
+			font-size: 20px;
+		}
+
+		#paperList li {
 			line-height: 40px;
 			margin-top: 5px;
 			margin-bottom: 5px;
 			padding-left: 20px;
 			color: #31708f;
-			/* background-color: #d9edf7; */
 			border: 1px solid black;
 			border-radius: 4px;
 		}
 
-		input {
-			width: 300px;
-			height: 40px;
-			border-radius: 2px;
-			font-size: 20px;
-			vertical-align: middle;
-		}
-
-		select {
-			height: 40px;
-			line-height: 40px;
-			vertical-align: middle;
+		input[type=search] {
+			width: 60%;
+			padding: .375rem .75rem;
+			font-size: 1rem;
+			line-height: 1.5;
+			color: #495057;
+			background-color: #fff;
+			background-clip: padding-box;
+			border: 1px solid #ced4da;
+			border-radius: .25rem;
+			transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 		}
 
 		button {
@@ -43,34 +47,50 @@
 			border: 1px solid transparent;
 			vertical-align: middle;
 		}
-
-		p {
-			padding-left: 15px;
-			padding-right: 15px;
-		}
 	</style>
 </head>
 
 <body>
-	<div id="app">
-		<h1>CCF Recommended List</h1>
-		<h3>By <a href="https://github.com/hegongshan/CCF_Rec_List">Gongshan He</a></h3>
-		<div>
-			<input id="q" type="search" placeholder="请输入关键词" />
-			Rank: <select id="rank">
-				<option value="all" selected>All</option>
-				<option value="A|B">CCF A and B</option>
-				<option value="A">CCF A</option>
-				<option value="B">CCF B</option>
-				<option value="C">CCF C</option>
-			</select>	
-			<button id="search">搜索</button>
-			<span id="tips"></span>
+	<div id="app" class="container">
+		<h1 style="text-align: center;">面向CCF推荐列表的学术论文检索系统</h1>
+		<h3 style="text-align: center;">By <a href="https://github.com/hegongshan/CCF_Rec_List">Gongshan He</a></h3>
+
+		<div id="form" class="row">
+			<div class="col-md-4">
+				<label>分&nbsp;&nbsp;&nbsp;&nbsp;类: </label>
+				<select id="category" multiple title="请选择分类">
+				</select>
+			</div>
+			<div class="col-md-4">
+				<label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
+				<select id="rank" multiple title="请选择级别">
+					<option value="A">CCF A</option>
+					<option value="B">CCF B</option>
+					<option value="C">CCF C</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+				<label>刊&nbsp;&nbsp;&nbsp;&nbsp;物: </label>
+				<select id="venue" multiple title="请选择刊物">
+				</select>
+			</div>
 		</div>
-		<div id="result"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<label>关键词: </label>
+				<input id="q" type="search" placeholder="请输入关键词"/>
+				<button id="search" class="btn btn-primary">搜索</button>
+				<span id="tips"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div id="result" class="col-md-12"></div>
+		</div>
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 	<script src="ccf_rec_list.js"></script>
 	<script src="search.js"></script>
 	<script id="loading-tips-info-template" type="text/html">
@@ -79,8 +99,20 @@
 	<script id="response-tips-info-template" type="text/html">
 		共匹配到<strong style="color:red;"">{{count}}</strong>条记录
 	</script>
+	<script id="category-info-template" type="text/html">
+		{{each categoryList}}
+			{{set category = $value}}
+			<option value="{{category.name}}">{{category.name}}</option>
+		{{/each}}
+	</script>
+	<script id="venue-info-template" type="text/html">
+		{{each venueList}}
+			{{set venue = $value}}
+			<option value="{{venue.url}}">{{venue.name}}</option>
+		{{/each}}
+	</script>
 	<script id="paper-info-template" type="text/html">
-		<ol>
+		<ol id="paperList">
 		{{each paperList}}
 			{{set paper = $value}}
 			<li>
@@ -105,11 +137,121 @@
 				search();
 			});
 			$("#q").keydown(function (event) {
-				if (event.keyCode == 13) {	
+				if (event.keyCode == 13) {
 					search();
 				}
-			})
-		}); 
+			});
+
+			var categories = [];
+			for (var key in CATEGORY_LIST) {
+				categories.push({"name": key});
+			}
+			let html = template.render($("#category-info-template").html(), {
+				categoryList: categories,
+			});
+			$("#category").html(html);
+
+
+			let selectpickerOptions = {
+				actionsBox: true, 
+				selectAllText: "全选", 
+				deselectAllText: "取消全选", 
+				noneResultsText: "未找到匹配的结果"
+			};
+			let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {liveSearch: true});
+			$('#category').selectpicker(selectpickerExtendedOptions);
+			$("#rank").selectpicker(selectpickerOptions);
+			$('#venue').prop('disabled', true);
+			$("#venue").selectpicker(selectpickerExtendedOptions);
+
+			// TODO: 当category和rank取消时，修改venue中的option
+			$("#category").on("hidden.bs.select", function (){
+				let categoryVals = $(this).val();
+				if (categoryVals.length == 0) {
+					if ($("#rank").val().length == 0) {
+						$("#venue").prop("disabled", true);
+						$("#venue").selectpicker("destroy");
+						$("#venue").selectpicker(selectpickerExtendedOptions);
+					}
+					return;
+				}
+
+				// 清空列表
+				$("#venue").prop("disabled", false);
+				$("#venue").empty();
+
+				// 重新填充列表
+				let ranks = $("#rank").val();
+				let venues = [];
+				for (let category of categoryVals) {
+					for (let venueUrl in CATEGORY_LIST[category]) {
+						if (ranks.length == 0 || ranks.includes(CATEGORY_LIST[category][venueUrl].rank)) {
+							venues.push({
+								url: venueUrl, 
+								name: CATEGORY_LIST[category][venueUrl].venue
+							});
+						}
+					}
+				}
+
+				let html = template.render($("#venue-info-template").html(), {
+					venueList: venues,
+				});
+				$("#venue").html(html);
+				$("#venue").selectpicker("destroy");
+				$("#venue").selectpicker(selectpickerExtendedOptions);
+			});
+
+			$("#rank").on("hidden.bs.select", function (){
+				let rankVals = $(this).val();
+				if (rankVals.length == 0) {
+					if ($("#category").val().length == 0) {
+						$("#venue").prop("disabled", true);
+						$("#venue").selectpicker("destroy");
+						$("#venue").selectpicker(selectpickerExtendedOptions);
+					}
+					return;
+				}
+
+				// 清空列表
+				$("#venue").prop("disabled", false);
+				$("#venue").empty();
+
+				// 重新填充列表
+				var categoryVals = $("#category").val();
+				let venues = [];
+				if (categoryVals.length > 0) {
+					for (let category of categoryVals) {
+						for (let venueUrl in CATEGORY_LIST[category]) {
+							if (rankVals.includes(CATEGORY_LIST[category][venueUrl].rank)) {
+								venues.push({
+									url: venueUrl, 
+									name: CATEGORY_LIST[category][venueUrl].venue
+								});
+							}
+						}
+					}
+				} else {
+					for (let category in CATEGORY_LIST) {
+						for (let venueUrl in CATEGORY_LIST[category]) {
+							if (rankVals.includes(CATEGORY_LIST[category][venueUrl].rank)) {
+								venues.push({
+									url: venueUrl, 
+									name: CATEGORY_LIST[category][venueUrl].venue
+								});
+							}
+						}
+					}
+				}
+
+				let html = template.render($("#venue-info-template").html(), {
+					venueList: venues,
+				});
+				$("#venue").html(html);
+				$("#venue").selectpicker("destroy");
+				$("#venue").selectpicker(selectpickerExtendedOptions);
+			});
+		});
 	</script>
 </body>
 

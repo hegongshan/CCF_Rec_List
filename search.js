@@ -1,4 +1,4 @@
-function doSearch(query, firstHit, pageSize, total, paperList, rank) {
+function doSearch(query, firstHit, pageSize, total, paperList, filter) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         q: query,
@@ -13,10 +13,10 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
             return;
         }
 
-        total = result["hits"]["@total"];
-        let size = result["hits"]["@sent"];
+        total = parseInt(result["hits"]["@total"]);
+        let size = parseInt(result["hits"]["@sent"]);
         // When reaching the upper limit -- 100000 hits
-        if (total > 0 && size > 0) {
+        if (size > 0) {
             let curPaperList = result["hits"]["hit"];
             for (var i = 0; i < curPaperList.length; i++) {
                 let paper = curPaperList[i]["info"];
@@ -32,7 +32,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                 ) {
                     continue;
                 }
-
+                
                 // Whether the key or venue hits or not
                 let venueURLMatchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
                 if (paper.venue) {
@@ -44,24 +44,43 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
                 }
                 let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
-                /*if (!matchCCFList) {
-                            continue;
-                        }*/
+                
+                if (filter.category.length > 0 
+                    || filter.rank.length > 0 
+                    || filter.venue.length > 0) {
+                    if (!matchCCFList) {
+                        continue;
+                    }
 
-                // Whether the rank match CCF Rank or not
-                let matchAll = rank == "all";
-                let rankList = new Set(["A", "B"]);
-                let matchAB =
-                    rank == "A|B" &&
-                    ((venueURLMatchCCFList &&
-                        rankList.has(CCF_LIST[venueDBLPURL]["rank"])) ||
-                        (venueNameMatchCCFList &&
-                            rankList.has(CCF_VENUE_RANK_LIST[venueName])));
-                let matchRank =
-                    (venueURLMatchCCFList && CCF_LIST[venueDBLPURL]["rank"] == rank) ||
-                    (venueNameMatchCCFList && CCF_VENUE_RANK_LIST[venueName] == rank);
-                if (!(matchAll || matchAB || matchRank)) {
-                    continue;
+                    let match = false;
+                    if (filter.category.length > 0) {
+                        for (let category of filter.category) {
+                            if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
+                                if (filter.rank.length > 0) {
+                                    if (filter.rank.includes(CATEGORY_LIST[category][venueDBLPURL].rank)) {
+                                        if (filter.venue.length == 0 || filter.venue.includes(venueDBLPURL)) {
+                                            match = true;
+                                            break ;
+                                        }
+                                    }
+                                } else if (filter.venue.length > 0) {
+                                    if (filter.venue.includes(venueDBLPURL)) {
+                                        match = true;
+                                        break;
+                                    }
+                                } else {
+                                    match = true;
+                                }
+                            }
+                        }
+                    } else if (filter.rank.length > 0) {
+                        if (filter.rank.includes(CCF_LIST[venueDBLPURL].rank)) {
+                            match = true;
+                        }
+                    }
+                    if (!match) {
+                        continue;
+                    }
                 }
 
                 let ccfRank;
@@ -101,35 +120,36 @@ function doSearch(query, firstHit, pageSize, total, paperList, rank) {
                     abstractId: title.replace(/[^a-zA-Z]+/g, "_"),
                 });
             }
+            
+            // recursion
+            if (firstHit + size < total) {
+                doSearch(query, firstHit + pageSize, pageSize, total, paperList, filter);
+                return ;
+            }
         }
 
-	// 排序
-	// TODO: 允许用户在网页上指定排序方式
-	paperList.sort(function(a, b) {
-	    if (a.year != b.year) {
-	        return b.year - a.year;
-	    }
-	    if (a.venue != b.venue) {
-	        return a.venue - b.venue;
-	    }
-	    return a.title > b.title;
-	});
+        // 排序
+        // TODO: 允许用户在网页上指定排序方式
+        paperList.sort(function(a, b) {
+            if (a.year != b.year) {
+                return b.year - a.year;
+            }
+            if (a.venue != b.venue) {
+                return a.venue - b.venue;
+            }
+            return a.title > b.title;
+        });
 
-        if (firstHit + pageSize >= total || size == 0) {
-            let tips = template.render($("#response-tips-info-template").html(), {
-                count: Object.keys(paperList).length,
-            });
-            $("#tips").html(tips);
 
-            let html = template.render($("#paper-info-template").html(), {
-                paperList: paperList,
-            });
-            $("#result").append(html);
-            return;
-        }
+        let tips = template.render($("#response-tips-info-template").html(), {
+            count: Object.keys(paperList).length,
+        });
+        $("#tips").html(tips);
 
-        // recursion
-        doSearch(query, firstHit + pageSize, pageSize, total, paperList, rank);
+        let html = template.render($("#paper-info-template").html(), {
+            paperList: paperList,
+        });
+        $("#result").append(html);
     });
 }
 
@@ -139,8 +159,13 @@ function search() {
     // 1.check whether q is null or not
     // 2.ensure that string q is not a chinese character sequence
     if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
+        alert("请输入关键词！");
         return;
     }
+
+    let category = $("#category").val();
+    let rank = $("#rank").val();
+    let venue = $("#venue").val();
 
     // init
     $("#tips").html($("#loading-tips-info-template").html());
@@ -150,8 +175,13 @@ function search() {
     let pageSize = 1000;
     let total = 0;
     let paperList = [];
-    let rank = $("#rank").find("option:selected").val().trim();
-    doSearch(query, firstHit, pageSize, total, paperList, rank);
+    let filter = {
+        category: category,
+        rank: rank,
+        venue: venue
+    };
+
+    doSearch(query, firstHit, pageSize, total, paperList, filter);
 }
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
@@ -216,7 +246,7 @@ function doQueryAbstract(
     }
 
     // $.ajaxSettings.async = false;
-    $.getJSON(semanticScholarUrl, inputData, function (data) {
+    $.getJSON(semanticScholarUrl, inputData, function (data) {        
         let abstract;
         if (isDOIQuery) {
             if (!data["abstract"]) {

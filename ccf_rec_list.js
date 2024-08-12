@@ -155,7 +155,7 @@ let SE_SS_PL = {
 let DB_DM_CR = {
     // Journal
     // Rank A
-    "journals/pvldb": { "venue": "VLDB", "rank": "A" },
+    "journals/pvldb": { "venue": "PVLDB", "rank": "A" },
 
     // Conference
     // Rank A
@@ -163,7 +163,7 @@ let DB_DM_CR = {
     "conf/kdd": { "venue": "SIGKDD", "rank": "A" },
     "conf/icde": { "venue": "ICDE", "rank": "A" },
     "conf/sigir": { "venue": "SIGIR", "rank": "A" },
-    "conf/vldb": { "venue": "VLDB Workshop", "rank": "A" },
+    "conf/vldb": { "venue": "VLDB", "rank": "A" },
 
     // Rank B
     "conf/cikm": { "venue": "CIKM", "rank": "B" },
@@ -213,10 +213,14 @@ let OTHERS = {
     "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
     // Communications of the ACM
     "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
+    // arXiv preprint
+    "journals/corr": { "venue": "CORR", "rank": "A" },
 
     "conf/iclr": { "venue": "ICLR", "rank": "A" },
 
     // They are equivalent to Rank B.
+
+
 };
 
 /* 
@@ -227,13 +231,22 @@ let OTHERS = {
  * ------------------------------------------------------------
  */
 
-let categoryList = [ARCH_PDC_SS, SE_SS_PL, DB_DM_CR, AI, INTERDISCIPLINARY_EMERGING, OTHERS];
+let CATEGORY_LIST = {
+    "计算机体系结构/并行与分布计算/存储系统": ARCH_PDC_SS,
+    "软件工程/系统软件/程序设计语言": SE_SS_PL,
+    "数据库/数据挖掘/内容检索": DB_DM_CR,
+    "人工智能": AI,
+    "交叉/综合/新兴": INTERDISCIPLINARY_EMERGING,
+    "其他": OTHERS
+};
+
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
-for (var category of categoryList) {
-    for (var key in category) {
-        CCF_LIST[key] = category[key];
+for (let category in CATEGORY_LIST) {
+    let specific_kv = CATEGORY_LIST[category];
+    for (let key in specific_kv) {
+        CCF_LIST[key] = specific_kv[key];
         CCF_VENUE_RANK_LIST.set(CCF_LIST[key].venue, CCF_LIST[key].rank);
     }
 }
