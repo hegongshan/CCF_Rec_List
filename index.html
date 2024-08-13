@@ -23,6 +23,11 @@
 			float: right;
 		}
 
+		.red-text {
+			color:#f00;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
+		}
+
 		input {
 			padding: .375rem .75rem;
 			line-height: 1.5;
@@ -48,6 +53,11 @@
 			padding-left: 20px;
 			border: 1px solid black;
 			border-radius: 4px;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 30px;
 		}
 	</style>
 </head>
@@ -102,6 +112,9 @@
 		<div class="row">
 			<div id="result" class="col-md-12"></div>
 		</div>
+		<footer>
+			
+		</footer>
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
@@ -113,7 +126,7 @@
 		<img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
 	</script>
 	<script id="response-tips-info-template" type="text/html">
-		共匹配到<strong style="color:red;"">{{count}}</strong>条记录
+		共匹配到<strong class="red-text">{{count}}</strong>条记录
 	</script>
 	<script id="category-info-template" type="text/html">
 		{{each categoryList}}
@@ -147,8 +160,20 @@
 		{{/each}}
 		</ol>
 	</script>
+	<script id="footer-info-template" type="text/html">
+		Copyright &copy; {{year.start}} - {{year.current}} Gongshan He All Rights Reserved.
+	</script>
 	<script type="text/javascript">
 		$(function () {
+			// 版权信息
+			let footerHtml = template.render($("#footer-info-template").html(), {
+				year: {
+					start: 2022,
+					current: new Date().getFullYear()
+				},
+			});
+			$("footer").html(footerHtml);
+
 			// 主题切换
 			$("#theme-light").click(function (){
 				$("body").css({
@@ -163,6 +188,7 @@
 				});
 			});
 
+			// 搜索
 			$("#search").click(function () {
 				search();
 			});

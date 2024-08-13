@@ -89,7 +89,9 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                         }
                     } else if (filter.rank.length > 0) {
                         if (filter.rank.includes(CCF_LIST[venueDBLPURL].rank)) {
-                            match = true;
+                            if (filter.venue.length == 0 || filter.venue.includes(venueDBLPURL)) {
+                                match = true;
+                            }
                         }
                     }
                     if (!match) {
