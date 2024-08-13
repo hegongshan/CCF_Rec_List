@@ -36,8 +36,6 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 let year = parseInt(paper["year"]);
                 let slashIdx = paper["key"].lastIndexOf("/");
                 let venueDBLPURL = paper["key"].substr(0, slashIdx);
-                let venueName = null;
-                let venueNameMatchCCFList = false;
 
                 // Ignore some irrelevant information
                 if (
@@ -48,16 +46,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 }
                 
                 // Whether the key or venue hits or not
-                let venueURLMatchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
-                if (paper.venue) {
-                    if (paper.venue instanceof Array) {
-                        venueName = paper.venue[0].toUpperCase();
-                    } else {
-                        venueName = paper.venue.toUpperCase();
-                    }
-                    venueNameMatchCCFList = CCF_VENUE_RANK_LIST.has(venueName);
-                }
-                let matchCCFList = venueURLMatchCCFList || venueNameMatchCCFList;
+                let matchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
                 
                 if (filter.category.length > 0 
                     || filter.rank.length > 0 
@@ -104,11 +93,18 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 }
 
                 let ccfRank;
-                if (venueURLMatchCCFList) {
+                let venueName = "";
+                if (matchCCFList) {
                     ccfRank = CCF_LIST[venueDBLPURL]["rank"];
                     venueName = CCF_LIST[venueDBLPURL]["venue"];
                 } else {
-                    ccfRank = CCF_VENUE_RANK_LIST[venueName];
+                    if (paper.venue) {
+                        if (paper.venue instanceof Array) {
+                            venueName = paper.venue[0].toUpperCase();
+                        } else {
+                            venueName = paper.venue.toUpperCase();
+                        }
+                    }
                 }
 
                 let firstAuthor = "";
@@ -155,11 +151,10 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 return b.year - a.year;
             }
             if (a.venue != b.venue) {
-                return a.venue - b.venue;
+                return a.venue.localeCompare(b.venue);
             }
-            return a.title > b.title;
+            return a.title.localeCompare(b.title);
         });
-
 
         let tips = template.render($("#response-tips-info-template").html(), {
             count: Object.keys(paperList).length,
