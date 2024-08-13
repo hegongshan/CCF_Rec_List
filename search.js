@@ -1,3 +1,16 @@
+function isYearRange(year, startYear, endYear) {
+    if (startYear.length == 0 && endYear.length == 0) {
+        return true;
+    }
+    if (startYear.length > 0 && endYear.length > 0) {
+        return parseInt(startYear) <= year && year <= parseInt(endYear);
+    }
+    if (startYear.length > 0) {
+        return parseInt(startYear) <= year;
+    }
+    return year <= parseInt(endYear);
+}
+
 function doSearch(query, firstHit, pageSize, total, paperList, filter) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
@@ -20,6 +33,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
             let curPaperList = result["hits"]["hit"];
             for (var i = 0; i < curPaperList.length; i++) {
                 let paper = curPaperList[i]["info"];
+                let year = parseInt(paper["year"]);
                 let slashIdx = paper["key"].lastIndexOf("/");
                 let venueDBLPURL = paper["key"].substr(0, slashIdx);
                 let venueName = null;
@@ -60,7 +74,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                                     if (filter.rank.includes(CATEGORY_LIST[category][venueDBLPURL].rank)) {
                                         if (filter.venue.length == 0 || filter.venue.includes(venueDBLPURL)) {
                                             match = true;
-                                            break ;
+                                            break;
                                         }
                                     }
                                 } else if (filter.venue.length > 0) {
@@ -81,6 +95,10 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                     if (!match) {
                         continue;
                     }
+                }
+
+                if (!isYearRange(year, filter.year.start, filter.year.end)) {
+                    continue;
                 }
 
                 let ccfRank;
@@ -158,14 +176,25 @@ function search() {
     let query = $("#q").val().trim();
     // 1.check whether q is null or not
     // 2.ensure that string q is not a chinese character sequence
+    // TODO: 使用更好的校验及展示方式
     if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
-        alert("请输入关键词！");
+        alert("关键词不能为空或者汉字！");
         return;
     }
 
-    let category = $("#category").val();
-    let rank = $("#rank").val();
-    let venue = $("#venue").val();
+    let startYearStr = $("#startYear").val().trim();
+    let endYearStr = $("#endYear").val().trim();
+    if ((startYearStr.length > 0 && parseInt(startYearStr) <= 0)
+        || (endYearStr.length > 0 && parseInt(endYearStr) <= 0)) {
+        alert("年份必须大于0！");
+        return;
+    }
+    if (startYearStr.length > 0 
+        && endYearStr.length > 0 
+        && parseInt(startYearStr) > parseInt(endYearStr)) {
+        alert("开始年份必须小于等于结束年份！");
+        return;
+    }
 
     // init
     $("#tips").html($("#loading-tips-info-template").html());
@@ -176,9 +205,13 @@ function search() {
     let total = 0;
     let paperList = [];
     let filter = {
-        category: category,
-        rank: rank,
-        venue: venue
+        category: $("#category").val(),
+        rank: $("#rank").val(),
+        venue: $("#venue").val(),
+        year: {
+            start: startYearStr,
+            end: endYearStr
+        }
     };
 
     doSearch(query, firstHit, pageSize, total, paperList, filter);
