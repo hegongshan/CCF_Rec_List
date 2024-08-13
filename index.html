@@ -66,7 +66,7 @@
 	<div id="app" class="container">
 		<h1 class="text-center">面向CCF推荐列表的学术论文检索系统</h1>
 		<div class="dropdown">
-			<a href="javascript:void(0)" class="dropdown-toggle theme" data-toggle="dropdown" aria-expanded="false">主题</a>
+			<a href="javascript:void(0)" class="dropdown-toggle theme badge badge-pill badge-primary" data-toggle="dropdown" aria-expanded="false">主题</a>
 			<div class="dropdown-menu">
 				<a id="theme-light" href="javascript:void(0)" class="dropdown-item">白色</a>
 				<a id="theme-dark" href="javascript:void(0)" class="dropdown-item">黑色</a>
@@ -82,9 +82,9 @@
 			<div class="col-md-4">
 				<label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
 				<select id="rank" multiple title="请选择级别">
-					<option value="A">CCF A</option>
-					<option value="B">CCF B</option>
-					<option value="C">CCF C</option>
+					<option data-content="<span class='badge badge-pill badge-primary'>CCF A</span>" value="A">CCF A</option>
+					<option data-content="<span class='badge badge-pill badge-primary'>CCF B</span>" value="B">CCF B</option>
+					<option data-content="<span class='badge badge-pill badge-primary'>CCF C</span>" value="C">CCF C</option>
 				</select>
 			</div>
 			<div class="col-md-4">
@@ -131,13 +131,13 @@
 	<script id="category-info-template" type="text/html">
 		{{each categoryList}}
 			{{set category = $value}}
-			<option value="{{category.name}}">{{category.name}}</option>
+			<option data-content="<span class='badge badge-pill badge-info'>{{category.name}}</span>" value="{{category.name}}">{{category.name}}</option>
 		{{/each}}
 	</script>
 	<script id="venue-info-template" type="text/html">
 		{{each venueList}}
 			{{set venue = $value}}
-			<option value="{{venue.url}}">{{venue.name}}</option>
+			<option data-content="<span class='badge badge-pill badge-success'>{{venue.name}}</span>" value="{{venue.url}}">{{venue.name}}</option>
 		{{/each}}
 	</script>
 	<script id="paper-info-template" type="text/html">
@@ -145,7 +145,11 @@
 		{{each paperList}}
 			{{set paper = $value}}
 			<li>
-				[CCF {{paper.ccfRank}}] 
+				{{if paper.ccfRank}}
+				<span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
+				{{else}}
+				<span class="badge badge-pill badge-info">No Rank</span>
+				{{/if}}
 				{{paper.firstAuthor}}, et al. 
 				<strong style='font-weight:bold;'>{{@paper.title}}</strong>, 
 				{{paper.venue}}'{{paper.year}}, 
