@@ -1,10 +1,21 @@
 /* 
  * ------------------------------------------------------------
  * 
- * 计算机体系结构/并行与分布计算/存储系统
+ * Begin:  The CCF Recommendation List
  *
  * ------------------------------------------------------------
  */
+
+/* 
+ * ------------------------------------------------------------
+ * 
+ * 计算机体系结构/并行与分布计算/存储系统
+ *
+ * (Computer Architecture/Parallel and Distributed Computing/Storage System)
+ * 
+ * ------------------------------------------------------------
+ */
+
 let ARCH_DCP_SS = {
     /*
      * Journal
@@ -123,19 +134,23 @@ let ARCH_DCP_SS = {
  * 
  * 软件工程/系统软件/程序设计语言
  *
+ * (Software Engineering/System Software/Programming Language)
+ * 
  * ------------------------------------------------------------
  */
-let TCSE_SS_PDL = {
+let SE_SS_PDL = {
     "conf/osdi": { "venue": "OSDI", "rank": "A" },
     "conf/sosp": { "venue": "SOSP", "rank": "A" },
 
     "conf/ispass": { "venue": "ISPASS", "rank": "C"},
 };
 
+/* 
  * ------------------------------------------------------------
  * 
  * 计算机网络
  *
+ * (Computer Network)
  * ------------------------------------------------------------
  */
 let CN = {
@@ -155,6 +170,7 @@ let CN = {
     "journal/tocm":{"venue": "TCOM", "rank": "B"},
     "journal/twc":{"venue": "TWC", "rank": "B"},
 
+    // Rank C
     "journal/adhoc":{"venue": "Ad Hoc Networks", "rank": "C"},
     "journal/cc":{"venue": "CC", "rank": "C"},
     "journal/tnsm":{"venue": "TNSM", "rank": "C"},
@@ -171,13 +187,13 @@ let CN = {
      /*
      * Conference
      */
-    //Rank A
+    // Rank A
     "conf/sigcomm": { "venue": "SIGCOMM", "rank": "A"},
     "conf/mobicom": { "venue": "MobiCom", "rank": "A" },
     "conf/infocom": { "venue": "INFOCOM", "rank": "A" },
     "conf/nsdi": { "venue": "NSDI", "rank": "A" },
 
-    //Rank B
+    // Rank B
     "conf/sensys": { "venue": "SenSys", "rank": "B" },
     "conf/conext": { "venue": "CoNEXT", "rank": "B" },
     "conf/secon": { "venue": "SECON", "rank": "B" },
@@ -189,7 +205,7 @@ let CN = {
     "conf/imc": { "venue": "IMC", "rank": "B" },
     "conf/icnp": { "venue": "ICNP", "rank": "B" },
 
-    //Rank C
+    // Rank C
     "conf/ancs": { "venue": "ANCS", "rank": "C" },
     "conf/apnoms": { "venue": "APNOMS", "rank": "C" },
     "conf/forte": { "venue": "FORTE", "rank": "C" },
@@ -291,9 +307,11 @@ let CIS = {
  * 
  * 数据库/数据挖掘/内容检索
  *
+ * (Database/Data Mining/Content Retrieval)
+ * 
  * ------------------------------------------------------------
  */
-let DM_CS = {
+let DB_DM_CR = {
     "journals/pvldb": { "venue": "VLDB", "rank": "A" },
 
     // Conference
@@ -315,6 +333,8 @@ let DM_CS = {
  * ------------------------------------------------------------
  * 
  * 人工智能
+ * 
+ * (Artificial Intelligence)
  *
  * ------------------------------------------------------------
  */
@@ -325,14 +345,105 @@ let AI = {
     "conf/ijcai": { "venue": "IJCAI", "rank": "A" },
 };
 
-let CROSS_COMPRE_EMERGING = {
+let INTERDISCIPLINARY_EMERGING = {
     "conf/www": { "venue": "WWW", "rank": "A" },
 };
 
 /* 
+ * ------------------------------------------------------------
+ * 
+ * 计算机科学理论
+ *
+ * (Computer Science Theory)
+ * ------------------------------------------------------------
+ */
+let TCS = {
+    // Journal
+    // Rank A
+    "journal/tit":{"venue": "TIT", "rank": "A"},
+    "journal/iandc":{"venue": "IANDC", "rank": "A"},
+    "journal/siamcomp":{"venue": "SICOMP", "rank": "A"},
+
+    // Rank B
+    "journal/talg":{"venue": "TALG", "rank": "B"},
+    "journal/tocl":{"venue": "TOCL", "rank": "B"},
+    "journal/toms":{"venue": "TOMS", "rank": "B"},
+    "journal/algorithmica":{"venue": "Algorithmica", "rank": "B"},
+    "journal/cc":{"venue": "CC", "rank": "B"},
+    "journal/fac":{"venue": "FAC", "rank": "B"},
+    "journal/fmsd":{"venue": "FMSD", "rank": "B"},
+    "journal/informs":{"venue": "INFORMS", "rank": "B"},
+    "journal/jcss":{"venue": "JCSS", "rank": "B"},
+    "journal/jgo":{"venue": "JGO", "rank": "B"},
+    "journal/jsc":{"venue": "JSC", "rank": "B"},
+    "journal/mscs":{"venue": "MSCS", "rank": "B"},
+    "journal/tcs":{"venue": "TCS", "rank": "B"},
+    
+    // Rank C
+    "journal/acta":{"venue": "ACTA", "rank": "C"},
+    "journal/apal":{"venue": "APAL", "rank": "C"},
+    "journal/dam":{"venue": "DAM", "rank": "C"},
+    "journal/fuin":{"venue": "FUIN", "rank": "C"},
+    "journal/ipl":{"venue": "IPL", "rank": "C"},
+    "journal/jc":{"venue": "JCOMPLEXITY", "rank": "C"},
+    "journal/logcom":{"venue": "LOGCOM", "rank": "C"},
+    "journal/jsyml":{"venue": "JSL", "rank": "C"},
+    "journal/lmcs":{"venue": "LMCS", "rank": "C"},
+    "journal/siamda":{"venue": "SIDMA", "rank": "C"},
+    // "journal/mst":{"venue": "TCS", "rank": "C"},
+
+    // Conference
+    // Rank A
+    "conf/stoc": { "venue": "STOC", "rank": "A" },
+    "conf/soda": { "venue": "SODA", "rank": "A" },
+    "conf/cav": { "venue": "CAV", "rank": "A" },
+    "conf/lics": { "venue": "LICS", "rank": "A" },
+    
+    // Rank B
+    "conf/compgeom": { "venue": "SoCG", "rank": "B" },
+    "conf/esa": { "venue": "ESA", "rank": "B" },
+    "conf/coco": { "venue": "CCC", "rank": "B" },
+    "conf/icalp": { "venue": "ICALP", "rank": "B" },
+    // "conf/cade": { "venue": "CADE", "rank": "B" },
+    "conf/concur": { "venue": "CONCUR", "rank": "B" },
+    "conf/hybrid": { "venue": "HSCC", "rank": "B" },
+    "conf/sat": { "venue": "SAT", "rank": "B" },
+    "conf/cocoon": { "venue": "COCOON", "rank": "B" },
+     
+    // Rank C
+     "conf/csl": { "venue": "CSL", "rank": "C" },
+     "conf/fmcad": { "venue": "FMCAD", "rank": "C" },
+     "conf/fsttcs": { "venue": "FSTTCS", "rank": "C" },
+     "conf/dsaa": { "venue": "DSAA", "rank": "C" },
+     "conf/ictac": { "venue": "ICTAC", "rank": "C" },
+     "conf/ipco": { "venue": "IPCO", "rank": "C" },
+     "conf/rta": { "venue": "RTA", "rank": "C" },
+     "conf/isaac": { "venue": "ISAAC", "rank": "C" },
+     "conf/mfcs": { "venue": "MFCS", "rank": "C" },
+     "conf/stacs": { "venue": "STACS", "rank": "C" },
+     "conf/setta": { "venue": "SETTA", "rank": "C" },
+};
+
+/* 
+ * ------------------------------------------------------------
+ * 
+ * 计算机图形学与多媒体
+ *
+ * (Computer Graphics and Multimedia)
+ * 
+ * ------------------------------------------------------------
+ */
+let CGM = {
+    // Journal
+    // Rank A
+    "journal/tog":{"venue": "TOG", "rank": "A"},
+    "journal/tip":{"venue": "TIP", "rank": "A"},
+}   
+
+/* 
  * --------------------------------------------------------------------------------------
  * 
- * The following journals or conferences are Not in the recommended list, but should in.
+ * The following journals or conferences are not in the recommended list, but should in.
  *
  * --------------------------------------------------------------------------------------
 */
@@ -350,11 +461,11 @@ let OTHERS  = {
 /* 
  * ------------------------------------------------------------
  * 
- * End. The CCF Recommended List
+ * End: The CCF Recommended List
  *
  * ------------------------------------------------------------
  */
-let categoryList = [ARCH_DCP_SS, TCSE_SS_PDL, DM_CS, AI, CROSS_COMPRE_EMERGING, CN, CIS, OTHERS];
+let categoryList = [ARCH_DCP_SS, SE_SS_PDL, DB_DM_CR, AI, INTERDISCIPLINARY_EMERGING, CN, CIS, OTHERS];
 let CCF_LIST = {};
 let CCF_VENUE_RANK_LIST = new Map();
 
