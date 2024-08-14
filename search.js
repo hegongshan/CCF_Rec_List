@@ -165,6 +165,11 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
             paperList: paperList,
         });
         $("#result").append(html);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("请求失败，请重新尝试！");
+        // 当请求失败时，不要继续显示加载图片
+        $("#tips").empty();
     });
 }
 
@@ -304,6 +309,10 @@ function doQueryAbstract(
         }
 
         abstractTag.html(abstract);
+        loadingTips.empty();
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        alert("请求失败，请重新尝试！");
         loadingTips.empty();
     });
 }
