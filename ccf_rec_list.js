@@ -44,7 +44,7 @@ let ARCH_PDC_SS = {
     "journals/tcc": { "venue": "TCC", "rank": "C" },
     "journals/integration": { "venue": "Integration", "rank": "C" },
     "journals/et": { "venue": "JETTA", "rank": "C" },
-    // "journals/": { "venue": "JGC", "rank": "C" },
+    "journals/grid": { "venue": "JGC", "rank": "C" },
     "journals/rts": { "venue": "RTS", "rank": "C" },
     "journals/tjs": { "venue": "TJSC", "rank": "C" },
     "journals/tcasI": { "venue": "TCASI", "rank": "C" },
@@ -57,7 +57,7 @@ let ARCH_PDC_SS = {
     "conf/ppopp": { "venue": "PPoPP", "rank": "A" },
     "conf/fast": { "venue": "FAST", "rank": "A" },
     "conf/dac": { "venue": "DAC", "rank": "A" },
-    "conf/cnhpca": { "venue": "HPCA", "rank": "A" },
+    "conf/hpca": { "venue": "HPCA", "rank": "A" },
     "conf/micro": { "venue": "MICRO", "rank": "A" },
     "conf/sc": { "venue": "SC", "rank": "A" },
     "conf/asplos": { "venue": "ASPLOS", "rank": "A" },
@@ -66,7 +66,7 @@ let ARCH_PDC_SS = {
     "conf/eurosys": { "venue": "EuroSys", "rank": "A" },
 
     // Rank B
-    "conf/cloud": { "venue": "SOCC", "rank": "B" },
+    "conf/cloud": { "venue": "SoCC", "rank": "B" },
     "conf/spaa": { "venue": "SPAA", "rank": "B" },
     "conf/podc": { "venue": "PODC", "rank": "B" },
     "conf/fpga": { "venue": "FPGA", "rank": "B" },
@@ -140,7 +140,7 @@ let CN = {
  
     // Rank B
     "journals/toit":{"venue": "TOIT", "rank": "B"},
-    "journals/tommcap":{"venue": "TOMM", "rank": "B"},
+    "journals/tomccap":{"venue": "TOMM", "rank": "B"},
     "journals/tosn":{"venue": "TOSN", "rank": "B"},
     "journals/cn":{"venue": "CN", "rank": "B"},
     "journals/tcom":{"venue": "TCOM", "rank": "B"},
@@ -207,7 +207,7 @@ let CN = {
  * 
  * 网络信息安全
  * 
- * (Network Information Security)
+ * (Network and Information Security)
  * 
  * -------------------------------------------------------------------------
 */
@@ -272,7 +272,7 @@ let NIS = {
     "conf/fc": { "venue": "FC", "rank": "C" },
     "conf/trustcom": { "venue": "TrustCom", "rank": "C" },
     "conf/sec": { "venue": "SEC", "rank": "C" },
-    "conf/ifip 11-9": { "venue": "IFIP WG 11.9", "rank": "C" },
+    "conf/ifip11-9": { "venue": "IFIP WG 11.9", "rank": "C" },
     "conf/isw": { "venue": "ISC", "rank": "C" },
     "conf/icdf2c": { "venue": "ICDF2C", "rank": "C" },
     "conf/icics": { "venue": "ICICS", "rank": "C" },
@@ -307,7 +307,7 @@ let SE_SS_PL = {
     // Rank B
     "journals/ase": { "venue": "ASE", "rank": "B" },
     "journals/ese": { "venue": "ESE", "rank": "B" },
-    "journals/iee": { "venue": "IETS", "rank": "B" },
+    "journals/iet-sen": { "venue": "IETS", "rank": "B" },
     "journals/infsof": { "venue": "IST", "rank": "B" },
     "journals/jfp": { "venue": "JFP", "rank": "B" },
     // "journals/smr": { "venue": "", "rank": "B" }, Journal Name : Journal of Software: Evolution and ProcessWiley
@@ -417,7 +417,7 @@ let DB_DM_CR = {
     "journals/datamine": { "venue": "DMKD", "rank": "B" },
     "journals/ejis": { "venue": "EJIS", "rank": "B" },
     // "journals/geoinformatica": { "venue": "", "rank": "B" }, Journal Name : GeoInformatica
-    "journals/ipm": { "venue": "IPM", "rank": "B" },
+    "journals/isci": { "venue": "IPM", "rank": "B" },
     // "journals/": { "venue": "", "rank": "B" }, Journal Name : Information Sciences
     "journals/is": { "venue": "IS", "rank": "B" },
     "journals/jasis": { "venue": "JASIST", "rank": "B" },
@@ -455,7 +455,7 @@ let DB_DM_CR = {
     "conf/wsdm": { "venue": "WSDM", "rank": "B" },
     "conf/pods": { "venue": "PODS", "rank": "B" },
     "conf/dasfaa": { "venue": "DASFAA", "rank": "B" },
-    "conf/ecml": { "venue": "ECML-PKDD", "rank": "B" },
+    "conf/pkdd": { "venue": "ECML-PKDD", "rank": "B" },
     "conf/semweb": { "venue": "ISWC", "rank": "B" },
     "conf/icdm": { "venue": "ICDM", "rank": "B" },
     "conf/icdt": { "venue": "ICDT", "rank": "B" },
@@ -478,7 +478,7 @@ let DB_DM_CR = {
     "conf/ssd": { "venue": "SSTD", "rank": "C" },
     "conf/pakdd": { "venue": "PAKDD", "rank": "C" },
     "conf/wise": { "venue": "WISE", "rank": "C" },
-    "conf/adam": { "venue": "ADMA", "rank": "C" },
+    "conf/adma": { "venue": "ADMA", "rank": "C" },
 };
 
 /* 
@@ -568,7 +568,7 @@ let CST = {
  * 
  * ------------------------------------------------------------
  */
-let CGM = {
+let CG_MM = {
     // Journal 
     // Rank A
     "journals/tog":{"venue": "TOG", "rank": "A"},
@@ -803,7 +803,7 @@ let HCI_UBICOMP = {
     // Rank A
     "conf/cscw":{"venue": "CSCW", "rank": "A"},
     "conf/chi":{"venue": "CHI", "rank": "A"},
-    "conf/imwut":{"venue": "UbiComp/IMWUT", "rank": "A"},
+    "conf/huc":{"venue": "UbiComp", "rank": "A"},
     "conf/uist":{"venue": "UIST", "rank": "A"},
 
     // Rank B
@@ -886,11 +886,11 @@ let INTERDISCIPLINARY_EMERGING = {
     "conf/wine": { "venue": "WINE", "rank": "A" },
 
     // Rank B
-    // "conf/": { "venue": "CogSci", "rank": "B" },
+     "conf/cogsci": { "venue": "CogSci", "rank": "B" },
     "conf/bibm": { "venue": "BIBM", "rank": "B" },
     "conf/emsoft": { "venue": "EMSOFT", "rank": "B" },
-    "conf/recomb": { "venue": "RECOMB", "rank": "B" },
     "conf/ismb": { "venue": "ISMB", "rank": "B" },
+    "conf/recomb": { "venue": "RECOMB", "rank": "B" },
     "conf/miccai": { "venue": "MICCAI", "rank": "B" },
 
     // Rank C
@@ -911,7 +911,7 @@ let INTERDISCIPLINARY_EMERGING = {
  * 
  * The following journals or conferences are not in the recommended list, but should in.
  *
- * -------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------
 */
 let OTHERS = {
     // They are equivalent to Rank A.
@@ -940,11 +940,11 @@ let OTHERS = {
 let CATEGORY_LIST = {
     "计算机体系结构/并行与分布计算/存储系统": ARCH_PDC_SS,
     "计算机网络": CN,
-    "网络信息安全": NIS,
+    "网络与信息安全": NIS,
     "软件工程/系统软件/程序设计语言": SE_SS_PL,
     "数据库/数据挖掘/内容检索": DB_DM_CR,
     "计算机科学理论": CST,
-    "计算机图形学与多媒体": CGM,
+    "计算机图形学与多媒体": CG_MM,
     "人工智能": AI,
     "人机交互与普适计算": HCI_UBICOMP,
     "交叉/综合/新兴": INTERDISCIPLINARY_EMERGING,
