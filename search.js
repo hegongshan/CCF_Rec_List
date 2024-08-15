@@ -1,3 +1,41 @@
+function isCategoryMatch(venueDBLPURL, categoryList) {
+    let match = false;
+    if (categoryList.length == 0) {
+        match = true;
+    } else {
+        for (let category of categoryList) {
+            if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
+                match = true;
+                break;
+            }
+        }
+    }
+    return match;
+}
+
+function isTypeMatch(venueDBLPURL, typeList) {
+    let match = false;
+    if (typeList.length == 0) {
+        match = true;
+    } else {
+        for (let type of typeList) {
+            if (venueDBLPURL.startsWith(type)) {
+                match = true;
+                break;
+            }
+        }
+    }
+    return match;
+}
+
+function isRankMatch(venueDBLPURL, rankList) {
+    return rankList.length == 0 || rankList.includes(CCF_LIST[venueDBLPURL].rank);
+}
+
+function isVenueMatch(venueDBLPURL, venueList) {
+    return venueList.length == 0 || venueList.includes(venueDBLPURL);
+}
+
 function isYearRange(year, startYear, endYear) {
     if (startYear.length == 0 && endYear.length == 0) {
         return true;
@@ -48,46 +86,35 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 // Whether the key or venue hits or not
                 let matchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
                 
-                if (filter.category.length > 0 
-                    || filter.rank.length > 0 
-                    || filter.venue.length > 0) {
+                if (filter.categoryList.length > 0 
+                    || filter.rankList.length > 0 
+                    || filter.venueList.length > 0) {
                     if (!matchCCFList) {
                         continue;
                     }
 
-                    let match = false;
-                    if (filter.category.length > 0) {
-                        for (let category of filter.category) {
-                            if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
-                                if (filter.rank.length > 0) {
-                                    if (filter.rank.includes(CATEGORY_LIST[category][venueDBLPURL].rank)) {
-                                        if (filter.venue.length == 0 || filter.venue.includes(venueDBLPURL)) {
-                                            match = true;
-                                            break;
-                                        }
-                                    }
-                                } else if (filter.venue.length > 0) {
-                                    if (filter.venue.includes(venueDBLPURL)) {
-                                        match = true;
-                                        break;
-                                    }
-                                } else {
-                                    match = true;
-                                }
-                            }
-                        }
-                    } else if (filter.rank.length > 0) {
-                        if (filter.rank.includes(CCF_LIST[venueDBLPURL].rank)) {
-                            if (filter.venue.length == 0 || filter.venue.includes(venueDBLPURL)) {
-                                match = true;
-                            }
-                        }
+                    // 根据分类过滤   
+                    if (!isCategoryMatch(venueDBLPURL, filter.categoryList)) {
+                        continue;
                     }
-                    if (!match) {
+
+                    // 根据级别过滤
+                    if (!isRankMatch(venueDBLPURL, filter.rankList)) {
+                        continue;
+                    }
+
+                    // 根据刊物过滤
+                    if (!isVenueMatch(venueDBLPURL, filter.venueList)) {
                         continue;
                     }
                 }
 
+                // 根据刊物类别过滤
+                if (!isTypeMatch(venueDBLPURL, filter.typeList)) {
+                    continue;
+                }
+
+                // 根据年份过滤
                 if (!isYearRange(year, filter.year.start, filter.year.end)) {
                     continue;
                 }
@@ -161,10 +188,10 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
         });
         $("#tips").html(tips);
 
-        let html = template.render($("#paper-info-template").html(), {
+        let paperHtml = template.render($("#paper-info-template").html(), {
             paperList: paperList,
         });
-        $("#result").append(html);
+        $("#result").append(paperHtml);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         alert("请求失败，请重新尝试！");
@@ -207,9 +234,10 @@ function search() {
     let total = 0;
     let paperList = [];
     let filter = {
-        category: $("#category").val(),
-        rank: $("#rank").val(),
-        venue: $("#venue").val(),
+        categoryList: $("#category").val(),
+        typeList: $("#type").val(),
+        rankList: $("#rank").val(),
+        venueList: $("#venue").val(),
         year: {
             start: startYearStr,
             end: endYearStr
@@ -237,29 +265,16 @@ function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
     let errorMsg = "没找到摘要=_=";
 
     // query
-    if (!paperDOI) {
-        doQueryAbstract(
-            false,
-            paperDOI,
-            paperTitle,
-            abstractTag,
-            loadingTips,
-            errorMsg
-        );
-    } else {
-        doQueryAbstract(
-            true,
-            paperDOI,
-            paperTitle,
-            abstractTag,
-            loadingTips,
-            errorMsg
-        );
-    }
+    doQueryAbstract(
+        paperDOI,
+        paperTitle,
+        abstractTag,
+        loadingTips,
+        errorMsg
+    );
 }
 
 function doQueryAbstract(
-    isDOIQuery = true,
     paperDOI,
     paperTitle,
     abstractTag,
@@ -271,7 +286,7 @@ function doQueryAbstract(
         fields: "title,abstract",
     };
 
-    if (isDOIQuery) {
+    if (paperDOI) {
         semanticScholarUrl += "DOI:" + paperDOI;
     } else {
         semanticScholarUrl += "search";
@@ -283,11 +298,10 @@ function doQueryAbstract(
     // $.ajaxSettings.async = false;
     $.getJSON(semanticScholarUrl, inputData, function (data) {        
         let abstract;
-        if (isDOIQuery) {
+        if (paperDOI) {
             if (!data["abstract"]) {
                 // search by title
                 doQueryAbstract(
-                    false,
                     paperDOI,
                     paperTitle,
                     abstractTag,

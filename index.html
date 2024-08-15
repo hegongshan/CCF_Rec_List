@@ -80,6 +80,13 @@
 				</select>
 			</div>
 			<div class="col-md-4">
+				<label>类&nbsp;&nbsp;&nbsp;&nbsp;型: </label>
+				<select id="type" multiple title="期刊 或 会议">
+					<option data-content="<span class='badge badge-pill badge-secondary'>期刊</span>" value="journals">期刊</option>
+					<option data-content="<span class='badge badge-pill badge-secondary'>会议</span>" value="conf">会议</option>
+				</select>
+			</div>
+			<div class="col-md-4">
 				<label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
 				<select id="rank" multiple title="请选择级别">
 					<option data-content="<span class='badge badge-pill badge-primary'>CCF A</span>" value="A">CCF A</option>
@@ -87,14 +94,14 @@
 					<option data-content="<span class='badge badge-pill badge-primary'>CCF C</span>" value="C">CCF C</option>
 				</select>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-4">
 				<label>刊&nbsp;&nbsp;&nbsp;&nbsp;物: </label>
 				<select id="venue" multiple title="请选择刊物">
 				</select>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<label>年&nbsp;&nbsp;&nbsp;&nbsp;份: </label>
 				<input id="startYear" type="number" placeholder="开始年份"/>
 				<label style="text-align: center;">&minus;</label>
@@ -113,7 +120,6 @@
 			<div id="result" class="col-md-12"></div>
 		</div>
 		<footer>
-			
 		</footer>
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -168,6 +174,65 @@
 		Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He All Rights Reserved.
 	</script>
 	<script type="text/javascript">
+		function updateVenue(current, selectpickerExtendedOptions) {
+			let categoryVals = $("#category").val();
+			let typeVals = $("#type").val();
+			let rankVals = $("#rank").val();
+			let venue = $("#venue");
+
+			if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
+				venue.prop("disabled", true);
+				venue.selectpicker("destroy");
+				venue.selectpicker(selectpickerExtendedOptions);
+			}
+
+			if ($(current).val().length == 0) {
+				return ;
+			}
+
+			// 清空列表
+			venue.prop("disabled", false);
+			venue.empty();
+
+			// 重新填充列表
+			let venueList = [];
+			let categoryList = {};
+			if (categoryVals.length == 0) {
+				categoryList = CATEGORY_LIST;
+			} else {
+				// 将选择的分类转换为JSON对象
+				categoryVals.forEach(function(element, index) {
+					categoryList[element] = "";
+				});
+			}
+			// 根据分类过滤
+			for (let category in categoryList) {
+				for (let venueDBLPUrl in CATEGORY_LIST[category]) {
+					// 根据类型过滤
+					if (!isTypeMatch(venueDBLPUrl, typeVals)) {
+						continue;
+					}
+
+					// 根据级别过滤
+					if (!isRankMatch(venueDBLPUrl, rankVals)) {
+						continue;
+					}
+
+					venueList.push({
+						url: venueDBLPUrl, 
+						name: CATEGORY_LIST[category][venueDBLPUrl].venue
+					});
+				}
+			}
+
+			let venueHtml = template.render($("#venue-info-template").html(), {
+				venueList: venueList,
+			});
+			venue.html(venueHtml);
+			venue.selectpicker("destroy");
+			venue.selectpicker(selectpickerExtendedOptions);
+		}
+
 		$(function () {
 			// 版权信息
 			let footerHtml = template.render($("#footer-info-template").html(), {
@@ -201,115 +266,49 @@
 					search();
 				}
 			});
+			
+			let category = $("#category");
+			let type = $("#type");
+			let rank = $("#rank");
+			let venue = $("#venue");
 
-			var categories = [];
-			for (var key in CATEGORY_LIST) {
-				categories.push({"name": key});
+			// 填充分类
+			let categoryList = [];
+			for (let venueDBLPUrl in CATEGORY_LIST) {
+				categoryList.push({"name": venueDBLPUrl});
 			}
-			let html = template.render($("#category-info-template").html(), {
-				categoryList: categories,
+			let categoryHtml = template.render($("#category-info-template").html(), {
+				categoryList: categoryList,
 			});
-			$("#category").html(html);
+			$(category).html(categoryHtml);
 
-
+			// bootstrap-select初始化
 			let selectpickerOptions = {
 				actionsBox: true, 
 				selectAllText: "全选", 
 				deselectAllText: "取消全选", 
 				noneResultsText: "未找到匹配的结果"
 			};
-			let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {liveSearch: true});
-			$('#category').selectpicker(selectpickerExtendedOptions);
-			$("#rank").selectpicker(selectpickerOptions);
-			$('#venue').prop('disabled', true);
-			$("#venue").selectpicker(selectpickerExtendedOptions);
+			let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {
+				liveSearch: true, 
+				selectedTextFormat: "count > 3",
+				countSelectedText: "选择了{0}项"
+			});
+			category.selectpicker(selectpickerExtendedOptions);
+			type.selectpicker(selectpickerOptions);
+			rank.selectpicker(selectpickerOptions);
+			venue.prop("disabled", true);
+			venue.selectpicker(selectpickerExtendedOptions);
 
 			// TODO: 当category和rank取消时，修改venue中的option
-			$("#category").on("hidden.bs.select", function (){
-				let categoryVals = $(this).val();
-				if (categoryVals.length == 0) {
-					if ($("#rank").val().length == 0) {
-						$("#venue").prop("disabled", true);
-						$("#venue").selectpicker("destroy");
-						$("#venue").selectpicker(selectpickerExtendedOptions);
-					}
-					return;
-				}
-
-				// 清空列表
-				$("#venue").prop("disabled", false);
-				$("#venue").empty();
-
-				// 重新填充列表
-				let ranks = $("#rank").val();
-				let venues = [];
-				for (let category of categoryVals) {
-					for (let venueUrl in CATEGORY_LIST[category]) {
-						if (ranks.length == 0 || ranks.includes(CATEGORY_LIST[category][venueUrl].rank)) {
-							venues.push({
-								url: venueUrl, 
-								name: CATEGORY_LIST[category][venueUrl].venue
-							});
-						}
-					}
-				}
-
-				let html = template.render($("#venue-info-template").html(), {
-					venueList: venues,
-				});
-				$("#venue").html(html);
-				$("#venue").selectpicker("destroy");
-				$("#venue").selectpicker(selectpickerExtendedOptions);
+			category.on("hidden.bs.select", function() {
+				updateVenue(this, selectpickerExtendedOptions);
+			});			
+			type.on("hidden.bs.select", function() {
+				updateVenue(this, selectpickerExtendedOptions);
 			});
-
-			$("#rank").on("hidden.bs.select", function (){
-				let rankVals = $(this).val();
-				if (rankVals.length == 0) {
-					if ($("#category").val().length == 0) {
-						$("#venue").prop("disabled", true);
-						$("#venue").selectpicker("destroy");
-						$("#venue").selectpicker(selectpickerExtendedOptions);
-					}
-					return;
-				}
-
-				// 清空列表
-				$("#venue").prop("disabled", false);
-				$("#venue").empty();
-
-				// 重新填充列表
-				var categoryVals = $("#category").val();
-				let venues = [];
-				if (categoryVals.length > 0) {
-					for (let category of categoryVals) {
-						for (let venueUrl in CATEGORY_LIST[category]) {
-							if (rankVals.includes(CATEGORY_LIST[category][venueUrl].rank)) {
-								venues.push({
-									url: venueUrl, 
-									name: CATEGORY_LIST[category][venueUrl].venue
-								});
-							}
-						}
-					}
-				} else {
-					for (let category in CATEGORY_LIST) {
-						for (let venueUrl in CATEGORY_LIST[category]) {
-							if (rankVals.includes(CATEGORY_LIST[category][venueUrl].rank)) {
-								venues.push({
-									url: venueUrl, 
-									name: CATEGORY_LIST[category][venueUrl].venue
-								});
-							}
-						}
-					}
-				}
-
-				let html = template.render($("#venue-info-template").html(), {
-					venueList: venues,
-				});
-				$("#venue").html(html);
-				$("#venue").selectpicker("destroy");
-				$("#venue").selectpicker(selectpickerExtendedOptions);
+			rank.on("hidden.bs.select", function() {
+				updateVenue(this, selectpickerExtendedOptions);
 			});
 		});
 	</script>
