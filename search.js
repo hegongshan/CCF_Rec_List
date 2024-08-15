@@ -143,7 +143,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                     }
                 }
                 firstAuthor = firstAuthor.replace(/\d+/g, "").trim();
-                let title = paper["title"].replace(/['"\.]+/g, "");
+                let title = paper["title"].replace(/['"]+/g, "").replace(/\.$/, "");
                 let url;
                 if (paper["ee"]) {
                     url = paper["ee"];
