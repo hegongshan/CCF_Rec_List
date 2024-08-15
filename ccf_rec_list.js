@@ -134,39 +134,39 @@ let ARCH_PDC_SS = {
 let CN = {
     // Journal
     // Rank A
-    "journals/jsac":{"venue": "JSAC", "rank": "A"},
-    "journals/tmc":{"venue": "TMC", "rank": "A"},
-    "journals/ton":{"venue": "TON", "rank": "A"},
- 
+    "journals/jsac": { "venue": "JSAC", "rank": "A" },
+    "journals/tmc": { "venue": "TMC", "rank": "A" },
+    "journals/ton": { "venue": "TON", "rank": "A" },
+
     // Rank B
-    "journals/toit":{"venue": "TOIT", "rank": "B"},
-    "journals/tomccap":{"venue": "TOMM", "rank": "B"},
-    "journals/tosn":{"venue": "TOSN", "rank": "B"},
-    "journals/cn":{"venue": "CN", "rank": "B"},
-    "journals/tcom":{"venue": "TCOM", "rank": "B"},
-    "journals/twc":{"venue": "TWC", "rank": "B"},
- 
+    "journals/toit": { "venue": "TOIT", "rank": "B" },
+    "journals/tomccap": { "venue": "TOMM", "rank": "B" },
+    "journals/tosn": { "venue": "TOSN", "rank": "B" },
+    "journals/cn": { "venue": "CN", "rank": "B" },
+    "journals/tcom": { "venue": "TCOM", "rank": "B" },
+    "journals/twc": { "venue": "TWC", "rank": "B" },
+
     // Rank C
     // "journal/adhoc":{"venue": "", "rank": "C"}, Journal Name : Ad hoc Networks
-    "journals/comcom":{"venue": "CC", "rank": "C"},
-    "journals/tnsm":{"venue": "TNSM", "rank": "C"},
+    "journals/comcom": { "venue": "CC", "rank": "C" },
+    "journals/tnsm": { "venue": "TNSM", "rank": "C" },
     // "journal/iet-commun":{"venue": "", "rank": "C"}, Journal Name : IET Communications
-    "journals/jnca":{"venue": "JNCA", "rank": "C"},
-    "journals/monet":{"venue": "MONET", "rank": "C"},
+    "journals/jnca": { "venue": "JNCA", "rank": "C" },
+    "journals/monet": { "venue": "MONET", "rank": "C" },
     // "journal/networks":{"venue": "Networks", "rank": "C"}, Journal Name : Networks
-    "journals/ppna":{"venue": "PPNA", "rank": "C"},
-    "journals/wicomm":{"venue": "WCMC", "rank": "C"},
+    "journals/ppna": { "venue": "PPNA", "rank": "C" },
+    "journals/wicomm": { "venue": "WCMC", "rank": "C" },
     // "journal/winet":{"venue": "", "rank": "C"}, JourNal Name : Wireless Networks
-    "journals/iotj":{"venue": "IOT", "rank": "C"},
- 
- 
+    "journals/iotj": { "venue": "IOT", "rank": "C" },
+
+
     // Conference
     // Rank A
-    "conf/sigcomm": { "venue": "SIGCOMM", "rank": "A"},
+    "conf/sigcomm": { "venue": "SIGCOMM", "rank": "A" },
     "conf/mobicom": { "venue": "MobiCom", "rank": "A" },
     "conf/infocom": { "venue": "INFOCOM", "rank": "A" },
     "conf/nsdi": { "venue": "NSDI", "rank": "A" },
- 
+
     //Rank B
     "conf/sensys": { "venue": "SenSys", "rank": "B" },
     "conf/conext": { "venue": "CoNEXT", "rank": "B" },
@@ -178,7 +178,7 @@ let CN = {
     "conf/nossdav": { "venue": "NOSSDAV", "rank": "B" },
     "conf/iwqos": { "venue": "IWQoS", "rank": "B" },
     "conf/imc": { "venue": "IMC", "rank": "B" },
-    
+
     // Rank C
     "conf/ancs": { "venue": "ANCS", "rank": "C" },
     "conf/apnoms": { "venue": "APNOMS", "rank": "C" },
@@ -200,42 +200,42 @@ let CN = {
     "conf/wasa": { "venue": "WASA", "rank": "C" },
     "conf/hotnets": { "venue": "HotNets", "rank": "C" },
     "conf/apnet": { "venue": "APNet", "rank": "C" },
- }
- 
- /* 
- * --------------------------------------------------------------------------------------
- * 
- * 网络信息安全
- * 
- * (Network and Information Security)
- * 
- * -------------------------------------------------------------------------
+}
+
+/* 
+* --------------------------------------------------------------------------------------
+* 
+* 网络信息与安全
+* 
+* (Network and Information Security)
+* 
+* -------------------------------------------------------------------------
 */
 let NIS = {
     // Journal
     // Rank A
-    "journals/tdsc":{"venue": "TDSC", "rank": "A"},
-    "journals/tifs":{"venue": "TIFS", "rank": "A"},
+    "journals/tdsc": { "venue": "TDSC", "rank": "A" },
+    "journals/tifs": { "venue": "TIFS", "rank": "A" },
     // "journal/joc":{"venue": "", "rank": "A"}, Journal Name : Journal of Cryptology
-    
+
     // Rank B
-    "journals/tissec":{"venue": "TOPS", "rank": "B"},
+    "journals/tissec": { "venue": "TOPS", "rank": "B" },
     // "journal/compsec":{"venue": "TDSC", "rank": "B"}, Journal Name : Computers & Security
     // "journal/dcc":{"venue": "", "rank": "B"}, Journal Name : Designs, Codes and Cryptography
-    "journals/jcs":{"venue": "JCS", "rank": "B"},
+    "journals/jcs": { "venue": "JCS", "rank": "B" },
 
     // Rank C
-    "journals/clsr":{"venue": "CLSR", "rank": "C"},
+    "journals/clsr": { "venue": "CLSR", "rank": "C" },
     // "journal/ejisec":{"venue": "", "rank": "C"}, Journal Name : EURASIP Journal on Information Security
     // "journal/iet-ifs":{"venue": "", "rank": "C"}, Journal Name : IET Information Security
-    "journals/imcs":{"venue": "IMCS", "rank": "C"},
-    "journals/ijics":{"venue": "IJICS", "rank": "C"},
-    "journals/ijisp":{"venue": "IJISP", "rank": "C"},
-    "journals/istr":{"venue": "JISA", "rank": "C"},
-    "journals/scn":{"venue": "SCN", "rank": "C"},
+    "journals/imcs": { "venue": "IMCS", "rank": "C" },
+    "journals/ijics": { "venue": "IJICS", "rank": "C" },
+    "journals/ijisp": { "venue": "IJISP", "rank": "C" },
+    "journals/istr": { "venue": "JISA", "rank": "C" },
+    "journals/scn": { "venue": "SCN", "rank": "C" },
     // "journal/cybersec":{"venue": "", "rank": "C"}, Journal Name : Cybersecurity
 
-    
+
     // Conference
     // Rank A
     "conf/ccs": { "venue": "CCS", "rank": "A" },
@@ -317,7 +317,7 @@ let SE_SS_PL = {
     "journals/sosym": { "venue": "SoSyM", "rank": "B" },
     "journals/stvr": { "venue": "STVR", "rank": "B" },
     "journals/spe": { "venue": "SPE", "rank": "B" },
-    
+
     // Rank C
     "journals/cl": { "venue": "CL", "rank": "C" },
     "journals/ijseke": { "venue": "IJSEKE", "rank": "C" },
@@ -341,7 +341,7 @@ let SE_SS_PL = {
     "conf/issta": { "venue": "ISSTA", "rank": "A" },
     "conf/osdi": { "venue": "OSDI", "rank": "A" },
     "conf/fm": { "venue": "FM", "rank": "A" },
-    
+
     // Rank B
     "conf/ecoop": { "venue": "ECOOP", "rank": "B" },
     "conf/etaps": { "venue": "ETAPS", "rank": "B" },
@@ -362,7 +362,7 @@ let SE_SS_PL = {
     "conf/esem": { "venue": "ESEM", "rank": "B" },
     "conf/issre": { "venue": "ISSRE", "rank": "B" },
     "conf/hotos": { "venue": "HotOS", "rank": "B" },
-   
+
     // Rank C
     "conf/pepm": { "venue": "PEPM", "rank": "C" },
     "conf/paste": { "venue": "PASTE", "rank": "C" },
@@ -404,6 +404,7 @@ let SE_SS_PL = {
 let DB_DM_CR = {
     // Journal
     // Rank A
+    "journals/pvldb": { "venue": "PVLDB", "rank": "A" },
     "journals/tods": { "venue": "TODS", "rank": "A" },
     "journals/tois": { "venue": "TOIS", "rank": "A" },
     "journals/tkde": { "venue": "TKDE", "rank": "A" },
@@ -417,8 +418,8 @@ let DB_DM_CR = {
     "journals/datamine": { "venue": "DMKD", "rank": "B" },
     "journals/ejis": { "venue": "EJIS", "rank": "B" },
     // "journals/geoinformatica": { "venue": "", "rank": "B" }, Journal Name : GeoInformatica
-    "journals/isci": { "venue": "IPM", "rank": "B" },
-    // "journals/": { "venue": "", "rank": "B" }, Journal Name : Information Sciences
+    "journals/ipm": { "venue": "IPM", "rank": "B" },
+    "journals/isci": { "venue": "Information Sciences", "rank": "B" },
     "journals/is": { "venue": "IS", "rank": "B" },
     "journals/jasis": { "venue": "JASIST", "rank": "B" },
     "journals/ws": { "venue": "JWS", "rank": "B" },
@@ -493,36 +494,36 @@ let DB_DM_CR = {
 let CST = {
     // Journal
     // Rank A
-    "journals/tit":{"venue": "TIT", "rank": "A"},
-    "journals/iandc":{"venue": "IANDC", "rank": "A"},
-    "journals/siamcomp":{"venue": "SICOMP", "rank": "A"},
+    "journals/tit": { "venue": "TIT", "rank": "A" },
+    "journals/iandc": { "venue": "IANDC", "rank": "A" },
+    "journals/siamcomp": { "venue": "SICOMP", "rank": "A" },
 
     // Rank B
-    "journals/talg":{"venue": "TALG", "rank": "B"},
-    "journals/tocl":{"venue": "TOCL", "rank": "B"},
-    "journals/toms":{"venue": "TOMS", "rank": "B"},
-    "journals/algorithmica":{"venue": "Algorithmica", "rank": "B"},
-    "journals/cc":{"venue": "CC", "rank": "B"},
-    "journals/fac":{"venue": "FAC", "rank": "B"},
-    "journals/fmsd":{"venue": "FMSD", "rank": "B"},
-    "journals/informs":{"venue": "INFORMS", "rank": "B"},
-    "journals/jcss":{"venue": "JCSS", "rank": "B"},
-    "journals/jgo":{"venue": "JGO", "rank": "B"},
-    "journals/jsc":{"venue": "JSC", "rank": "B"},
-    "journals/mscs":{"venue": "MSCS", "rank": "B"},
-    "journals/tcs":{"venue": "TCS", "rank": "B"},
-    
+    "journals/talg": { "venue": "TALG", "rank": "B" },
+    "journals/tocl": { "venue": "TOCL", "rank": "B" },
+    "journals/toms": { "venue": "TOMS", "rank": "B" },
+    "journals/algorithmica": { "venue": "Algorithmica", "rank": "B" },
+    "journals/cc": { "venue": "CC", "rank": "B" },
+    "journals/fac": { "venue": "FAC", "rank": "B" },
+    "journals/fmsd": { "venue": "FMSD", "rank": "B" },
+    "journals/informs": { "venue": "INFORMS", "rank": "B" },
+    "journals/jcss": { "venue": "JCSS", "rank": "B" },
+    "journals/jgo": { "venue": "JGO", "rank": "B" },
+    "journals/jsc": { "venue": "JSC", "rank": "B" },
+    "journals/mscs": { "venue": "MSCS", "rank": "B" },
+    "journals/tcs": { "venue": "TCS", "rank": "B" },
+
     // Rank C
-    "journals/acta":{"venue": "ACTA", "rank": "C"},
-    "journals/apal":{"venue": "APAL", "rank": "C"},
-    "journals/dam":{"venue": "DAM", "rank": "C"},
-    "journals/fuin":{"venue": "FUIN", "rank": "C"},
-    "journals/ipl":{"venue": "IPL", "rank": "C"},
-    "journals/jc":{"venue": "JCOMPLEXITY", "rank": "C"},
-    "journals/logcom":{"venue": "LOGCOM", "rank": "C"},
-    "journals/jsyml":{"venue": "JSL", "rank": "C"},
-    "journals/lmcs":{"venue": "LMCS", "rank": "C"},
-    "journals/siamdm":{"venue": "SIDMA", "rank": "C"},
+    "journals/acta": { "venue": "ACTA", "rank": "C" },
+    "journals/apal": { "venue": "APAL", "rank": "C" },
+    "journals/dam": { "venue": "DAM", "rank": "C" },
+    "journals/fuin": { "venue": "FUIN", "rank": "C" },
+    "journals/ipl": { "venue": "IPL", "rank": "C" },
+    "journals/jc": { "venue": "JCOMPLEXITY", "rank": "C" },
+    "journals/logcom": { "venue": "LOGCOM", "rank": "C" },
+    "journals/jsyml": { "venue": "JSL", "rank": "C" },
+    "journals/lmcs": { "venue": "LMCS", "rank": "C" },
+    "journals/siamdm": { "venue": "SIDMA", "rank": "C" },
     // "journals/mst":{"venue": "", "rank": "C"}, Journal Name : Theory of Computing Systems
 
     // Conference
@@ -532,7 +533,7 @@ let CST = {
     "conf/cav": { "venue": "CAV", "rank": "A" },
     "conf/focs": { "venue": "FOCS", "rank": "A" },
     "conf/lics": { "venue": "LICS", "rank": "A" },
-    
+
     // Rank B
     "conf/compgeom": { "venue": "SoCG", "rank": "B" },
     "conf/esa": { "venue": "ESA", "rank": "B" },
@@ -543,19 +544,19 @@ let CST = {
     "conf/hybrid": { "venue": "HSCC", "rank": "B" },
     "conf/sat": { "venue": "SAT", "rank": "B" },
     "conf/cocoon": { "venue": "COCOON", "rank": "B" },
-     
+
     // Rank C
-     "conf/csl": { "venue": "CSL", "rank": "C" },
-     "conf/fmcad": { "venue": "FMCAD", "rank": "C" },
-     "conf/fsttcs": { "venue": "FSTTCS", "rank": "C" },
-     "conf/dsaa": { "venue": "DSAA", "rank": "C" },
-     "conf/ictac": { "venue": "ICTAC", "rank": "C" },
-     "conf/ipco": { "venue": "IPCO", "rank": "C" },
-     "conf/rta": { "venue": "RTA", "rank": "C" },
-     "conf/isaac": { "venue": "ISAAC", "rank": "C" },
-     "conf/mfcs": { "venue": "MFCS", "rank": "C" },
-     "conf/stacs": { "venue": "STACS", "rank": "C" },
-     "conf/setta": { "venue": "SETTA", "rank": "C" },
+    "conf/csl": { "venue": "CSL", "rank": "C" },
+    "conf/fmcad": { "venue": "FMCAD", "rank": "C" },
+    "conf/fsttcs": { "venue": "FSTTCS", "rank": "C" },
+    "conf/dsaa": { "venue": "DSAA", "rank": "C" },
+    "conf/ictac": { "venue": "ICTAC", "rank": "C" },
+    "conf/ipco": { "venue": "IPCO", "rank": "C" },
+    "conf/rta": { "venue": "RTA", "rank": "C" },
+    "conf/isaac": { "venue": "ISAAC", "rank": "C" },
+    "conf/mfcs": { "venue": "MFCS", "rank": "C" },
+    "conf/stacs": { "venue": "STACS", "rank": "C" },
+    "conf/setta": { "venue": "SETTA", "rank": "C" },
 };
 
 
@@ -571,77 +572,77 @@ let CST = {
 let CG_MM = {
     // Journal 
     // Rank A
-    "journals/tog":{"venue": "TOG", "rank": "A"},
-    "journals/tip":{"venue": "TIP", "rank": "A"},
-    "journals/tvcg":{"venue": "TVCG", "rank": "A"},
-    
+    "journals/tog": { "venue": "TOG", "rank": "A" },
+    "journals/tip": { "venue": "TIP", "rank": "A" },
+    "journals/tvcg": { "venue": "TVCG", "rank": "A" },
+
     // Rank B
-    "journals/tomccap":{"venue": "TOMM", "rank": "B"},
-    "journals/cagd":{"venue": "CAGD", "rank": "B"},
-    "journals/cgf":{"venue": "CGF", "rank": "B"},
-    "journals/cad":{"venue": "CAD", "rank": "B"},
-    "journals/cvgip":{"venue": "CM", "rank": "B"},
-    "journals/tcsv":{"venue": "TCSVT", "rank": "B"},
-    "journals/tmm":{"venue": "TMM", "rank": "B"},
+    "journals/tomccap": { "venue": "TOMM", "rank": "B" },
+    "journals/cagd": { "venue": "CAGD", "rank": "B" },
+    "journals/cgf": { "venue": "CGF", "rank": "B" },
+    "journals/cad": { "venue": "CAD", "rank": "B" },
+    "journals/cvgip": { "venue": "CM", "rank": "B" },
+    "journals/tcsv": { "venue": "TCSVT", "rank": "B" },
+    "journals/tmm": { "venue": "TMM", "rank": "B" },
     // "journals/":{"venue": "JASA", "rank": "B"},
-    "journals/siamis":{"venue": "SIIMS", "rank": "B"},
-    "journals/speech":{"venue": "SPECOM", "rank": "B"},
+    "journals/siamis": { "venue": "SIIMS", "rank": "B" },
+    "journals/speech": { "venue": "SPECOM", "rank": "B" },
 
     // Rank C
-    "journals/comgeo":{"venue": "CGTA", "rank": "C"},
-    "journals/jvca":{"venue": "CAVW", "rank": "C"},
-    "journals/cg":{"venue": "C&G", "rank": "C"},
-    "journals/dcg":{"venue": "DCG ", "rank": "C"},
-    "journals/spl":{"venue": "SPL", "rank": "C"},
-    "journals/iet-ipr":{"venue": "IET-IPR", "rank": "C"},
-    "journals/jvcir":{"venue": "JVCIR", "rank": "C"},
-    "journals/mms":{"venue": "MS", "rank": "C"},
-    "journals/mta":{"venue": "MTA", "rank": "C"},
-    "journals/sigpro":{"venue": "SIGPRO", "rank": "C"},
-    "journals/spic":{"venue": "IMAGE", "rank": "C"},
-    "journals/vc":{"venue": "TVC", "rank": "C"},
-    "journals/cvm":{"venue": "CVMJ", "rank": "C"},
+    "journals/comgeo": { "venue": "CGTA", "rank": "C" },
+    "journals/jvca": { "venue": "CAVW", "rank": "C" },
+    "journals/cg": { "venue": "C&G", "rank": "C" },
+    "journals/dcg": { "venue": "DCG ", "rank": "C" },
+    "journals/spl": { "venue": "SPL", "rank": "C" },
+    "journals/iet-ipr": { "venue": "IET-IPR", "rank": "C" },
+    "journals/jvcir": { "venue": "JVCIR", "rank": "C" },
+    "journals/mms": { "venue": "MS", "rank": "C" },
+    "journals/mta": { "venue": "MTA", "rank": "C" },
+    "journals/sigpro": { "venue": "SIGPRO", "rank": "C" },
+    "journals/spic": { "venue": "IMAGE", "rank": "C" },
+    "journals/vc": { "venue": "TVC", "rank": "C" },
+    "journals/cvm": { "venue": "CVMJ", "rank": "C" },
 
 
     // Conference
     // Rank A
-    "conf/mm":{"venue": "ACM MM", "rank": "A"},
-    "conf/siggraph":{"venue": "SIGGRAPH", "rank": "A"},
-    "conf/vr":{"venue": "VR", "rank": "A"},
-    "conf/visualization":{"venue": "IEEE VIS", "rank": "A"},
+    "conf/mm": { "venue": "ACM MM", "rank": "A" },
+    "conf/siggraph": { "venue": "SIGGRAPH", "rank": "A" },
+    "conf/vr": { "venue": "VR", "rank": "A" },
+    "conf/visualization": { "venue": "IEEE VIS", "rank": "A" },
 
     // Rank B
-    "conf/mir":{"venue": "ICMR", "rank": "B"},
-    "conf/si3d":{"venue": "I3D", "rank": "B"},
-    "conf/sca":{"venue": "SCA", "rank": "B"},
-    "conf/dcc":{"venue": "DCC", "rank": "B"},
-    "conf/eurographics":{"venue": "Eurographics", "rank": "B"},
-    "conf/vissym":{"venue": "EuroVis", "rank": "B"},
-    "conf/sgp":{"venue": "SGP", "rank": "B"},
-    "conf/rt":{"venue": "ESGP", "rank": "B"},
-    "conf/icassp":{"venue": "ICASSP", "rank": "B"},
-    "conf/icmcs":{"venue": "ICME", "rank": "B"},
-    "conf/ismar":{"venue": "ISMAR", "rank": "B"},
-    "conf/pg":{"venue": "PG", "rank": "B"},
-    "conf/sma":{"venue": "SPM", "rank": "B"},
-    
+    "conf/mir": { "venue": "ICMR", "rank": "B" },
+    "conf/si3d": { "venue": "I3D", "rank": "B" },
+    "conf/sca": { "venue": "SCA", "rank": "B" },
+    "conf/dcc": { "venue": "DCC", "rank": "B" },
+    "conf/eurographics": { "venue": "Eurographics", "rank": "B" },
+    "conf/vissym": { "venue": "EuroVis", "rank": "B" },
+    "conf/sgp": { "venue": "SGP", "rank": "B" },
+    "conf/rt": { "venue": "ESGP", "rank": "B" },
+    "conf/icassp": { "venue": "ICASSP", "rank": "B" },
+    "conf/icmcs": { "venue": "ICME", "rank": "B" },
+    "conf/ismar": { "venue": "ISMAR", "rank": "B" },
+    "conf/pg": { "venue": "PG", "rank": "B" },
+    "conf/sma": { "venue": "SPM", "rank": "B" },
+
     // Rank C
-    "conf/vrst":{"venue": "VRST", "rank": "C"},
-    "conf/ca":{"venue": "CASA", "rank": "C"},
-    "conf/cgi":{"venue": "CGI", "rank": "C"},
-    "conf/interspeech":{"venue": "INTERSPEECH", "rank": "C"},
-    "conf/gmp":{"venue": "GMP", "rank": "C"},
-    "conf/apvis":{"venue": "PacificVis", "rank": "C"},
-    "conf/3dim":{"venue": "3DV", "rank": "C"},
-    "conf/cadgraphics":{"venue": "CAD/Graphics", "rank": "C"},
-    "conf/icip":{"venue": "ICIP", "rank": "C"},
-    "conf/mmm":{"venue": "MMM", "rank": "C"},
-    "conf/mmaisa":{"venue": "MMAisa", "rank": "C"},
-    "conf/smi":{"venue": "SMI", "rank": "C"},
+    "conf/vrst": { "venue": "VRST", "rank": "C" },
+    "conf/ca": { "venue": "CASA", "rank": "C" },
+    "conf/cgi": { "venue": "CGI", "rank": "C" },
+    "conf/interspeech": { "venue": "INTERSPEECH", "rank": "C" },
+    "conf/gmp": { "venue": "GMP", "rank": "C" },
+    "conf/apvis": { "venue": "PacificVis", "rank": "C" },
+    "conf/3dim": { "venue": "3DV", "rank": "C" },
+    "conf/cadgraphics": { "venue": "CAD/Graphics", "rank": "C" },
+    "conf/icip": { "venue": "ICIP", "rank": "C" },
+    "conf/mmm": { "venue": "MMM", "rank": "C" },
+    "conf/mmaisa": { "venue": "MMAisa", "rank": "C" },
+    "conf/smi": { "venue": "SMI", "rank": "C" },
     // "conf/":{"venue": "ICVRV", "rank": "C"},
-    "conf/cvm":{"venue": "CVM", "rank": "C"},
-    "conf/prcv":{"venue": "PRCV", "rank": "C"},
-}   
+    "conf/cvm": { "venue": "CVM", "rank": "C" },
+    "conf/prcv": { "venue": "PRCV", "rank": "C" },
+}
 
 /* 
  * ------------------------------------------------------------
@@ -719,8 +720,8 @@ let AI = {
     // "journals/soco": { "venue": "", "rank": "C" }, Journal Name : Soft Computing
     "journals/wias": { "venue": "WI", "rank": "C" },
     "journals/tiis": { "venue": "TIIS", "rank": "C" },
-    
-    
+
+
 
     // Conference
     // Rank A
@@ -731,7 +732,7 @@ let AI = {
     "conf/iccv": { "venue": "ICCV", "rank": "A" },
     "conf/icml": { "venue": "ICML", "rank": "A" },
     "conf/ijcai": { "venue": "IJCAI", "rank": "A" },
-    
+
     // Rank B
     "conf/colt": { "venue": "COLT", "rank": "B" },
     "conf/emnlp": { "venue": "EMNLP", "rank": "B" },
@@ -781,54 +782,54 @@ let AI = {
 let HCI_UBICOMP = {
     // Journal
     // Rank A
-    "journals/tochi":{"venue": "TOCHI", "rank": "A"},
-    "journals/ijmms":{"venue": "IJHCS", "rank": "A"},
+    "journals/tochi": { "venue": "TOCHI", "rank": "A" },
+    "journals/ijmms": { "venue": "IJHCS", "rank": "A" },
 
     // Rank B
-    "journals/cscw":{"venue": "CSCW", "rank": "B"},
-    "journals/hhci":{"venue": "HCI", "rank": "B"},
+    "journals/cscw": { "venue": "CSCW", "rank": "B" },
+    "journals/hhci": { "venue": "HCI", "rank": "B" },
     // "journals/thms":{"venue": "", "rank": "B"}, journal Name : IEEE Transactions on Human-Machine Systems
-    "journals/iwc":{"venue": "IWC", "rank": "B"},
-    "journals/ijhci":{"venue": "IJHCI", "rank": "B"},
-    "journals/umuai":{"venue": "UMUAI", "rank": "B"},
-    "journals/tsmc":{"venue": "TSMC", "rank": "B"},
-    
+    "journals/iwc": { "venue": "IWC", "rank": "B" },
+    "journals/ijhci": { "venue": "IJHCI", "rank": "B" },
+    "journals/umuai": { "venue": "UMUAI", "rank": "B" },
+    "journals/tsmc": { "venue": "TSMC", "rank": "B" },
+
     // Rank C
-    "journals/behaviourIT":{"venue": "BIT", "rank": "C"},
-    "journals/puc":{"venue": "PUC", "rank": "C"},
-    "journals/percom":{"venue": "PMC", "rank": "C"},
-    "journals/pacmhci":{"venue": "PACMHCI", "rank": "C"},
+    "journals/behaviourIT": { "venue": "BIT", "rank": "C" },
+    "journals/puc": { "venue": "PUC", "rank": "C" },
+    "journals/percom": { "venue": "PMC", "rank": "C" },
+    "journals/pacmhci": { "venue": "PACMHCI", "rank": "C" },
 
     // Conference 
     // Rank A
-    "conf/cscw":{"venue": "CSCW", "rank": "A"},
-    "conf/chi":{"venue": "CHI", "rank": "A"},
-    "conf/huc":{"venue": "UbiComp", "rank": "A"},
-    "conf/uist":{"venue": "UIST", "rank": "A"},
+    "conf/cscw": { "venue": "CSCW", "rank": "A" },
+    "conf/chi": { "venue": "CHI", "rank": "A" },
+    "conf/huc": { "venue": "UbiComp", "rank": "A" },
+    "conf/uist": { "venue": "UIST", "rank": "A" },
 
     // Rank B
-    "conf/group":{"venue": "GROUP", "rank": "B"},
-    "conf/iui":{"venue": "IUI", "rank": "B"},
-    "conf/tabletop":{"venue": "ISS", "rank": "B"},
-    "conf/ecscw":{"venue": "ECSCW", "rank": "B"},
-    "conf/percom":{"venue": "PERCOM", "rank": "B"},
-    "conf/mhci":{"venue": "MobileHCI", "rank": "B"},
-    "conf/icwsm":{"venue": "ICWSM", "rank": "B"},
+    "conf/group": { "venue": "GROUP", "rank": "B" },
+    "conf/iui": { "venue": "IUI", "rank": "B" },
+    "conf/tabletop": { "venue": "ISS", "rank": "B" },
+    "conf/ecscw": { "venue": "ECSCW", "rank": "B" },
+    "conf/percom": { "venue": "PERCOM", "rank": "B" },
+    "conf/mhci": { "venue": "MobileHCI", "rank": "B" },
+    "conf/icwsm": { "venue": "ICWSM", "rank": "B" },
 
     // Rank C
-    "conf/ACMdis":{"venue": "DIS", "rank": "C"},
-    "conf/icmi":{"venue": "ICMI", "rank": "C"},
-    "conf/assets":{"venue": "ASSETS", "rank": "C"},
-    "conf/graphicsinterface":{"venue": "GI", "rank": "C"},
-    "conf/uic":{"venue": "UIC", "rank": "C"},
+    "conf/ACMdis": { "venue": "DIS", "rank": "C" },
+    "conf/icmi": { "venue": "ICMI", "rank": "C" },
+    "conf/assets": { "venue": "ASSETS", "rank": "C" },
+    "conf/graphicsinterface": { "venue": "GI", "rank": "C" },
+    "conf/uic": { "venue": "UIC", "rank": "C" },
     // "conf/haptics":{"venue": "", "rank": "C"}, Journal Name : IEEE World Haptics Conference
-    "conf/interact":{"venue": "INTERACT", "rank": "C"},
-    "conf/acmidc":{"venue": "IDC", "rank": "C"},
-    "conf/colcom":{"venue": "CollaborateCom", "rank": "C"},
-    "conf/cscwd":{"venue": "CSCWD", "rank": "C"},
-    "conf/coopis":{"venue": "CoopIS", "rank": "C"},
-    "conf/mobiquitous":{"venue": "MobiQuitous", "rank": "C"},
-    "conf/avi":{"venue": "AVI", "rank": "C"},
+    "conf/interact": { "venue": "INTERACT", "rank": "C" },
+    "conf/acmidc": { "venue": "IDC", "rank": "C" },
+    "conf/colcom": { "venue": "CollaborateCom", "rank": "C" },
+    "conf/cscwd": { "venue": "CSCWD", "rank": "C" },
+    "conf/coopis": { "venue": "CoopIS", "rank": "C" },
+    "conf/mobiquitous": { "venue": "MobiQuitous", "rank": "C" },
+    "conf/avi": { "venue": "AVI", "rank": "C" },
 }
 
 /* 
@@ -841,44 +842,44 @@ let HCI_UBICOMP = {
 let INTERDISCIPLINARY_EMERGING = {
     // Journal
     // Rank A
-    "journals/jacm":{"venue": "JACM", "rank": "A"},
-    "journals/pieee":{"venue": "Proc. IEEE", "rank": "A"},
-    "journals/chinaf":{"venue": "SCIS", "rank": "A"},
+    "journals/jacm": { "venue": "JACM", "rank": "A" },
+    "journals/pieee": { "venue": "Proc. IEEE", "rank": "A" },
+    "journals/chinaf": { "venue": "SCIS", "rank": "A" },
 
     // Rank B
     // "journals/bioinformatics":{"venue": "", "rank": "B"}, Journal Name : Bioinformatics
     // "journals/bib":{"venue": "", "rank": "B"}, Journal Name : Briefings in Bioinformatics
     // "journals/":{"venue": "Cognition", "rank": "B"},
-    "journals/tase":{"venue": "TASAE", "rank": "B"},
-    "journals/tgrs":{"venue": "TGARS", "rank": "B"},
-    "journals/tits":{"venue": "TITS", "rank": "B"},
-    "journals/tmi":{"venue": "TMI", "rank": "B"},
-    "journals/trob":{"venue": "TR", "rank": "B"},
-    "journals/tcbb":{"venue": "TCBB", "rank": "B"},
-    "journals/jcst":{"venue": "JCST", "rank": "B"},
-    "journals/jamia":{"venue": "JAMIA", "rank": "B"},
+    "journals/tase": { "venue": "TASAE", "rank": "B" },
+    "journals/tgrs": { "venue": "TGARS", "rank": "B" },
+    "journals/tits": { "venue": "TITS", "rank": "B" },
+    "journals/tmi": { "venue": "TMI", "rank": "B" },
+    "journals/trob": { "venue": "TR", "rank": "B" },
+    "journals/tcbb": { "venue": "TCBB", "rank": "B" },
+    "journals/jcst": { "venue": "JCST", "rank": "B" },
+    "journals/jamia": { "venue": "JAMIA", "rank": "B" },
     // "journals/ploscb":{"venue": "", "rank": "B"}, Journal Name : PLOS Computational Biology
     // "journals/cj":{"venue": "", "rank": "B"}, Journal Name : The Computer Journal
-    "journals/www":{"venue": "WWW", "rank": "B"},
-    "journals/fcsc":{"venue": "FCS", "rank": "B"},
+    "journals/www": { "venue": "WWW", "rank": "B" },
+    "journals/fcsc": { "venue": "FCS", "rank": "B" },
 
     // Rank C
     // "journals/bmcbi":{"venue": "", "rank": "C"}, Journal Name : BMC Bioinformatics
     // "journals/cas":{"venue": "", "rank": "C"}, Journal Name : Cybernetics and Systems
     // "journals/lgrs":{"venue": "", "rank": "C"}, Journal Name : IEEE Geoscience and Remote Sensing Letters
-    "journals/titb":{"venue": "JBHI", "rank": "C"},
-    "journals/tbd":{"venue": "TBD", "rank": "C"},
+    "journals/titb": { "venue": "JBHI", "rank": "C" },
+    "journals/tbd": { "venue": "TBD", "rank": "C" },
     // "journals/iet-its":{"venue": "", "rank": "C"}, Journal Name : IET Intelligent Transport Systems
-    "journals/jbi":{"venue": "JBI", "rank": "C"},
+    "journals/jbi": { "venue": "JBI", "rank": "C" },
     // "journals/mia":{"venue": "", "rank": "C"}, journal Name : Medical Image Analysis
-    "journals/tii":{"venue": "TII", "rank": "C"},
-    "journals/tcps":{"venue": "TCPS", "rank": "C"},
-    "journals/jeric":{"venue": "TOCE", "rank": "C"},
-    "journals/jzusc":{"venue": "FITEE", "rank": "C"},
-    "journals/tcss":{"venue": "TCSS", "rank": "C"},
+    "journals/tii": { "venue": "TII", "rank": "C" },
+    "journals/tcps": { "venue": "TCPS", "rank": "C" },
+    "journals/jeric": { "venue": "TOCE", "rank": "C" },
+    "journals/jzusc": { "venue": "FITEE", "rank": "C" },
+    "journals/tcss": { "venue": "TCSS", "rank": "C" },
     // "journals/tr":{"venue": "", "rank": "C"}, Journal Name : IEEE Transactions on Reliability
 
-    
+
     // Conference
     // Rank A
     "conf/www": { "venue": "WWW", "rank": "A" },
@@ -886,7 +887,7 @@ let INTERDISCIPLINARY_EMERGING = {
     "conf/wine": { "venue": "WINE", "rank": "A" },
 
     // Rank B
-     "conf/cogsci": { "venue": "CogSci", "rank": "B" },
+    "conf/cogsci": { "venue": "CogSci", "rank": "B" },
     "conf/bibm": { "venue": "BIBM", "rank": "B" },
     "conf/emsoft": { "venue": "EMSOFT", "rank": "B" },
     "conf/ismb": { "venue": "ISMB", "rank": "B" },
