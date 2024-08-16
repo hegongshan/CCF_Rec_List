@@ -194,35 +194,88 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
         $("#result").append(paperHtml);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("请求失败，请重新尝试！");
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "请求失败，请重新尝试！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
         // 当请求失败时，不要继续显示加载图片
         $("#tips").empty();
     });
 }
 
 function search() {
-    // trim q
+    let invalidClass = "is-invalid";
+
+    // 验证关键词
     let query = $("#q").val().trim();
-    // 1.check whether q is null or not
-    // 2.ensure that string q is not a chinese character sequence
-    // TODO: 使用更好的校验及展示方式
-    if (query == "" || query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
-        alert("关键词不能为空或者汉字！");
+    if (query == "") {
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "关键词不能为空！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+        
+        $("#q").addClass(invalidClass);
         return;
     }
+    if (query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "不支持中文关键词！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
 
+        $("#q").addClass(invalidClass);
+        return;
+    }
+    if ($("#q").hasClass(invalidClass)) {
+        $("#q").removeClass(invalidClass);
+    }
+
+    // 验证起止年份
     let startYearStr = $("#startYear").val().trim();
     let endYearStr = $("#endYear").val().trim();
-    if ((startYearStr.length > 0 && parseInt(startYearStr) <= 0)
-        || (endYearStr.length > 0 && parseInt(endYearStr) <= 0)) {
-        alert("年份必须大于0！");
+    let isStartYearInvalid = startYearStr.length > 0 && parseInt(startYearStr) <= 0;
+    let isEndYearInvalid = endYearStr.length > 0 && parseInt(endYearStr) <= 0;
+    if (isStartYearInvalid || isEndYearInvalid) {
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "年份必须大于0！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
+        if (isStartYearInvalid) {
+            $("#startYear").addClass(invalidClass);
+        } else if ($("#startYear").hasClass(invalidClass)) {
+            $("#startYear").removeClass(invalidClass);
+        }
+        if (isEndYearInvalid) {
+            $("#endYear").addClass(invalidClass);
+        } else if ($("#endYear").hasClass(invalidClass)) {
+            $("#endYear").removeClass(invalidClass);
+        }
         return;
     }
     if (startYearStr.length > 0 
         && endYearStr.length > 0 
         && parseInt(startYearStr) > parseInt(endYearStr)) {
-        alert("开始年份必须小于等于结束年份！");
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "开始年份≤结束年份！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
+        $("#startYear").addClass(invalidClass);
+        $("#endYear").addClass(invalidClass);
         return;
+    }
+    if ($("#startYear").hasClass(invalidClass)) {
+        $("#startYear").removeClass(invalidClass);
+    }
+    if ($("#endYear").hasClass(invalidClass)) {
+        $("#endYear").removeClass(invalidClass);
     }
 
     // init
@@ -286,7 +339,7 @@ function doQueryAbstract(
         fields: "title,abstract",
     };
 
-    if (paperDOI) {
+    if (paperDOI.trim().length > 0) {
         semanticScholarUrl += "DOI:" + paperDOI;
     } else {
         semanticScholarUrl += "search";
@@ -298,11 +351,11 @@ function doQueryAbstract(
     // $.ajaxSettings.async = false;
     $.getJSON(semanticScholarUrl, inputData, function (data) {        
         let abstract;
-        if (paperDOI) {
+        // 如果doi搜索不到，那么按标题搜索
+        if (paperDOI.trim().length > 0) {
             if (!data["abstract"]) {
-                // search by title
                 doQueryAbstract(
-                    paperDOI,
+                    "",
                     paperTitle,
                     abstractTag,
                     loadingTips,
@@ -326,7 +379,12 @@ function doQueryAbstract(
         loadingTips.empty();
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        alert("请求失败，请重新尝试！");
+        let alertHtml = template.render($("#alert-info-template").html(), {
+            errorMsg: "请求失败，请重新尝试！"
+        });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
         loadingTips.empty();
     });
 }

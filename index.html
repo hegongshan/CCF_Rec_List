@@ -28,16 +28,11 @@
 			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
 		}
 
-		input {
-			padding: .375rem .75rem;
-			line-height: 1.5;
-			color: #495057;
-			background-clip: padding-box;
-			border: 1px solid #ced4da;
-			border-radius: .25rem;
-			transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+		.div-inline > .form-control {
+			display: inline-block;
+			/* width: 60%; */
 		}
-
+		
 		input[type=search] {
 			width: 60%;
 		}
@@ -46,7 +41,7 @@
 			width: 30%;
 		}
 		
-		#paperList li {
+		#paperList > li {
 			line-height: 40px;
 			margin-top: 5px;
 			margin-bottom: 5px;
@@ -101,17 +96,17 @@
 				<select id="venue" multiple title="请选择刊物">
 				</select>
 			</div>
-			<div class="col-md-8">
+			<div id="year" class="col-md-8 div-inline">
 				<label>年&nbsp;&nbsp;&nbsp;&nbsp;份: </label>
-				<input id="startYear" type="number" placeholder="开始年份"/>
-				<label style="text-align: center;">&minus;</label>
-				<input id="endYear" type="number" placeholder="结束年份"/>
+				<input id="startYear" type="number" class="form-control" placeholder="开始年份"/>
+				<label>&minus;</label>
+				<input id="endYear" type="number" class="form-control" placeholder="结束年份"/>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 div-inline">
 				<label>关键词: </label>
-				<input id="q" type="search" placeholder="请输入关键词"/>
+				<input id="q" type="search" class="form-control" placeholder="请输入关键词"/>
 				<button id="search" class="btn btn-primary">搜索</button>
 				<span id="tips"></span>
 			</div>
@@ -119,8 +114,8 @@
 		<div class="row">
 			<div id="result" class="col-md-12"></div>
 		</div>
-		<footer>
-		</footer>
+		<div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
+		<footer></footer>
 	</div>
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
@@ -172,6 +167,26 @@
 	</script>
 	<script id="footer-info-template" type="text/html">
 		Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He All Rights Reserved.
+	</script>
+	<script id="alert-info-template" type="text/html">
+		<!-- <div id="modal"> -->
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">提示信息</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>{{errorMsg}}</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		<!-- </div> -->
 	</script>
 	<script type="text/javascript">
 		function updateVenue(current, selectpickerExtendedOptions) {
