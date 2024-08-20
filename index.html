@@ -2,331 +2,328 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>DBLP & CCF</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="description" content="Description">
-	<meta name="viewport"
-		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-	<style type="text/css">
-		#app {
-			font-size: 1rem;
-		}
+    <meta charset="UTF-8">
+    <title>DBLP & CCF</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <style type="text/css">
+        #app {
+            font-size: 1rem;
+        }
 
-		.text-center {
-			text-align: center;
-		}
+        .text-center {
+            text-align: center;
+        }
 
-		.theme {
-			float: right;
-		}
+        .theme {
+            float: right;
+        }
 
-		.red-text {
-			color:#f00;
-			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
-		}
+        .red-text {
+            color:#f00;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
+        }
 
-		.div-inline > .form-control {
-			display: inline-block;
-			/* width: 60%; */
-		}
-		
-		input[type=search] {
-			width: 60%;
-		}
-		
-		input[type=number] {
-			width: 30%;
-		}
-		
-		#paperList > li {
-			line-height: 40px;
-			margin-top: 5px;
-			margin-bottom: 5px;
-			padding-left: 20px;
-			border: 1px solid black;
-			border-radius: 4px;
-		}
+        .div-inline > .form-control {
+            display: inline-block;
+        }
+        
+        input[type=search] {
+            width: 60%;
+        }
+        
+        input[type=number] {
+            width: 30%;
+        }
+        
+        #paperList > li {
+            line-height: 40px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+        }
 
-		footer {
-			text-align: center;
-			margin-top: 30px;
-		}
-	</style>
+        footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
-	<div id="app" class="container">
-		<h1 class="text-center">面向CCF推荐列表的学术论文检索系统</h1>
-		<div class="dropdown">
-			<a href="javascript:void(0)" class="dropdown-toggle theme badge badge-pill badge-primary" data-toggle="dropdown" aria-expanded="false">主题</a>
-			<div class="dropdown-menu">
-				<a id="theme-light" href="javascript:void(0)" class="dropdown-item">白色</a>
-				<a id="theme-dark" href="javascript:void(0)" class="dropdown-item">黑色</a>
-			</div>
-		</div>
-		<h3 class="text-center">By <a href="https://github.com/hegongshan/CCF_Rec_List">Gongshan He</a></h3>
-		<div id="form" class="row">
-			<div class="col-md-4">
-				<label>分&nbsp;&nbsp;&nbsp;&nbsp;类: </label>
-				<select id="category" multiple title="请选择分类">
-				</select>
-			</div>
-			<div class="col-md-4">
-				<label>类&nbsp;&nbsp;&nbsp;&nbsp;型: </label>
-				<select id="type" multiple title="期刊 或 会议">
-					<option data-content="<span class='badge badge-pill badge-secondary'>期刊</span>" value="journals">期刊</option>
-					<option data-content="<span class='badge badge-pill badge-secondary'>会议</span>" value="conf">会议</option>
-				</select>
-			</div>
-			<div class="col-md-4">
-				<label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
-				<select id="rank" multiple title="请选择级别">
-					<option data-content="<span class='badge badge-pill badge-primary'>CCF A</span>" value="A">CCF A</option>
-					<option data-content="<span class='badge badge-pill badge-primary'>CCF B</span>" value="B">CCF B</option>
-					<option data-content="<span class='badge badge-pill badge-primary'>CCF C</span>" value="C">CCF C</option>
-				</select>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label>刊&nbsp;&nbsp;&nbsp;&nbsp;物: </label>
-				<select id="venue" multiple title="请选择刊物">
-				</select>
-			</div>
-			<div id="year" class="col-md-8 div-inline">
-				<label>年&nbsp;&nbsp;&nbsp;&nbsp;份: </label>
-				<input id="startYear" type="number" class="form-control" placeholder="开始年份"/>
-				<label>&minus;</label>
-				<input id="endYear" type="number" class="form-control" placeholder="结束年份"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 div-inline">
-				<label>关键词: </label>
-				<input id="q" type="search" class="form-control" placeholder="请输入关键词"/>
-				<button id="search" class="btn btn-primary">搜索</button>
-				<span id="tips"></span>
-			</div>
-		</div>
-		<div class="row">
-			<div id="result" class="col-md-12"></div>
-		</div>
-		<div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
-		<footer></footer>
-	</div>
-	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-	<script src="ccf_rec_list.js"></script>
-	<script src="search.js"></script>
-	<script id="loading-tips-info-template" type="text/html">
-		<img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
-	</script>
-	<script id="response-tips-info-template" type="text/html">
-		共匹配到<strong class="red-text">{{count}}</strong>条记录
-	</script>
-	<script id="category-info-template" type="text/html">
-		{{each categoryList}}
-			{{set category = $value}}
-			<option data-content="<span class='badge badge-pill badge-info'>{{category.name}}</span>" value="{{category.name}}">{{category.name}}</option>
-		{{/each}}
-	</script>
-	<script id="venue-info-template" type="text/html">
-		{{each venueList}}
-			{{set venue = $value}}
-			<option data-content="<span class='badge badge-pill badge-success'>{{venue.name}}</span>" value="{{venue.url}}">{{venue.name}}</option>
-		{{/each}}
-	</script>
-	<script id="paper-info-template" type="text/html">
-		<ol id="paperList">
-		{{each paperList}}
-			{{set paper = $value}}
-			<li>
-				{{if paper.ccfRank}}
-				<span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
-				{{else}}
-				<span class="badge badge-pill badge-info">No Rank</span>
-				{{/if}}
-				{{paper.firstAuthor}}, et al. 
-				<strong style='font-weight:bold;'>{{@paper.title}}</strong>, 
-				{{paper.venue}}'{{paper.year}}, 
-				<a href="{{paper.url}}">URL</a>
-				<br/>
-				<a style="text-decoration:underline;font-family:bold;" 
-					onclick="queryAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
-				<br/>
-				<span id="{{paper.abstractId}}tips"></span>
-				<p id="{{paper.abstractId}}"></p>
-			</li>
-		{{/each}}
-		</ol>
-	</script>
-	<script id="footer-info-template" type="text/html">
-		Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He All Rights Reserved.
-	</script>
-	<script id="alert-info-template" type="text/html">
-		<!-- <div id="modal"> -->
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">提示信息</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p>{{errorMsg}}</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-					</div>
-				</div>
-			</div>
-		<!-- </div> -->
-	</script>
-	<script type="text/javascript">
-		function updateVenue(current, selectpickerExtendedOptions) {
-			let categoryVals = $("#category").val();
-			let typeVals = $("#type").val();
-			let rankVals = $("#rank").val();
-			let venue = $("#venue");
+    <div id="app" class="container">
+        <h1 class="text-center">面向CCF推荐列表的学术论文检索系统</h1>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle theme badge badge-pill badge-primary" data-toggle="dropdown" aria-expanded="false">主题</a>
+            <div class="dropdown-menu">
+                <a id="theme-light" href="javascript:void(0)" class="dropdown-item">白色</a>
+                <a id="theme-dark" href="javascript:void(0)" class="dropdown-item">黑色</a>
+            </div>
+        </div>
+        <h3 class="text-center">By <a href="https://github.com/hegongshan/CCF_Rec_List">Gongshan He</a></h3>
+        <div class="row">
+            <div class="col-md-4">
+                <label>分&nbsp;&nbsp;&nbsp;&nbsp;类: </label>
+                <select id="category" multiple title="请选择分类">
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>类&nbsp;&nbsp;&nbsp;&nbsp;型: </label>
+                <select id="type" multiple title="期刊 或 会议">
+                    <option data-content="<span class='badge badge-pill badge-secondary'>期刊</span>" value="journals">期刊</option>
+                    <option data-content="<span class='badge badge-pill badge-secondary'>会议</span>" value="conf">会议</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
+                <select id="rank" multiple title="请选择级别">
+                    <option data-content="<span class='badge badge-pill badge-primary'>CCF A</span>" value="A">CCF A</option>
+                    <option data-content="<span class='badge badge-pill badge-primary'>CCF B</span>" value="B">CCF B</option>
+                    <option data-content="<span class='badge badge-pill badge-primary'>CCF C</span>" value="C">CCF C</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>刊&nbsp;&nbsp;&nbsp;&nbsp;物: </label>
+                <select id="venue" multiple title="请选择刊物">
+                </select>
+            </div>
+            <div id="year" class="col-md-8 div-inline">
+                <label>年&nbsp;&nbsp;&nbsp;&nbsp;份: </label>
+                <input id="startYear" type="number" class="form-control" placeholder="开始年份"/>
+                <label>&minus;</label>
+                <input id="endYear" type="number" class="form-control" placeholder="结束年份"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 div-inline">
+                <label>关键词: </label>
+                <input id="q" type="search" class="form-control" placeholder="请输入关键词"/>
+                <button id="search" class="btn btn-primary">搜索</button>
+                <span id="tips"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div id="result" class="col-md-12"></div>
+        </div>
+        <div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
+        <footer></footer>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    <script src="ccf_rec_list.js"></script>
+    <script src="search.js"></script>
+    <script id="loading-tips-info-template" type="text/html">
+        <img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
+    </script>
+    <script id="response-tips-info-template" type="text/html">
+        共匹配到<strong class="red-text">{{count}}</strong>条记录
+    </script>
+    <script id="category-info-template" type="text/html">
+        {{each categoryList}}
+            {{set category = $value}}
+            <option data-content="<span class='badge badge-pill badge-info'>{{category.name}}</span>" value="{{category.name}}">{{category.name}}</option>
+        {{/each}}
+    </script>
+    <script id="venue-info-template" type="text/html">
+        {{each venueList}}
+            {{set venue = $value}}
+            <option data-content="<span class='badge badge-pill badge-success'>{{venue.name}}</span>" value="{{venue.url}}">{{venue.name}}</option>
+        {{/each}}
+    </script>
+    <script id="paper-info-template" type="text/html">
+        <ol id="paperList">
+        {{each paperList}}
+            {{set paper = $value}}
+            <li>
+                {{if paper.ccfRank}}
+                <span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
+                {{else}}
+                <span class="badge badge-pill badge-info">No Rank</span>
+                {{/if}}
+                {{paper.firstAuthor}}, et al. 
+                <strong style='font-weight:bold;'>{{@paper.title}}</strong>, 
+                {{paper.venue}}'{{paper.year}}, 
+                <a href="{{paper.url}}">URL</a>
+                <br/>
+                <a style="text-decoration:underline;font-family:bold;" 
+                    onclick="queryAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
+                <br/>
+                <span id="{{paper.abstractId}}tips"></span>
+                <p id="{{paper.abstractId}}"></p>
+            </li>
+        {{/each}}
+        </ol>
+    </script>
+    <script id="footer-info-template" type="text/html">
+        Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He All Rights Reserved.
+    </script>
+    <script id="alert-info-template" type="text/html">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">提示信息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{errorMsg}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+        function updateVenue(current, selectpickerExtendedOptions) {
+            let categoryVals = $("#category").val();
+            let typeVals = $("#type").val();
+            let rankVals = $("#rank").val();
+            let venue = $("#venue");
 
-			if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
-				venue.prop("disabled", true);
-				venue.selectpicker("destroy");
-				venue.selectpicker(selectpickerExtendedOptions);
-			}
+            if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
+                venue.prop("disabled", true);
+                venue.selectpicker("destroy");
+                venue.selectpicker(selectpickerExtendedOptions);
+            }
 
-			if ($(current).val().length == 0) {
-				return ;
-			}
+            if ($(current).val().length == 0) {
+                return ;
+            }
 
-			// 清空列表
-			venue.prop("disabled", false);
-			venue.empty();
+            // 清空列表
+            venue.prop("disabled", false);
+            venue.empty();
 
-			// 重新填充列表
-			let venueList = [];
-			let categoryList = {};
-			if (categoryVals.length == 0) {
-				categoryList = CATEGORY_LIST;
-			} else {
-				// 将选择的分类转换为JSON对象
-				categoryVals.forEach(function(element, index) {
-					categoryList[element] = "";
-				});
-			}
-			// 根据分类过滤
-			for (let category in categoryList) {
-				for (let venueDBLPUrl in CATEGORY_LIST[category]) {
-					// 根据类型过滤
-					if (!isTypeMatch(venueDBLPUrl, typeVals)) {
-						continue;
-					}
+            // 重新填充列表
+            let venueList = [];
+            let categoryList = {};
+            if (categoryVals.length == 0) {
+                categoryList = CATEGORY_LIST;
+            } else {
+                // 将选择的分类转换为JSON对象
+                categoryVals.forEach(function(element, index) {
+                    categoryList[element] = "";
+                });
+            }
+            // 根据分类过滤
+            for (let category in categoryList) {
+                for (let venueDBLPUrl in CATEGORY_LIST[category]) {
+                    // 根据类型过滤
+                    if (!isTypeMatch(venueDBLPUrl, typeVals)) {
+                        continue;
+                    }
 
-					// 根据级别过滤
-					if (!isRankMatch(venueDBLPUrl, rankVals)) {
-						continue;
-					}
+                    // 根据级别过滤
+                    if (!isRankMatch(venueDBLPUrl, rankVals)) {
+                        continue;
+                    }
 
-					venueList.push({
-						url: venueDBLPUrl, 
-						name: CATEGORY_LIST[category][venueDBLPUrl].venue
-					});
-				}
-			}
+                    venueList.push({
+                        url: venueDBLPUrl, 
+                        name: CATEGORY_LIST[category][venueDBLPUrl].venue
+                    });
+                }
+            }
 
-			let venueHtml = template.render($("#venue-info-template").html(), {
-				venueList: venueList,
-			});
-			venue.html(venueHtml);
-			venue.selectpicker("destroy");
-			venue.selectpicker(selectpickerExtendedOptions);
-		}
+            let venueHtml = template.render($("#venue-info-template").html(), {
+                venueList: venueList,
+            });
+            venue.html(venueHtml);
+            venue.selectpicker("destroy");
+            venue.selectpicker(selectpickerExtendedOptions);
+        }
 
-		$(function () {
-			// 版权信息
-			let footerHtml = template.render($("#footer-info-template").html(), {
-				year: {
-					start: 2022,
-					current: new Date().getFullYear()
-				},
-			});
-			$("footer").html(footerHtml);
+        $(function () {
+            // 版权信息
+            let footerHtml = template.render($("#footer-info-template").html(), {
+                year: {
+                    start: 2022,
+                    current: new Date().getFullYear()
+                },
+            });
+            $("footer").html(footerHtml);
 
-			// 主题切换
-			$("#theme-light").click(function (){
-				$("body").css({
-					"background-color": "#fff",
-					"color": "#333"
-				});
-			});
-			$("#theme-dark").click(function (){
-				$("body").css({
-					"background-color": "#333",
-					"color": "#fff"
-				});
-			});
+            // 主题切换
+            $("#theme-light").click(function (){
+                $("body").css({
+                    "background-color": "#fff",
+                    "color": "#333"
+                });
+            });
+            $("#theme-dark").click(function (){
+                $("body").css({
+                    "background-color": "#333",
+                    "color": "#fff"
+                });
+            });
 
-			// 搜索
-			$("#search").click(function () {
-				search();
-			});
-			$("#q").keydown(function (event) {
-				if (event.keyCode == 13) {
-					search();
-				}
-			});
-			
-			let category = $("#category");
-			let type = $("#type");
-			let rank = $("#rank");
-			let venue = $("#venue");
+            // 搜索
+            $("#search").click(function () {
+                search();
+            });
+            $("#q").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    search();
+                }
+            });
+            
+            let category = $("#category");
+            let type = $("#type");
+            let rank = $("#rank");
+            let venue = $("#venue");
 
-			// 填充分类
-			let categoryList = [];
-			for (let venueDBLPUrl in CATEGORY_LIST) {
-				categoryList.push({"name": venueDBLPUrl});
-			}
-			let categoryHtml = template.render($("#category-info-template").html(), {
-				categoryList: categoryList,
-			});
-			$(category).html(categoryHtml);
+            // 填充分类
+            let categoryList = [];
+            for (let venueDBLPUrl in CATEGORY_LIST) {
+                categoryList.push({"name": venueDBLPUrl});
+            }
+            let categoryHtml = template.render($("#category-info-template").html(), {
+                categoryList: categoryList,
+            });
+            $(category).html(categoryHtml);
 
-			// bootstrap-select初始化
-			let selectpickerOptions = {
-				actionsBox: true, 
-				selectAllText: "全选", 
-				deselectAllText: "取消全选", 
-				noneResultsText: "未找到匹配的结果"
-			};
-			let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {
-				liveSearch: true, 
-				selectedTextFormat: "count > 3",
-				countSelectedText: "选择了{0}项"
-			});
-			category.selectpicker(selectpickerExtendedOptions);
-			type.selectpicker(selectpickerOptions);
-			rank.selectpicker(selectpickerOptions);
-			venue.prop("disabled", true);
-			venue.selectpicker(selectpickerExtendedOptions);
+            // bootstrap-select初始化
+            let selectpickerOptions = {
+                actionsBox: true, 
+                selectAllText: "全选", 
+                deselectAllText: "取消全选", 
+                noneResultsText: "未找到匹配的结果"
+            };
+            let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {
+                liveSearch: true, 
+                selectedTextFormat: "count > 3",
+                countSelectedText: "选择了{0}项"
+            });
+            category.selectpicker(selectpickerExtendedOptions);
+            type.selectpicker(selectpickerOptions);
+            rank.selectpicker(selectpickerOptions);
+            venue.prop("disabled", true);
+            venue.selectpicker(selectpickerExtendedOptions);
 
-			// TODO: 当category和rank取消时，修改venue中的option
-			category.on("hidden.bs.select", function() {
-				updateVenue(this, selectpickerExtendedOptions);
-			});			
-			type.on("hidden.bs.select", function() {
-				updateVenue(this, selectpickerExtendedOptions);
-			});
-			rank.on("hidden.bs.select", function() {
-				updateVenue(this, selectpickerExtendedOptions);
-			});
-		});
-	</script>
+            // TODO: 当category和rank取消时，修改venue中的option
+            category.on("hidden.bs.select", function() {
+                updateVenue(this, selectpickerExtendedOptions);
+            });            
+            type.on("hidden.bs.select", function() {
+                updateVenue(this, selectpickerExtendedOptions);
+            });
+            rank.on("hidden.bs.select", function() {
+                updateVenue(this, selectpickerExtendedOptions);
+            });
+        });
+    </script>
 </body>
 
 </html>
