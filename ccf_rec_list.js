@@ -1,7 +1,7 @@
 /* 
  * -----------------------------------------------------------------------------
  * 
- * Begin:  The CCF Recommendation List
+ * Begin: The CCF Recommendation List
  *
  * -----------------------------------------------------------------------------
  */
@@ -33,12 +33,12 @@ let ARCH_PDC_SS = {
     "journals/tvlsi": { "venue": "TVLSI", "rank": "B" },
     "journals/jpdc": { "venue": "JPDC", "rank": "B" },
     "journals/jsa": { "venue": "JSA", "rank": "B" },
-    // "journals/pc": { "venue": "PARCO", "rank": "B" }, Journal Name :  Parallel Computing
-    // "journals/pe": { "venue": "", "rank": "B" }, Journal Name : Performance Evaluation: An International Journal
+    "journals/pc": { "venue": "Parallel Computing", "rank": "B" },
+    "journals/pe": { "venue": "Performance Evaluation: An International Journal", "rank": "B" },
 
     // Rank C
     "journals/jetc": { "venue": "JETC", "rank": "C" },
-    // "journals/concurrency": { "venue": "", "rank": "C" }, Journal Name : Performance Evaluation: An International Journal
+    "journals/concurrency": { "venue": "Concurrency and Computation: Practice and Experience", "rank": "C" },
     "journals/dc": { "venue": "DC", "rank": "C" },
     "journals/fgcs": { "venue": "FGCS", "rank": "C" },
     "journals/tcc": { "venue": "TCC", "rank": "C" },
@@ -147,16 +147,16 @@ let CN = {
     "journals/twc": { "venue": "TWC", "rank": "B" },
 
     // Rank C
-    // "journal/adhoc":{"venue": "", "rank": "C"}, Journal Name : Ad hoc Networks
+    "journals/adhoc": { "venue": "Ad hoc Networks", "rank": "C" },
     "journals/comcom": { "venue": "CC", "rank": "C" },
     "journals/tnsm": { "venue": "TNSM", "rank": "C" },
-    // "journal/iet-commun":{"venue": "", "rank": "C"}, Journal Name : IET Communications
+    "journals/iet-com": { "venue": "IET Communications", "rank": "C" },
     "journals/jnca": { "venue": "JNCA", "rank": "C" },
     "journals/monet": { "venue": "MONET", "rank": "C" },
-    // "journal/networks":{"venue": "Networks", "rank": "C"}, Journal Name : Networks
+    "journals/networks": { "venue": "Networks", "rank": "C" },
     "journals/ppna": { "venue": "PPNA", "rank": "C" },
     "journals/wicomm": { "venue": "WCMC", "rank": "C" },
-    // "journal/winet":{"venue": "", "rank": "C"}, JourNal Name : Wireless Networks
+    "journals/winet": { "venue": "Wireless Networks", "rank": "C" },
     "journals/iotj": { "venue": "IOT", "rank": "C" },
 
 
@@ -216,24 +216,24 @@ let NIS = {
     // Rank A
     "journals/tdsc": { "venue": "TDSC", "rank": "A" },
     "journals/tifs": { "venue": "TIFS", "rank": "A" },
-    // "journal/joc":{"venue": "", "rank": "A"}, Journal Name : Journal of Cryptology
+    "journals/joc": { "venue": "Journal of Cryptology", "rank": "A" },
 
     // Rank B
     "journals/tissec": { "venue": "TOPS", "rank": "B" },
-    // "journal/compsec":{"venue": "TDSC", "rank": "B"}, Journal Name : Computers & Security
-    // "journal/dcc":{"venue": "", "rank": "B"}, Journal Name : Designs, Codes and Cryptography
+    "journals/compsec": { "venue": "Computers & Security", "rank": "B" },
+    "journals/dcc": { "venue": "Designs, Codes and Cryptography", "rank": "B" },
     "journals/jcs": { "venue": "JCS", "rank": "B" },
 
     // Rank C
     "journals/clsr": { "venue": "CLSR", "rank": "C" },
-    // "journal/ejisec":{"venue": "", "rank": "C"}, Journal Name : EURASIP Journal on Information Security
-    // "journal/iet-ifs":{"venue": "", "rank": "C"}, Journal Name : IET Information Security
+    "journals/ejisec": { "venue": "EURASIP Journal on Information Security", "rank": "C" },
+    "journals/iet-ifs": { "venue": "IET Information Security", "rank": "C" },
     "journals/imcs": { "venue": "IMCS", "rank": "C" },
     "journals/ijics": { "venue": "IJICS", "rank": "C" },
     "journals/ijisp": { "venue": "IJISP", "rank": "C" },
     "journals/istr": { "venue": "JISA", "rank": "C" },
     "journals/scn": { "venue": "SCN", "rank": "C" },
-    // "journal/cybersec":{"venue": "", "rank": "C"}, Journal Name : Cybersecurity
+    "journals/cybersec": { "venue": "Cybersecurity", "rank": "C" },
 
 
     // Conference
@@ -282,7 +282,7 @@ let NIS = {
     "conf/pet": { "venue": "PETS", "rank": "C" },
     "conf/sacrypt": { "venue": "SAC", "rank": "C" },
     "conf/soups": { "venue": "SOUPS", "rank": "C" },
-    // "conf/": { "venue": "HotSec", "rank": "C" },
+    // HotSec, http://www.usenix.org/events/
     "conf/eurosp": { "venue": "EuroS&P", "rank": "C" },
     "conf/cisc": { "venue": "Inscrypt", "rank": "C" },
 }
@@ -310,7 +310,7 @@ let SE_SS_PL = {
     "journals/iet-sen": { "venue": "IETS", "rank": "B" },
     "journals/infsof": { "venue": "IST", "rank": "B" },
     "journals/jfp": { "venue": "JFP", "rank": "B" },
-    // "journals/smr": { "venue": "", "rank": "B" }, Journal Name : Journal of Software: Evolution and ProcessWiley
+    "journals/smr": { "venue": "Journal of Software: Evolution and Process", "rank": "B" },
     "journals/jss": { "venue": "JSS", "rank": "B" },
     "journals/re": { "venue": "RE", "rank": "B" },
     "journals/scp": { "venue": "SCP", "rank": "B" },
@@ -378,7 +378,7 @@ let SE_SS_PL = {
     "conf/IEEEscc": { "venue": "SSE", "rank": "C" },
     "conf/ispw": { "venue": "ICSSP", "rank": "C" },
     "conf/seke": { "venue": "SEKE", "rank": "C" },
-    // "conf/qrs": { "venue": "QRS", "rank": "C" },
+    "conf/qrs": { "venue": "QRS", "rank": "C" },
     "conf/icsr": { "venue": "ICSR", "rank": "C" },
     "conf/icwe": { "venue": "ICWE", "rank": "C" },
     "conf/spin": { "venue": "SPIN", "rank": "C" },
@@ -417,7 +417,7 @@ let DB_DM_CR = {
     "journals/dke": { "venue": "DKE", "rank": "B" },
     "journals/datamine": { "venue": "DMKD", "rank": "B" },
     "journals/ejis": { "venue": "EJIS", "rank": "B" },
-    // "journals/geoinformatica": { "venue": "", "rank": "B" }, Journal Name : GeoInformatica
+    "journals/geoinformatica": { "venue": "GeoInformatica", "rank": "B" },
     "journals/ipm": { "venue": "IPM", "rank": "B" },
     "journals/isci": { "venue": "Information Sciences", "rank": "B" },
     "journals/is": { "venue": "IS", "rank": "B" },
@@ -524,7 +524,7 @@ let CST = {
     "journals/jsyml": { "venue": "JSL", "rank": "C" },
     "journals/lmcs": { "venue": "LMCS", "rank": "C" },
     "journals/siamdm": { "venue": "SIDMA", "rank": "C" },
-    // "journals/mst":{"venue": "", "rank": "C"}, Journal Name : Theory of Computing Systems
+    "journals/mst": { "venue": "Theory of Computing Systems", "rank": "C" },
 
     // Conference
     // Rank A
@@ -539,7 +539,7 @@ let CST = {
     "conf/esa": { "venue": "ESA", "rank": "B" },
     "conf/coco": { "venue": "CCC", "rank": "B" },
     "conf/icalp": { "venue": "ICALP", "rank": "B" },
-    // "conf/cade": { "venue": "", "rank": "B" }, Journal Name : International Conference on Automated Deduction/International Joint Conference on Automated Reasoning
+    "conf/cade": { "venue": "International Conference on Automated Deduction/International Joint Conference on Automated Reasoning", "rank": "B" },
     "conf/concur": { "venue": "CONCUR", "rank": "B" },
     "conf/hybrid": { "venue": "HSCC", "rank": "B" },
     "conf/sat": { "venue": "SAT", "rank": "B" },
@@ -584,7 +584,7 @@ let CG_MM = {
     "journals/cvgip": { "venue": "CM", "rank": "B" },
     "journals/tcsv": { "venue": "TCSVT", "rank": "B" },
     "journals/tmm": { "venue": "TMM", "rank": "B" },
-    // "journals/":{"venue": "JASA", "rank": "B"},
+    // The Journal of the Acoustical Society of America, http://scitation.aip.org/content/asa/journal/jasa
     "journals/siamis": { "venue": "SIIMS", "rank": "B" },
     "journals/speech": { "venue": "SPECOM", "rank": "B" },
 
@@ -639,7 +639,7 @@ let CG_MM = {
     "conf/mmm": { "venue": "MMM", "rank": "C" },
     "conf/mmaisa": { "venue": "MMAisa", "rank": "C" },
     "conf/smi": { "venue": "SMI", "rank": "C" },
-    // "conf/":{"venue": "ICVRV", "rank": "C"},
+    // International Conference on Virtual Reality and Visualization, https://www.computer.org/csdl/proceedings/1800579
     "conf/cvm": { "venue": "CVM", "rank": "C" },
     "conf/prcv": { "venue": "PRCV", "rank": "C" },
 }
@@ -662,42 +662,42 @@ let AI = {
     // Rank B
     "journals/tap": { "venue": "TAP", "rank": "B" },
     "journals/aamas": { "venue": "AAMAS", "rank": "B" },
-    // "journals/coling": { "venue": "", "rank": "B" }, Journal Name : Computational Linguistics
+    "journals/coling": { "venue": "Computational Linguistics", "rank": "B" },
     "journals/cviu": { "venue": "CVIU", "rank": "B" },
     "journals/dke": { "venue": "DKE", "rank": "B" },
-    // "journals/ec": { "venue": "", "rank": "B" }, Journal Name : Evolutionary Computation
+    "journals/ec": { "venue": "Evolutionary Computation", "rank": "B" },
     "journals/taffco": { "venue": "TAC", "rank": "B" },
     "journals/taslp": { "venue": "TASLP", "rank": "B" },
-    // "journals/tcyb": { "venue": "", "rank": "B" }, Journal Name : IEEE Transactions on Cybernetics
+    "journals/tcyb": { "venue": "IEEE Transactions on Cybernetics", "rank": "B" },
     "journals/tec": { "venue": "TEC", "rank": "B" },
     "journals/tfs": { "venue": "TFS", "rank": "B" },
     "journals/tnn": { "venue": "TNNLS", "rank": "B" },
     "journals/ijar": { "venue": "IJAR", "rank": "B" },
     "journals/jair": { "venue": "JAIR", "rank": "B" },
-    // "journals/jar": { "venue": "", "rank": "B" }, Journal Name : Journal of Automated Reasoning
-    // "journals/": { "venue": "JSLHR", "rank": "B" },
-    // "journals/ml": { "venue": "", "rank": "B" }, Journal Name : Machine Learning
-    // "journals/neco": { "venue": "", "rank": "B" }, Journal Name : Neural Computation
-    // "journals/nn": { "venue": "", "rank": "B" }, Journal Name : Neural Networks
+    "journals/jar": { "venue": "Journal of Automated Reasoning", "rank": "B" },
+    // Journal of Speech, Language, and Hearing Research, http://jslhr.pubs.asha.org/
+    "journals/ml": { "venue": "Machine Learning", "rank": "B" },
+    "journals/neco": { "venue": "Neural Computation", "rank": "B" },
+    "journals/nn": { "venue": "Neural Networks", "rank": "B" },
     "journals/par": { "venue": "PR", "rank": "B" },
     "journals/tacl": { "venue": "TACL", "rank": "B" },
 
     // Rank C
     "journals/talip": { "venue": "TALLIP", "rank": "C" },
-    // "journals/apin": { "venue": "", "rank": "C" }, Journal Name : Applied Intelligence
+    "journals/apin": { "venue": "Applied Intelligence", "rank": "C" },
     "journals/artmed": { "venue": "AIM", "rank": "C" },
-    // "journals/alife": { "venue": "", "rank": "C" }, Jounal Name : Artificial Life
-    // "journals/ci": { "venue": "", "rank": "C" }, Journal Name : Computational Intelligence
-    // "journals/csl": { "venue": "", "rank": "C" }, Journal Name : Computer Speech & Language
-    // "journals/connection": { "venue": "", "rank": "C" }, Journal Name : Connection Science
+    "journals/alife": { "venue": "Artificial Life", "rank": "C" },
+    "journals/ci": { "venue": "Computational Intelligence", "rank": "C" },
+    "journals/csl": { "venue": "Computer Speech & Language", "rank": "C" },
+    "journals/connection": { "venue": "Connection Science", "rank": "C" },
     "journals/dss": { "venue": "DSS", "rank": "C" },
     "journals/eaai": { "venue": "EAAI", "rank": "C" },
-    // "journals/es": { "venue": "", "rank": "C" }, Journal Name : Expert Systems
+    "journals/es": { "venue": "Expert Systems", "rank": "C" },
     "journals/eswa": { "venue": "ESWA", "rank": "C" },
-    // "journals/fss": { "venue": "", "rank": "C" }, Journal Name : Fuzzy Sets and Systems
+    "journals/fss": { "venue": "Fuzzy Sets and Systems", "rank": "C" },
     "journals/tciaig": { "venue": "TG", "rank": "C" },
     "journals/iet-cvi": { "venue": "IET-CVI", "rank": "C" },
-    // "journals/iet-spr": { "venue": "", "rank": "C" }, Journal Name : IET Signal Processing
+    "journals/iet-spr": { "venue": "IET Signal Processing", "rank": "C" },
     "journals/ivc": { "venue": "IVC", "rank": "C" },
     "journals/ida": { "venue": "IDA", "rank": "C" },
     "journals/ijcia": { "venue": "IJCIA", "rank": "C" },
@@ -708,16 +708,16 @@ let AI = {
     "journals/ijdar": { "venue": "IJDAR", "rank": "C" },
     "journals/jetai": { "venue": "JETAI", "rank": "C" },
     "journals/kbs": { "venue": "KBS", "rank": "C" },
-    // "journals/mt": { "venue": "", "rank": "C" }, Journal Name : Machine Translation
-    // "journals/mva": { "venue": "", "rank": "C" }, Journal Name : Machine Vision and Applications
-    // "journals/nc": { "venue": "", "rank": "C" }, Journal Name : Natural Computing
+    "journals/mt": { "venue": "Machine Translation", "rank": "C" },
+    "journals/mva": { "venue": "Machine Vision and Applications", "rank": "C" },
+    "journals/nc": { "venue": "Natural Computing", "rank": "C" },
     "journals/nle": { "venue": "NLE", "rank": "C" },
     "journals/nca": { "venue": "NCA", "rank": "C" },
     "journals/npl": { "venue": "NPL", "rank": "C" },
-    // "journals/ijon": { "venue": "", "rank": "C" }, Journal Name : Neurocomputing
+    "journals/ijon": { "venue": "Neurocomputing", "rank": "C" },
     "journals/paa": { "venue": "PAA", "rank": "C" },
     "journals/prl": { "venue": "PRL", "rank": "C" },
-    // "journals/soco": { "venue": "", "rank": "C" }, Journal Name : Soft Computing
+    "journals/soco": { "venue": "Soft Computing", "rank": "C" },
     "journals/wias": { "venue": "WI", "rank": "C" },
     "journals/tiis": { "venue": "TIIS", "rank": "C" },
 
@@ -787,7 +787,7 @@ let HCI_UBICOMP = {
     // Rank B
     "journals/cscw": { "venue": "CSCW", "rank": "B" },
     "journals/hhci": { "venue": "HCI", "rank": "B" },
-    // "journals/thms":{"venue": "", "rank": "B"}, journal Name : IEEE Transactions on Human-Machine Systems
+    "journals/thms": { "venue": "IEEE Transactions on Human-Machine Systems", "rank": "B" },
     "journals/iwc": { "venue": "IWC", "rank": "B" },
     "journals/ijhci": { "venue": "IJHCI", "rank": "B" },
     "journals/umuai": { "venue": "UMUAI", "rank": "B" },
@@ -821,7 +821,7 @@ let HCI_UBICOMP = {
     "conf/assets": { "venue": "ASSETS", "rank": "C" },
     "conf/graphicsinterface": { "venue": "GI", "rank": "C" },
     "conf/uic": { "venue": "UIC", "rank": "C" },
-    // "conf/haptics":{"venue": "", "rank": "C"}, Journal Name : IEEE World Haptics Conference
+    "conf/haptics": { "venue": "IEEE World Haptics Conference", "rank": "C" },
     "conf/interact": { "venue": "INTERACT", "rank": "C" },
     "conf/acmidc": { "venue": "IDC", "rank": "C" },
     "conf/colcom": { "venue": "CollaborateCom", "rank": "C" },
@@ -846,9 +846,9 @@ let INTERDISCIPLINARY_EMERGING = {
     "journals/chinaf": { "venue": "SCIS", "rank": "A" },
 
     // Rank B
-    // "journals/bioinformatics":{"venue": "", "rank": "B"}, Journal Name : Bioinformatics
-    // "journals/bib":{"venue": "", "rank": "B"}, Journal Name : Briefings in Bioinformatics
-    // "journals/":{"venue": "Cognition", "rank": "B"},
+    "journals/bioinformatics": { "venue": "Bioinformatics", "rank": "B" },
+    "journals/bib": { "venue": "Briefings in Bioinformatics", "rank": "B" },
+    // Cognition, http://www.journals.elsevier.com/cognition/
     "journals/tase": { "venue": "TASAE", "rank": "B" },
     "journals/tgrs": { "venue": "TGARS", "rank": "B" },
     "journals/tits": { "venue": "TITS", "rank": "B" },
@@ -857,26 +857,26 @@ let INTERDISCIPLINARY_EMERGING = {
     "journals/tcbb": { "venue": "TCBB", "rank": "B" },
     "journals/jcst": { "venue": "JCST", "rank": "B" },
     "journals/jamia": { "venue": "JAMIA", "rank": "B" },
-    // "journals/ploscb":{"venue": "", "rank": "B"}, Journal Name : PLOS Computational Biology
-    // "journals/cj":{"venue": "", "rank": "B"}, Journal Name : The Computer Journal
+    "journals/ploscb": { "venue": "PLOS Computational Biology", "rank": "B" },
+    "journals/cj": { "venue": "The Computer Journal", "rank": "B" },
     "journals/www": { "venue": "WWW", "rank": "B" },
     "journals/fcsc": { "venue": "FCS", "rank": "B" },
 
     // Rank C
-    // "journals/bmcbi":{"venue": "", "rank": "C"}, Journal Name : BMC Bioinformatics
-    // "journals/cas":{"venue": "", "rank": "C"}, Journal Name : Cybernetics and Systems
-    // "journals/lgrs":{"venue": "", "rank": "C"}, Journal Name : IEEE Geoscience and Remote Sensing Letters
+    "journals/bmcbi": { "venue": "BMC Bioinformatics", "rank": "C" },
+    "journals/cas": { "venue": "Cybernetics and Systems", "rank": "C" },
+    "journals/lgrs": { "venue": "IEEE Geoscience and Remote Sensing Letters", "rank": "C" },
     "journals/titb": { "venue": "JBHI", "rank": "C" },
     "journals/tbd": { "venue": "TBD", "rank": "C" },
-    // "journals/iet-its":{"venue": "", "rank": "C"}, Journal Name : IET Intelligent Transport Systems
+    // IET Intelligent Transport Systems, http://digital-library.theiet.org/content/journals/iet-its
     "journals/jbi": { "venue": "JBI", "rank": "C" },
-    // "journals/mia":{"venue": "", "rank": "C"}, journal Name : Medical Image Analysis
+    "journals/mia": { "venue": "Medical Image Analysis", "rank": "C" },
     "journals/tii": { "venue": "TII", "rank": "C" },
     "journals/tcps": { "venue": "TCPS", "rank": "C" },
     "journals/jeric": { "venue": "TOCE", "rank": "C" },
     "journals/jzusc": { "venue": "FITEE", "rank": "C" },
     "journals/tcss": { "venue": "TCSS", "rank": "C" },
-    // "journals/tr":{"venue": "", "rank": "C"}, Journal Name : IEEE Transactions on Reliability
+    "journals/tr": { "venue": "IEEE Transactions on Reliability", "rank": "C" },
 
 
     // Conference
