@@ -137,7 +137,13 @@
     <script id="venue-info-template" type="text/html">
         {{each venueList}}
             {{set venue = $value}}
-            <option data-content="<span class='badge badge-pill badge-success'>{{venue.name}}</span>" value="{{venue.url}}">{{venue.name}}</option>
+            <option data-content="
+                <span class='badge badge-pill badge-success'>{{venue.name}}</span>
+                <small class='text-muted'>
+                    {{ venue.url.startsWith('journals') ? '期刊' : '会议' }}, 
+                    CCF {{venue.rank}}
+                </small>" 
+                value="{{venue.url}}">{{venue.name}}</option>
         {{/each}}
     </script>
     <script id="paper-info-template" type="text/html">
@@ -186,22 +192,28 @@
         </div>
     </script>
     <script type="text/javascript">
-        function updateVenue(current, selectpickerExtendedOptions) {
+        function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
             let categoryVals = $("#category").val();
             let typeVals = $("#type").val();
             let rankVals = $("#rank").val();
             let venue = $("#venue");
 
+            // 如果三者均没有值，则禁用venue
             if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
                 venue.prop("disabled", true);
                 venue.selectpicker("destroy");
                 venue.selectpicker(selectpickerExtendedOptions);
+                return;
             }
 
-            if ($(current).val().length == 0) {
+            // 如果该元素当前和之前均没有值，则无需更新venue
+            if ($(currentSelector).val().length == 0 && previousVals[currentSelector].length == 0) {
                 return ;
             }
 
+            // 更新上一次选中的值
+            previousVals[currentSelector] = $(currentSelector).val();
+            
             // 清空列表
             venue.prop("disabled", false);
             venue.empty();
@@ -232,7 +244,8 @@
 
                     venueList.push({
                         url: venueDBLPUrl, 
-                        name: CATEGORY_LIST[category][venueDBLPUrl].venue
+                        name: CATEGORY_LIST[category][venueDBLPUrl].venue,
+                        rank: CATEGORY_LIST[category][venueDBLPUrl].rank
                     });
                 }
             }
@@ -312,15 +325,19 @@
             venue.prop("disabled", true);
             venue.selectpicker(selectpickerExtendedOptions);
 
-            // TODO: 当category和rank取消时，修改venue中的option
+            var previousVals = {
+                "#category": [],
+                "#type": [],
+                "#rank": []
+            };
             category.on("hidden.bs.select", function() {
-                updateVenue(this, selectpickerExtendedOptions);
+                updateVenue("#category", previousVals, selectpickerExtendedOptions);
             });            
             type.on("hidden.bs.select", function() {
-                updateVenue(this, selectpickerExtendedOptions);
+                updateVenue("#type", previousVals, selectpickerExtendedOptions);
             });
             rank.on("hidden.bs.select", function() {
-                updateVenue(this, selectpickerExtendedOptions);
+                updateVenue("#rank", previousVals, selectpickerExtendedOptions);
             });
         });
     </script>
