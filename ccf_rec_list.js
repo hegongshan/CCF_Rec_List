@@ -920,8 +920,8 @@ let OTHERS = {
     "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
     // Communications of the ACM
     "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
-    // arXiv preprint
-    "journals/corr": { "venue": "CORR", "rank": "A" },
+    // arXiv preprint (Computing Research Repository)
+    "journals/corr": { "venue": "arXiv", "rank": "A" },
 
     "conf/iclr": { "venue": "ICLR", "rank": "A" },
 

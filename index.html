@@ -15,34 +15,32 @@
             font-size: 1rem;
         }
 
-        .text-center {
-            text-align: center;
-        }
-
-        .theme {
-            float: right;
-        }
-
         .red-text {
             color:#f00;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); 
         }
 
-        .div-inline > .form-control {
-            display: inline-block;
+        /* 将文本分散对齐 */
+        .dist-align {
+            text-align: justify;
+            text-align-last: justify;
+            text-justify: distribute-all-lines;
         }
         
-        input[type=search] {
-            width: 60%;
-        }
-        
-        input[type=number] {
-            width: 30%;
+        /* 在小屏幕上将文本左对齐 */
+        @media (max-width: 768px) {
+            .dist-align {
+                text-align: left;
+            }
         }
         
         /* 在bootstrap-select渲染结束前，不要显示原始的select */
         select {
             display: none;
+        }
+
+        .keyword {
+            margin: 5px 0;
         }
         
         #paperList > li {
@@ -65,7 +63,7 @@
     <div id="app" class="container">
         <h1 class="text-center">面向CCF推荐列表的学术论文检索系统</h1>
         <div class="dropdown">
-            <a href="javascript:void(0)" class="dropdown-toggle theme badge badge-pill badge-primary" data-toggle="dropdown" aria-expanded="false">主题</a>
+            <a href="javascript:void(0)" class="dropdown-toggle float-right badge badge-pill badge-primary" data-toggle="dropdown" aria-expanded="false">主题</a>
             <div class="dropdown-menu">
                 <a id="theme-light" href="javascript:void(0)" class="dropdown-item">白色</a>
                 <a id="theme-dark" href="javascript:void(0)" class="dropdown-item">黑色</a>
@@ -73,21 +71,21 @@
         </div>
         <h3 class="text-center">By <a href="https://github.com/hegongshan/CCF_Rec_List">Gongshan He</a></h3>
         <div class="row">
-            <div class="col-md-4">
-                <label>分&nbsp;&nbsp;&nbsp;&nbsp;类: </label>
-                <select id="category" multiple title="请选择分类">
+            <label class="col-md-1 col-form-label dist-align">分类</label>
+            <div class="col-md-3">
+                <select id="category" class="form-control" multiple title="请选择分类">
                 </select>
             </div>
-            <div class="col-md-4">
-                <label>类&nbsp;&nbsp;&nbsp;&nbsp;型: </label>
-                <select id="type" multiple title="期刊 或 会议">
+            <label class="col-md-1 col-form-label dist-align">类型</label>
+            <div class="col-md-3">
+                <select id="type" class="form-control" multiple title="期刊 或 会议">
                     <option data-content="<span class='badge badge-pill badge-secondary'>期刊</span>" value="journals">期刊</option>
                     <option data-content="<span class='badge badge-pill badge-secondary'>会议</span>" value="conf">会议</option>
                 </select>
             </div>
-            <div class="col-md-4">
-                <label>级&nbsp;&nbsp;&nbsp;&nbsp;别: </label>
-                <select id="rank" multiple title="请选择级别">
+            <label class="col-md-1 col-form-label dist-align">级别</label>
+            <div class="col-md-3">
+                <select id="rank" class="form-control" multiple title="请选择级别">
                     <option data-content="<span class='badge badge-pill badge-primary'>CCF A</span>" value="A">CCF A</option>
                     <option data-content="<span class='badge badge-pill badge-primary'>CCF B</span>" value="B">CCF B</option>
                     <option data-content="<span class='badge badge-pill badge-primary'>CCF C</span>" value="C">CCF C</option>
@@ -95,23 +93,29 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <label>刊&nbsp;&nbsp;&nbsp;&nbsp;物: </label>
-                <select id="venue" multiple title="请选择刊物">
+            <label class="col-md-1 col-form-label dist-align">刊物</label>
+            <div class="col-md-3">
+                <select id="venue" class="form-control" multiple title="请选择刊物">
                 </select>
             </div>
-            <div id="year" class="col-md-8 div-inline">
-                <label>年&nbsp;&nbsp;&nbsp;&nbsp;份: </label>
+            <label class="col-md-1 col-form-label dist-align">年份</label>
+            <div class="col-md-3">
                 <input id="startYear" type="number" class="form-control" placeholder="开始年份"/>
-                <label>&minus;</label>
+                <div class="year-feedback invalid-feedback"></div>
+            </div>
+            <label class="col-md-1 col-form-label text-center">&minus;</label>
+            <div class="col-md-3">
                 <input id="endYear" type="number" class="form-control" placeholder="结束年份"/>
+                <div class="year-feedback invalid-feedback"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 div-inline">
-                <label>关键词: </label>
-                <input id="q" type="search" class="form-control" placeholder="请输入关键词"/>
-                <button id="search" class="btn btn-primary">搜索</button>
+            <label class="col-md-1 col-form-label dist-align">关键词</label>
+            <div class="col-md-11">
+                <input id="q" type="search" class="q form-control" placeholder="请输入关键词"/>
+                <div class="search-feedback invalid-feedback"></div>
+                <button id="add-keyword" type="button" class="btn btn-primary">&plus;</button>
+                <button id="search" type="button" class="btn btn-primary">搜索</button>
                 <span id="tips"></span>
             </div>
         </div>
@@ -127,9 +131,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <script src="ccf_rec_list.js"></script>
     <script src="search.js"></script>
-    <script id="loading-tips-info-template" type="text/html">
-        <img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
-    </script>
     <script id="response-tips-info-template" type="text/html">
         共匹配到<strong class="red-text">{{count}}</strong>条记录
     </script>
@@ -144,12 +145,24 @@
             {{set venue = $value}}
             <option data-content="
                 <span class='badge badge-pill badge-success'>{{venue.name}}</span>
-                <small class='text-muted'>
-                    {{ venue.url.startsWith('journals') ? '期刊' : '会议' }}, 
-                    CCF {{venue.rank}}
-                </small>" 
+                <small class='text-muted'>{{venue.type}}, CCF {{venue.rank}}</small>" 
                 value="{{venue.url}}">{{venue.name}}</option>
         {{/each}}
+    </script>
+    <script id="keyword-info-template" type="text/html">
+        <div class="input-group keyword">
+            <div class="input-group-prepend">
+                <select class="condition custom-select">
+                    <option class="dropdown-item" value="and">AND</option>
+                    <option class="dropdown-item" value="or">OR</option>
+                </select>
+            </div>
+            <input type="search" class="q form-control" placeholder="请输入关键词"/>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-danger remove-keyword">&minus;</button>
+            </div>
+            <div class="search-feedback invalid-feedback"></div>
+        </div>
     </script>
     <script id="paper-info-template" type="text/html">
         <ol id="paperList">
@@ -162,7 +175,7 @@
                 <span class="badge badge-pill badge-info">No Rank</span>
                 {{/if}}
                 {{paper.firstAuthor}}, et al. 
-                <strong style='font-weight:bold;'>{{@paper.title}}</strong>, 
+                <strong style="font-weight:bold;">{{@paper.title}}</strong>, 
                 {{paper.venue}}'{{paper.year}}, 
                 <a href="{{paper.url}}">URL</a>
                 <br/>
@@ -177,6 +190,9 @@
     </script>
     <script id="footer-info-template" type="text/html">
         Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He All Rights Reserved.
+    </script>
+    <script id="loading-tips-info-template" type="text/html">
+        <img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
     </script>
     <script id="alert-info-template" type="text/html">
         <div class="modal-dialog">
@@ -250,6 +266,7 @@
                     venueList.push({
                         url: venueDBLPUrl, 
                         name: CATEGORY_LIST[category][venueDBLPUrl].venue,
+                        type: venueDBLPUrl.startsWith("journals") ? "期刊" : "会议",
                         rank: CATEGORY_LIST[category][venueDBLPUrl].rank
                     });
                 }
@@ -272,30 +289,6 @@
                 },
             });
             $("footer").html(footerHtml);
-
-            // 主题切换
-            $("#theme-light").click(function (){
-                $("body").css({
-                    "background-color": "#fff",
-                    "color": "#333"
-                });
-            });
-            $("#theme-dark").click(function (){
-                $("body").css({
-                    "background-color": "#333",
-                    "color": "#fff"
-                });
-            });
-
-            // 搜索
-            $("#search").click(function () {
-                search();
-            });
-            $("#q").keydown(function (event) {
-                if (event.keyCode == 13) {
-                    search();
-                }
-            });
             
             let category = $("#category");
             let type = $("#type");
@@ -343,6 +336,38 @@
             });
             rank.on("hidden.bs.select", function() {
                 updateVenue("#rank", previousVals, selectpickerExtendedOptions);
+            });
+
+            // 主题切换
+            $("#theme-light").click(function (){
+                $("body").css({
+                    "background-color": "#fff",
+                    "color": "#333"
+                });
+            });
+            $("#theme-dark").click(function (){
+                $("body").css({
+                    "background-color": "#333",
+                    "color": "#fff"
+                });
+            });
+
+            // 添加和删除新关键词
+            $("#add-keyword").click(function(){
+                $(this).before($("#keyword-info-template").html());
+            });
+            $("body").on("click", ".remove-keyword", function() {
+                $(this).parent().parent().remove();
+            });
+
+            // 搜索
+            $("#search").click(function () {
+                search();
+            });
+            $("#q").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    search();
+                }
             });
         });
     </script>

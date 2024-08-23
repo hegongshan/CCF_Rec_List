@@ -49,6 +49,10 @@ function isYearRange(year, startYear, endYear) {
     return year <= parseInt(endYear);
 }
 
+function isEmpty(str) {
+    return !str || str.length === 0;
+}
+
 function doSearch(query, firstHit, pageSize, total, paperList, filter) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
@@ -191,7 +195,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
         let paperHtml = template.render($("#paper-info-template").html(), {
             paperList: paperList,
         });
-        $("#result").append(paperHtml);
+        $("#result").html(paperHtml);
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         let alertHtml = template.render($("#alert-info-template").html(), {
@@ -207,76 +211,93 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
 
 function search() {
     let invalidClass = "is-invalid";
+    let invalid = false;
 
     // 验证关键词
-    let query = $("#q").val().trim();
-    if (query == "") {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "关键词不能为空！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
-        
-        $("#q").addClass(invalidClass);
-        return;
-    }
-    if (query.search(/[\u4E00-\u9FA5]|[\uf900-\ufa2d]/g) != -1) {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "不支持中文关键词！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+    let $searchFeedback = $(".search-feedback");
+    $(".q").each(function(index){
+        let $input = $(this);
 
-        $("#q").addClass(invalidClass);
-        return;
-    }
-    if ($("#q").hasClass(invalidClass)) {
-        $("#q").removeClass(invalidClass);
-    }
+        let query = $input.val().trim();
+        let isEmpty = query == "";
+        let hasChineseCharacter = query.match(/[\u4E00-\u9FA5]|[\uF900-\uFA2D]/);
+
+        if (isEmpty || hasChineseCharacter) {
+            invalid = true;
+            $input.addClass(invalidClass);
+            
+            let errorMsg = isEmpty ? "关键词不能为空！" : "DBLP不支持中文关键词！";
+            $feedback = $searchFeedback.eq(index);
+            $feedback.text(errorMsg);
+        } else {
+            $input.removeClass(invalidClass);
+        }
+    });
 
     // 验证起止年份
-    let startYearStr = $("#startYear").val().trim();
-    let endYearStr = $("#endYear").val().trim();
-    let isStartYearInvalid = startYearStr.length > 0 && parseInt(startYearStr) <= 0;
-    let isEndYearInvalid = endYearStr.length > 0 && parseInt(endYearStr) <= 0;
-    if (isStartYearInvalid || isEndYearInvalid) {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "年份必须大于0！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+    let $startYear = $("#startYear");
+    let $endYear = $("#endYear");
+    let startYearStr = $startYear.val().trim();
+    let endYearStr = $endYear.val().trim();
+    let isStartYearEmpty = isEmpty(startYearStr);
+    let isEndYearEmpty = isEmpty(endYearStr);
 
-        if (isStartYearInvalid) {
-            $("#startYear").addClass(invalidClass);
-        } else if ($("#startYear").hasClass(invalidClass)) {
-            $("#startYear").removeClass(invalidClass);
-        }
-        if (isEndYearInvalid) {
-            $("#endYear").addClass(invalidClass);
-        } else if ($("#endYear").hasClass(invalidClass)) {
-            $("#endYear").removeClass(invalidClass);
-        }
-        return;
-    }
-    if (startYearStr.length > 0 
-        && endYearStr.length > 0 
-        && parseInt(startYearStr) > parseInt(endYearStr)) {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "开始年份≤结束年份！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+    function handleYear($year, index) {
+        let errorMsg = "年份必须大于0！";
 
-        $("#startYear").addClass(invalidClass);
-        $("#endYear").addClass(invalidClass);
-        return;
+        let yearStr = $year.val().trim();
+        let isYearInvalid = !isEmpty(yearStr) && parseInt(yearStr) <= 0;
+        $yearFeedback = $(".year-feedback").eq(index);
+
+        if (isYearInvalid) {
+            $year.addClass(invalidClass);
+            $yearFeedback.text(errorMsg);
+        } else {
+            $year.removeClass(invalidClass);
+            $yearFeedback.empty();
+        }
+
+        return isYearInvalid;
     }
-    if ($("#startYear").hasClass(invalidClass)) {
-        $("#startYear").removeClass(invalidClass);
+
+    if (!isStartYearEmpty || !isEndYearEmpty) {
+        let isStartYearInvalid = handleYear($startYear, 0);
+        let isEndYearInvalid = handleYear($endYear, 1);
+        if (isStartYearInvalid || isEndYearInvalid) {
+            invalid = true;
+        } else if (!isStartYearEmpty && !isEndYearEmpty
+            && parseInt(startYearStr) > parseInt(endYearStr)) {
+            $startYear.addClass(invalidClass);
+            $endYear.addClass(invalidClass);
+            $(".year-feedback").text("开始年份必须≤结束年份！");
+            
+            invalid = true;
+        }
     }
-    if ($("#endYear").hasClass(invalidClass)) {
-        $("#endYear").removeClass(invalidClass);
+
+    // 如果关键词和起止年份存在问题，则提前返回
+    if (invalid) {
+        return ;
     }
+
+    // 拼接查询字符串
+    let query = "";
+    $(".q").each(function(index) {
+        let val = $(this).val().trim();
+        if (index == 0) {
+            query += val;
+        } else {
+            let condition = $(".condition").eq(index - 1).val();
+            switch (condition) {
+                case "and":
+                    query += " " + val;
+                    break;
+                case "or":
+                    query += "|" + val;
+                    break;
+            }
+        }
+    });
 
     // init
     $("#tips").html($("#loading-tips-info-template").html());
