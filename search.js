@@ -280,6 +280,10 @@ function search() {
         return ;
     }
 
+    // 显示加载图片，并清空查询结果
+    $("#tips").html($("#loading-tips-info-template").html());
+    $("#result").empty();
+
     // 拼接查询字符串
     let query = "";
     $(".q").each(function(index) {
@@ -298,10 +302,12 @@ function search() {
             }
         }
     });
-
-    // init
-    $("#tips").html($("#loading-tips-info-template").html());
-    $("#result").empty();
+    // 判断是否需要显示查询字符串
+    if ($("#query-string-input").prop("checked")) {
+        $("#query-string").text(query);
+    } else {
+        $("#query-string").empty();
+    }
 
     let firstHit = 0;
     let pageSize = 1000;
