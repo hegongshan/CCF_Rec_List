@@ -42,6 +42,13 @@
         .keyword {
             margin: 5px 0;
         }
+
+        /* 当查询字符串太长时，避免溢出 */
+        .badge-wrap {
+            white-space: normal;
+            word-break: break-all;
+            text-align: left;
+        }
         
         #paperList > li {
             line-height: 40px;
@@ -117,7 +124,7 @@
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="query-string-input">
                     <label class="custom-control-label" for="query-string-input">显示查询字符串</label>
-                    <span id="query-string" class="badge badge-primary"></span>
+                    <span id="query-string" class="badge badge-primary badge-wrap"></span>
                 </div>
                 <button id="add-keyword" type="button" class="btn btn-primary">&plus;</button>
                 <button id="search" type="button" class="btn btn-primary">搜索</button>
