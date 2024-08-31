@@ -247,7 +247,7 @@ function search() {
 
         let yearStr = $year.val().trim();
         let isYearInvalid = !isEmpty(yearStr) && parseInt(yearStr) <= 0;
-        $yearFeedback = $(".year-feedback").eq(index);
+        let $yearFeedback = $(".year-feedback").eq(index);
 
         if (isYearInvalid) {
             $year.addClass(invalidClass);
@@ -273,6 +273,12 @@ function search() {
             
             invalid = true;
         }
+    } else {
+        $startYear.removeClass(invalidClass);
+        $endYear.removeClass(invalidClass);
+        $(".year-feedback").each(function(index) {
+            $(this).empty();
+        });
     }
 
     // 如果关键词和起止年份存在问题，则提前返回
