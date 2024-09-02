@@ -86,12 +86,12 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                 ) {
                     continue;
                 }
-                
+
                 // Whether the key or venue hits or not
                 let matchCCFList = CCF_LIST.hasOwnProperty(venueDBLPURL);
-                
-                if (filter.categoryList.length > 0 
-                    || filter.rankList.length > 0 
+
+                if (filter.categoryList.length > 0
+                    || filter.rankList.length > 0
                     || filter.venueList.length > 0) {
                     if (!matchCCFList) {
                         continue;
@@ -167,17 +167,16 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
                     abstractId: title.replace(/[^a-zA-Z]+/g, "_"),
                 });
             }
-            
+
             // recursion
             if (firstHit + size < total) {
                 doSearch(query, firstHit + pageSize, pageSize, total, paperList, filter);
-                return ;
+                return;
             }
         }
 
         // 排序
-        // TODO: 允许用户在网页上指定排序方式
-        paperList.sort(function(a, b) {
+        paperList.sort(function (a, b) {
             if (a.year != b.year) {
                 return b.year - a.year;
             }
@@ -187,27 +186,27 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
             return a.title.localeCompare(b.title);
         });
 
-        let tips = template.render($("#response-tips-info-template").html(), {
+        let tips = template.render($("#responseTipsTemplate").html(), {
             count: Object.keys(paperList).length,
         });
         $("#tips").html(tips);
 
-        let paperHtml = template.render($("#paper-info-template").html(), {
+        let paperHtml = template.render($("#paperTemplate").html(), {
             paperList: paperList,
         });
         $("#result").html(paperHtml);
     })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            title: "提示信息",
-            message: "请求失败，请重新尝试！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            let alertHtml = template.render($("#alertTemplate").html(), {
+                title: "提示信息",
+                message: "请求失败，请重新尝试！"
+            });
+            $("#alert").html(alertHtml);
+            $('#alert').modal();
 
-        // 当请求失败时，不要继续显示加载图片
-        $("#tips").empty();
-    });
+            // 当请求失败时，不要继续显示加载图片
+            $("#tips").empty();
+        });
 }
 
 function search() {
@@ -216,7 +215,7 @@ function search() {
 
     // 验证关键词
     let $searchFeedback = $(".search-feedback");
-    $(".q").each(function(index){
+    $(".q").each(function (index) {
         let $input = $(this);
 
         let query = $input.val().trim();
@@ -226,7 +225,7 @@ function search() {
         if (isEmpty || hasChineseCharacter) {
             invalid = true;
             $input.addClass(invalidClass);
-            
+
             let errorMsg = isEmpty ? "关键词不能为空！" : "DBLP不支持中文关键词！";
             $feedback = $searchFeedback.eq(index);
             $feedback.text(errorMsg);
@@ -271,29 +270,29 @@ function search() {
             $startYear.addClass(invalidClass);
             $endYear.addClass(invalidClass);
             $(".year-feedback").text("开始年份必须≤结束年份！");
-            
+
             invalid = true;
         }
     } else {
         $startYear.removeClass(invalidClass);
         $endYear.removeClass(invalidClass);
-        $(".year-feedback").each(function(index) {
+        $(".year-feedback").each(function (index) {
             $(this).empty();
         });
     }
 
     // 如果关键词和起止年份存在问题，则提前返回
     if (invalid) {
-        return ;
+        return;
     }
 
     // 显示加载图片，并清空查询结果
-    $("#tips").html($("#loading-tips-info-template").html());
+    $("#tips").html($("#loadingTipsTemplate").html());
     $("#result").empty();
 
     // 拼接查询字符串
     let query = "";
-    $(".q").each(function(index) {
+    $(".q").each(function (index) {
         let val = $(this).val().trim();
         if (index == 0) {
             query += val;
@@ -310,10 +309,10 @@ function search() {
         }
     });
     // 判断是否需要显示查询字符串
-    if ($("#query-string-input").prop("checked")) {
-        $("#query-string").text(query);
+    if ($("#queryStringInput").prop("checked")) {
+        $("#queryString").text(query);
     } else {
-        $("#query-string").empty();
+        $("#queryString").empty();
     }
 
     let firstHit = 0;
@@ -336,27 +335,27 @@ function search() {
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
     // read cache if exists
-    let abstractTag = $(abstractSelector);
-    if (abstractTag.html()) {
-        if (abstractTag.css("display") == "block") {
-            abstractTag.css("display", "none");
+    let $abstractTag = $(abstractSelector);
+    if ($abstractTag.html()) {
+        if ($abstractTag.css("display") == "block") {
+            $abstractTag.css("display", "none");
         } else {
-            abstractTag.css("display", "block");
+            $abstractTag.css("display", "block");
         }
         return;
     }
 
     // init
-    let loadingTips = $(abstractSelector + "tips");
-    loadingTips.html($("#loading-tips-info-template").html());
+    let $loadingTips = $(abstractSelector + "tips");
+    $loadingTips.html($("#loadingTipsTemplate").html());
     let errorMsg = "没找到摘要=_=";
 
     // query
     doQueryAbstract(
         paperDOI,
         paperTitle,
-        abstractTag,
-        loadingTips,
+        $abstractTag,
+        $loadingTips,
         errorMsg
     );
 }
@@ -364,8 +363,8 @@ function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
 function doQueryAbstract(
     paperDOI,
     paperTitle,
-    abstractTag,
-    loadingTips,
+    $abstractTag,
+    $loadingTips,
     errorMsg
 ) {
     let semanticScholarUrl = "https://api.semanticscholar.org/graph/v1/paper/";
@@ -382,8 +381,7 @@ function doQueryAbstract(
         inputData["fieldsOfStudy"] = "Computer Science";
     }
 
-    // $.ajaxSettings.async = false;
-    $.getJSON(semanticScholarUrl, inputData, function (data) {        
+    $.getJSON(semanticScholarUrl, inputData, function (data) {
         let abstract;
         // 如果doi搜索不到，那么按标题搜索
         if (paperDOI.trim().length > 0) {
@@ -391,8 +389,8 @@ function doQueryAbstract(
                 doQueryAbstract(
                     "",
                     paperTitle,
-                    abstractTag,
-                    loadingTips,
+                    $abstractTag,
+                    $loadingTips,
                     errorMsg
                 );
                 return;
@@ -400,8 +398,8 @@ function doQueryAbstract(
             abstract = data["abstract"];
         } else {
             if (data["total"] == 0 || !data["data"][0]["abstract"]) {
-                abstractTag.html(errorMsg);
-                loadingTips.empty();
+                $abstractTag.html(errorMsg);
+                $loadingTips.empty();
                 return;
             }
 
@@ -409,17 +407,17 @@ function doQueryAbstract(
             abstract = paper["abstract"];
         }
 
-        abstractTag.html(abstract);
-        loadingTips.empty();
+        $abstractTag.html(abstract);
+        $loadingTips.empty();
     })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        let alertHtml = template.render($("#alert-info-template").html(), {
-            title: "提示信息",
-            message: "请求失败，请重新尝试！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            let alertHtml = template.render($("#alertTemplate").html(), {
+                title: "提示信息",
+                message: "请求失败，请重新尝试！"
+            });
+            $("#alert").html(alertHtml);
+            $('#alert').modal();
 
-        loadingTips.empty();
-    });
+            $loadingTips.empty();
+        });
 }
