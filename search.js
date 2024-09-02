@@ -199,7 +199,8 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "请求失败，请重新尝试！"
+            title: "提示信息",
+            message: "请求失败，请重新尝试！"
         });
         $("#alert").html(alertHtml);
         $('#alert').modal();
@@ -413,7 +414,8 @@ function doQueryAbstract(
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         let alertHtml = template.render($("#alert-info-template").html(), {
-            errorMsg: "请求失败，请重新尝试！"
+            title: "提示信息",
+            message: "请求失败，请重新尝试！"
         });
         $("#alert").html(alertHtml);
         $('#alert').modal();
