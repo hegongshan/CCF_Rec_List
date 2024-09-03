@@ -2,6 +2,7 @@ let PAGINATION = {
     paperList: [],
     pageList: [],
     pageSize: 10,
+    pageSizeStr: "10",
     navigatePages: 10
 };
 

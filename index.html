@@ -50,7 +50,7 @@
             word-break: break-all;
             text-align: left;
         }
-        
+
         /* 论文列表 */
         #paperList>li {
             line-height: 40px;
@@ -274,7 +274,7 @@
                     <select id="pageSizeSelect" class="custom-select">
                     {{each pageInfo.pageSizeList}}
                         {{set size = $value}}
-                        {{if size == pageInfo.pageSize}}
+                        {{if size == pageInfo.pageSizeStr}}
                         <option value="{{size}}" selected>{{size}}</option>
                         {{else}}
                         <option value="{{size}}">{{size}}</option>
@@ -412,15 +412,22 @@
 
             // 如果没有匹配的论文，则直接返回
             if (PAGINATION.paperList.length == 0) {
-                return ;
+                return;
             }
 
             // currentPage从1开始，其索引为currentPage - 1
             let currentPage = parseInt(currentPageStr);
 
+            // 显示全部的论文
+            if (PAGINATION.pageSizeStr == "All") {
+                PAGINATION.pageSize = PAGINATION.paperList.length;
+            } else {
+                PAGINATION.pageSize = parseInt(PAGINATION.pageSizeStr);
+            }
+
             // 计算总页数和页列表
             let totalPage = Math.floor((PAGINATION.paperList.length + PAGINATION.pageSize - 1) / PAGINATION.pageSize);
-            PAGINATION.pageList = Array.from({length: totalPage}, (_, index) => index + 1);
+            PAGINATION.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
 
             // 计算开始论文索引和结束论文索引
             let startPaperIndex = (currentPage - 1) * PAGINATION.pageSize;
@@ -449,8 +456,8 @@
                     currentPage: currentPage,
                     nextPage: currentPage + 1,
 
-                    pageSizeList: [10, 20, 50, 100],
-                    pageSize: PAGINATION.pageSize
+                    pageSizeList: ["10", "20", "50", "100", "All"],
+                    pageSizeStr: PAGINATION.pageSizeStr // 处理All
                 }
             });
             $("#result").html(paperHtml);
@@ -538,9 +545,13 @@
 
             // 搜索
             $("#search").click(function () {
+                // 重置pageSize，避免影响不同查询
+                PAGINATION.pageSizeStr = "10";
                 search(updatePaper);
             });
             $("#q").keydown(function (event) {
+                // 重置pageSize，避免影响不同查询
+                PAGINATION.pageSizeStr = "10";
                 if (event.keyCode == 13) {
                     search(updatePaper);
                 }
@@ -549,11 +560,14 @@
             // 选择pageSize
             $("body").on("change", "#pageSizeSelect", function () {
                 let oldPageSize = PAGINATION.pageSize;
-                PAGINATION.pageSize = parseInt($(this).val());
 
-                if (PAGINATION.paperList.length <= oldPageSize 
-                    && PAGINATION.paperList.length <= PAGINATION.pageSize) {
-                    return ;
+                PAGINATION.pageSizeStr = $(this).val();
+
+                // 避免不必要的页面更新操作
+                if (PAGINATION.paperList.length <= oldPageSize
+                    && (PAGINATION.pageSizeStr == "All"
+                        || PAGINATION.paperList.length <= parseInt(PAGINATION.pageSizeStr))) {
+                    return;
                 }
 
                 updatePaper();
