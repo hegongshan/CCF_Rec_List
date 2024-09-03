@@ -50,7 +50,8 @@
             word-break: break-all;
             text-align: left;
         }
-
+        
+        /* 论文列表 */
         #paperList>li {
             line-height: 40px;
             margin-top: 5px;
@@ -60,17 +61,22 @@
             border-radius: 4px;
         }
 
-        .list-clear ul {
-            margin: 0;
-            padding: 0;
+        /* 相关链接 */
+        .list-clear-style {
             list-style: none;
         }
 
-        .list-clear li {
+        .list-clear-other {
+            margin: 0;
+            padding: 0;
+        }
+
+        .list-clear-other li {
             display: inline-block;
             margin-right: 10px;
         }
 
+        /* FAQ */
         .list li {
             margin-top: 5px;
         }
@@ -84,7 +90,7 @@
 
 <body>
     <div id="app" class="container">
-        <h1 class="text-center">面向CCF推荐列表的学术论文检索系统</h1>
+        <h1 class="text-center">面向CCF推荐目录的学术论文检索系统</h1>
         <div class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle float-right badge badge-pill badge-primary"
                 data-toggle="dropdown" aria-expanded="false">主题</a>
@@ -103,9 +109,9 @@
             <label class="col-md-1 col-form-label dist-align">类型</label>
             <div class="col-md-3">
                 <select id="type" class="form-control" multiple title="期刊 或 会议">
-                    <option data-content="<span class='badge badge-pill badge-secondary'>期刊</span>" value="journals">期刊
+                    <option data-content="<span class='badge badge-pill badge-primary'>期刊</span>" value="journals">期刊
                     </option>
-                    <option data-content="<span class='badge badge-pill badge-secondary'>会议</span>" value="conf">会议
+                    <option data-content="<span class='badge badge-pill badge-primary'>会议</span>" value="conf">会议
                     </option>
                 </select>
             </div>
@@ -172,14 +178,14 @@
     <script id="categoryTemplate" type="text/html">
         {{each categoryList}}
             {{set category = $value}}
-            <option data-content="<span class='badge badge-pill badge-info'>{{category.name}}</span>" value="{{category.name}}">{{category.name}}</option>
+            <option data-content="<span class='badge badge-pill badge-primary'>{{category.name}}</span>" value="{{category.name}}">{{category.name}}</option>
         {{/each}}
     </script>
     <script id="venueTemplate" type="text/html">
         {{each venueList}}
             {{set venue = $value}}
             <option data-content="
-                <span class='badge badge-pill badge-success'>{{venue.name}}</span>
+                <span class='badge badge-pill badge-primary'>{{venue.name}}</span>
                 <small class='text-muted'>{{venue.type}}, CCF {{venue.rank}}</small>" 
                 value="{{venue.url}}">{{venue.name}}</option>
         {{/each}}
@@ -200,14 +206,15 @@
         </div>
     </script>
     <script id="paperTemplate" type="text/html">
-        <ol id="paperList">
+        <ul id="paperList" class="list-clear-style">
         {{each paperList}}
             {{set paper = $value}}
             <li>
+                {{startPaperNumber + $index}}. 
                 {{if paper.ccfRank}}
                 <span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
                 {{else}}
-                <span class="badge badge-pill badge-info">No Rank</span>
+                <span class="badge badge-pill badge-success">No Rank</span>
                 {{/if}}
                 {{paper.firstAuthor}}, et al. 
                 <strong style="font-weight:bold;">{{@paper.title}}</strong>, 
@@ -221,11 +228,66 @@
                 <p id="{{paper.abstractId}}"></p>
             </li>
         {{/each}}
-        </ol>
+        </ul>
+
+        <!-- 分页 -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+            {{if pageInfo.currentPage == pageInfo.firstPage}}
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="Previous">&laquo;</span>
+                </li>
+            {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" onclick="updatePaper('{{pageInfo.previousPage}}')">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {{/if}}
+
+            {{each pageInfo.pageList}}
+                {{set page = $value}}
+                {{if pageInfo.currentPage == page}}
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{page}}</span>
+                </li>
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" onclick="updatePaper('{{page}}')">{{page}}</a>
+                </li>
+                {{/if}}
+            {{/each}}
+
+            {{if pageInfo.currentPage == pageInfo.lastPage}}
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="Next">&raquo;</span>
+                </li>
+            {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="updatePaper('{{pageInfo.nextPage}}')">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {{/if}}
+
+                <li class="page-item">
+                    <select id="pageSizeSelect" class="custom-select">
+                    {{each pageInfo.pageSizeList}}
+                        {{set size = $value}}
+                        {{if size == pageInfo.pageSize}}
+                        <option value="{{size}}" selected>{{size}}</option>
+                        {{else}}
+                        <option value="{{size}}">{{size}}</option>
+                        {{/if}}
+                    {{/each}}
+                    </select>
+                </li>
+            </ul>
+        </nav>
     </script>
     <script id="footerTemplate" type="text/html">
         <!-- 相关链接 -->
-        <div class="list-clear">
+        <div class="list-clear-style list-clear-other">
             <ul>
                 <li><a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/">中国计算机学会推荐国际学术会议和期刊目录</a></li>
                 <li><a href="https://www.ccf.org.cn/ccftjgjxskwml/">计算领域高质量科技期刊分级目录</a></li>
@@ -342,6 +404,57 @@
             $venue.selectpicker(selectpickerExtendedOptions);
         }
 
+        function updatePaper(currentPageStr = '1') {
+            if (PAGINATION.paperList.length == 0) {
+                return ;
+            }
+            
+            let tips = template.render($("#responseTipsTemplate").html(), {
+                count: PAGINATION.paperList.length,
+            });
+            $("#tips").html(tips);
+
+            // currentPage从1开始，其索引为currentPage - 1
+            let currentPage = parseInt(currentPageStr);
+
+            // 计算总页数和页列表
+            let totalPage = Math.floor((PAGINATION.paperList.length + PAGINATION.pageSize - 1) / PAGINATION.pageSize);
+            PAGINATION.pageList = Array.from({length: totalPage}, (_, index) => index + 1);
+
+            // 计算开始论文索引和结束论文索引
+            let startPaperIndex = (currentPage - 1) * PAGINATION.pageSize;
+            let endPaperIndex = Math.min(currentPage * PAGINATION.pageSize, PAGINATION.paperList.length);
+
+            // 计算开始页码和结束页码
+            let startPageIndex;
+            if (currentPage % PAGINATION.navigatePages == 0) {
+                startPageIndex = parseInt((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
+            } else {
+                startPageIndex = Math.floor((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
+            }
+            let endPageIndex = Math.min(startPageIndex + PAGINATION.navigatePages, PAGINATION.pageList.length);
+
+            // 渲染分页代码
+            let paperHtml = template.render($("#paperTemplate").html(), {
+                paperList: PAGINATION.paperList.slice(startPaperIndex, endPaperIndex),
+                startPaperNumber: startPaperIndex + 1,
+
+                pageInfo: {
+                    firstPage: 1,
+                    lastPage: totalPage,
+                    pageList: PAGINATION.pageList.slice(startPageIndex, endPageIndex),
+
+                    previousPage: currentPage - 1,
+                    currentPage: currentPage,
+                    nextPage: currentPage + 1,
+
+                    pageSizeList: [10, 20, 50, 100],
+                    pageSize: PAGINATION.pageSize
+                }
+            });
+            $("#result").html(paperHtml);
+        }
+
         $(function () {
             // 版权信息
             let footerHtml = template.render($("#footerTemplate").html(), {
@@ -424,14 +537,28 @@
 
             // 搜索
             $("#search").click(function () {
-                search();
+                search(updatePaper);
             });
             $("#q").keydown(function (event) {
                 if (event.keyCode == 13) {
-                    search();
+                    search(updatePaper);
                 }
             });
 
+            // 选择pageSize
+            $("body").on("change", "#pageSizeSelect", function () {
+                let oldPageSize = PAGINATION.pageSize;
+                PAGINATION.pageSize = parseInt($(this).val());
+
+                if (PAGINATION.paperList.length <= oldPageSize 
+                    && PAGINATION.paperList.length <= PAGINATION.pageSize) {
+                    return ;
+                }
+
+                updatePaper();
+            });
+
+            // 常见问题
             $("#faq").click(function () {
                 let faqHtml = template.render($("#alertTemplate").html(), {
                     title: "常见问题",

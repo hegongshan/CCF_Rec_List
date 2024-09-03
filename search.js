@@ -1,3 +1,10 @@
+let PAGINATION = {
+    paperList: [],
+    pageList: [],
+    pageSize: 10,
+    navigatePages: 10
+};
+
 function isCategoryMatch(venueDBLPURL, categoryList) {
     let match = false;
     if (categoryList.length == 0) {
@@ -53,7 +60,7 @@ function isEmpty(str) {
     return !str || str.length === 0;
 }
 
-function doSearch(query, firstHit, pageSize, total, paperList, filter) {
+function doSearch(query, firstHit, pageSize, total, paperList, filter, success) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         q: query,
@@ -185,31 +192,25 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter) {
             }
             return a.title.localeCompare(b.title);
         });
+        PAGINATION.paperList = paperList;
 
-        let tips = template.render($("#responseTipsTemplate").html(), {
-            count: Object.keys(paperList).length,
-        });
-        $("#tips").html(tips);
-
-        let paperHtml = template.render($("#paperTemplate").html(), {
-            paperList: paperList,
-        });
-        $("#result").html(paperHtml);
+        // 执行回调函数
+        success();
     })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            let alertHtml = template.render($("#alertTemplate").html(), {
-                title: "提示信息",
-                message: "请求失败，请重新尝试！"
-            });
-            $("#alert").html(alertHtml);
-            $('#alert').modal();
-
-            // 当请求失败时，不要继续显示加载图片
-            $("#tips").empty();
+    .fail(function (jqXHR, textStatus, errorThrown) {
+        let alertHtml = template.render($("#alertTemplate").html(), {
+            title: "提示信息",
+            message: "请求失败，请重新尝试！"
         });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
+        // 当请求失败时，不要继续显示加载图片
+        $("#tips").empty();
+    });
 }
 
-function search() {
+function search(success) {
     let invalidClass = "is-invalid";
     let invalid = false;
 
@@ -330,7 +331,7 @@ function search() {
         }
     };
 
-    doSearch(query, firstHit, pageSize, total, paperList, filter);
+    doSearch(query, firstHit, pageSize, total, paperList, filter, success);
 }
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
@@ -410,14 +411,14 @@ function doQueryAbstract(
         $abstractTag.html(abstract);
         $loadingTips.empty();
     })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            let alertHtml = template.render($("#alertTemplate").html(), {
-                title: "提示信息",
-                message: "请求失败，请重新尝试！"
-            });
-            $("#alert").html(alertHtml);
-            $('#alert').modal();
-
-            $loadingTips.empty();
+    .fail(function (jqXHR, textStatus, errorThrown) {
+        let alertHtml = template.render($("#alertTemplate").html(), {
+            title: "提示信息",
+            message: "请求失败，请重新尝试！"
         });
+        $("#alert").html(alertHtml);
+        $('#alert').modal();
+
+        $loadingTips.empty();
+    });
 }
