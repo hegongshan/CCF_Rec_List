@@ -405,14 +405,15 @@
         }
 
         function updatePaper(currentPageStr = '1') {
-            if (PAGINATION.paperList.length == 0) {
-                return ;
-            }
-            
             let tips = template.render($("#responseTipsTemplate").html(), {
                 count: PAGINATION.paperList.length,
             });
             $("#tips").html(tips);
+
+            // 如果没有匹配的论文，则直接返回
+            if (PAGINATION.paperList.length == 0) {
+                return ;
+            }
 
             // currentPage从1开始，其索引为currentPage - 1
             let currentPage = parseInt(currentPageStr);
