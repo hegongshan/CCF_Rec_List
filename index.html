@@ -61,11 +61,11 @@
             border-radius: 4px;
         }
 
-        /* 相关链接 */
         .list-clear-style {
             list-style: none;
         }
 
+        /* 相关链接 */
         .list-clear-other {
             margin: 0;
             padding: 0;
@@ -79,6 +79,10 @@
         /* FAQ */
         .list li {
             margin-top: 5px;
+        }
+
+        .borderless {
+            border: none;
         }
 
         footer {
@@ -269,7 +273,10 @@
                     </a>
                 </li>
             {{/if}}
-
+                &nbsp;
+                <li class="page-item disabled">
+                    <span class="page-link borderless">每页</span>
+                </li>
                 <li class="page-item">
                     <select id="pageSizeSelect" class="custom-select">
                     {{each pageInfo.pageSizeList}}
@@ -281,6 +288,10 @@
                         {{/if}}
                     {{/each}}
                     </select>
+                </li>
+                &nbsp;
+                <li class="page-item disabled">
+                    <span class="page-link borderless">篇论文</span>
                 </li>
             </ul>
         </nav>
