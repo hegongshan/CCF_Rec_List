@@ -243,7 +243,7 @@
                 </li>
             {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" onclick="updatePaper('{{pageInfo.previousPage}}')">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Previous" onclick="updatePaperList('{{pageInfo.previousPage}}')">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -257,7 +257,7 @@
                 </li>
                 {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)" onclick="updatePaper('{{page}}')">{{page}}</a>
+                    <a class="page-link" href="javascript:void(0)" onclick="updatePaperList('{{page}}')">{{page}}</a>
                 </li>
                 {{/if}}
             {{/each}}
@@ -268,7 +268,7 @@
                 </li>
             {{else}}
                 <li class="page-item">
-                    <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="updatePaper('{{pageInfo.nextPage}}')">
+                    <a class="page-link" href="javascript:void(0)" aria-label="Next" onclick="updatePaperList('{{pageInfo.nextPage}}')">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -415,7 +415,7 @@
             $venue.selectpicker(selectpickerExtendedOptions);
         }
 
-        function updatePaper(currentPageStr = '1') {
+        function updatePaperList(currentPageStr = '1') {
             let tips = template.render($("#responseTipsTemplate").html(), {
                 count: PAGINATION.paperList.length,
             });
@@ -558,13 +558,13 @@
             $("#search").click(function () {
                 // 重置pageSize，避免影响不同查询
                 PAGINATION.pageSizeStr = "10";
-                search(updatePaper);
+                search(updatePaperList);
             });
             $("#q").keydown(function (event) {
                 // 重置pageSize，避免影响不同查询
                 PAGINATION.pageSizeStr = "10";
                 if (event.keyCode == 13) {
-                    search(updatePaper);
+                    search(updatePaperList);
                 }
             });
 
@@ -581,7 +581,7 @@
                     return;
                 }
 
-                updatePaper();
+                updatePaperList();
             });
 
             // 常见问题

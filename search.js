@@ -61,7 +61,7 @@ function isEmpty(str) {
     return !str || str.length === 0;
 }
 
-function doSearch(query, firstHit, pageSize, total, paperList, filter, success) {
+function doSearch(query, firstHit, pageSize, total, paperList, filter, fillPaperListCallback) {
     let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         q: query,
@@ -178,7 +178,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter, success) 
 
             // recursion
             if (firstHit + size < total) {
-                doSearch(query, firstHit + pageSize, pageSize, total, paperList, filter);
+                doSearch(query, firstHit + pageSize, pageSize, total, paperList, filter, fillPaperListCallback);
                 return;
             }
         }
@@ -195,8 +195,8 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter, success) 
         });
         PAGINATION.paperList = paperList;
 
-        // 执行回调函数
-        success();
+        // 执行回调函数，填充论文列表
+        fillPaperListCallback();
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         let alertHtml = template.render($("#alertTemplate").html(), {
@@ -211,7 +211,7 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter, success) 
     });
 }
 
-function search(success) {
+function search(fillPaperListCallback) {
     let invalidClass = "is-invalid";
     let invalid = false;
 
@@ -318,6 +318,7 @@ function search(success) {
     }
 
     let firstHit = 0;
+    // DBLP允许的最大值为1000
     let pageSize = 1000;
     let total = 0;
     let paperList = [];
@@ -332,7 +333,7 @@ function search(success) {
         }
     };
 
-    doSearch(query, firstHit, pageSize, total, paperList, filter, success);
+    doSearch(query, firstHit, pageSize, total, paperList, filter, fillPaperListCallback);
 }
 
 function queryAbstract(paperDOI, paperTitle = null, abstractSelector) {
