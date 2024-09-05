@@ -282,25 +282,17 @@
                     </a>
                 </li>
             {{/if}}
-                &nbsp;
-                <li class="page-item disabled">
-                    <span class="page-link borderless">每页</span>
-                </li>
                 <li class="page-item">
                     <select id="pageSizeSelect" class="custom-select">
                     {{each pageInfo.pageSizeList}}
                         {{set size = $value}}
                         {{if size == pageInfo.pageSizeStr}}
-                        <option value="{{size}}" selected>{{size}}</option>
+                        <option value="{{size}}" selected>{{size}}篇/页</option>
                         {{else}}
-                        <option value="{{size}}">{{size}}</option>
+                        <option value="{{size}}">{{size}}篇/页</option>
                         {{/if}}
                     {{/each}}
                     </select>
-                </li>
-                &nbsp;
-                <li class="page-item disabled">
-                    <span class="page-link borderless">篇论文</span>
                 </li>
             </ul>
         </nav>
@@ -599,12 +591,13 @@
                     title: "常见问题",
                     message: $("#faqTemplate").html()
                 });
-                $("#alert").html(faqHtml);
-                $('#alert').modal();
+                let $alert = $("#alert");
+                $alert.html(faqHtml);
+                $alert.modal();
             });
 
             // 回到顶部
-            $backToTopBtn = $("#backToTopBtn");
+            let $backToTopBtn = $("#backToTopBtn");
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 100) {
                     $backToTopBtn.fadeIn();
@@ -613,7 +606,7 @@
                 }
             });
             $backToTopBtn.click(function () {
-                $('html, body').animate({scrollTop : 0}, 300);
+                $("html, body").animate({scrollTop : 0}, 300);
                 return false;
             });
             $backToTopBtn.tooltip()
