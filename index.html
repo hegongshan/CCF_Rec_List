@@ -85,6 +85,14 @@
             border: none;
         }
 
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
         footer {
             text-align: center;
             margin-top: 30px;
@@ -167,6 +175,7 @@
         <div class="row">
             <div id="result" class="col-md-12"></div>
         </div>
+        <button id="backToTopBtn" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="回到顶部">↑</button>
         <div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
         <footer></footer>
     </div>
@@ -593,6 +602,21 @@
                 $("#alert").html(faqHtml);
                 $('#alert').modal();
             });
+
+            // 回到顶部
+            $backToTopBtn = $("#backToTopBtn");
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $backToTopBtn.fadeIn();
+                } else {
+                    $backToTopBtn.fadeOut();
+                }
+            });
+            $backToTopBtn.click(function () {
+                $('html, body').animate({scrollTop : 0}, 300);
+                return false;
+            });
+            $backToTopBtn.tooltip()
         });
     </script>
 </body>
