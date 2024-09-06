@@ -6,19 +6,15 @@ let PAGINATION = {
     navigatePages: 10
 };
 
-function isCategoryMatch(venueDBLPURL, categoryList) {
-    let match = false;
-    if (categoryList.length == 0) {
-        match = true;
-    } else {
-        for (let category of categoryList) {
-            if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
-                match = true;
-                break;
-            }
+if (categoryList.length == 0) {
+    match = true;
+} else {
+    for (let category of categoryList) {
+        if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
+            match = true;
+            break;
         }
     }
-    return match;
 }
 
 function isRankMatch(venueDBLPURL, rankList) {
