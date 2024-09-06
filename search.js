@@ -6,19 +6,15 @@ let PAGINATION = {
     navigatePages: 10
 };
 
-function isCategoryMatch(venueDBLPURL, categoryList) {
-    let match = false;
-    if (categoryList.length == 0) {
-        match = true;
-    } else {
-        for (let category of categoryList) {
-            if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
-                match = true;
-                break;
-            }
+if (categoryList.length == 0) {
+    match = true;
+} else {
+    for (let category of categoryList) {
+        if (CATEGORY_LIST[category].hasOwnProperty(venueDBLPURL)) {
+            match = true;
+            break;
         }
     }
-    return match;
 }
 
 function isTypeMatch(venueDBLPURL, typeList) {
@@ -198,17 +194,17 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter, fillPaper
         // 执行回调函数，填充论文列表
         fillPaperListCallback();
     })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        let alertHtml = template.render($("#alertTemplate").html(), {
-            title: "提示信息",
-            message: "请求失败，请重新尝试！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            let alertHtml = template.render($("#alertTemplate").html(), {
+                title: "提示信息",
+                message: "请求失败，请重新尝试！"
+            });
+            $("#alert").html(alertHtml);
+            $('#alert').modal();
 
-        // 当请求失败时，不要继续显示加载图片
-        $("#tips").empty();
-    });
+            // 当请求失败时，不要继续显示加载图片
+            $("#tips").empty();
+        });
 }
 
 function search(fillPaperListCallback) {
@@ -245,10 +241,12 @@ function search(fillPaperListCallback) {
     let isEndYearEmpty = isEmpty(endYearStr);
 
     function handleYear($year, index) {
-        let errorMsg = "年份必须大于0！";
+        let currentYear = new Date().getFullYear()
+        let errorMsg = "年份必须在1和当前年份之间" + currentYear + "之间！";
 
         let yearStr = $year.val().trim();
-        let isYearInvalid = !isEmpty(yearStr) && parseInt(yearStr) <= 0;
+        let yearVal = parseInt(yearStr);
+        let isYearInvalid = !isEmpty(yearStr) && (yearVal <= 0 || yearVal > currentYear) ;
         let $yearFeedback = $(".year-feedback").eq(index);
 
         if (isYearInvalid) {
@@ -271,7 +269,7 @@ function search(fillPaperListCallback) {
             && parseInt(startYearStr) > parseInt(endYearStr)) {
             $startYear.addClass(invalidClass);
             $endYear.addClass(invalidClass);
-            $(".year-feedback").text("开始年份必须≤结束年份！");
+            $(".year-feedback").eq(0).text("开始年份必须≤结束年份！");
 
             invalid = true;
         }
@@ -413,14 +411,14 @@ function doQueryAbstract(
         $abstractTag.html(abstract);
         $loadingTips.empty();
     })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        let alertHtml = template.render($("#alertTemplate").html(), {
-            title: "提示信息",
-            message: "请求失败，请重新尝试！"
-        });
-        $("#alert").html(alertHtml);
-        $('#alert').modal();
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            let alertHtml = template.render($("#alertTemplate").html(), {
+                title: "提示信息",
+                message: "请求失败，请重新尝试！"
+            });
+            $("#alert").html(alertHtml);
+            $('#alert').modal();
 
-        $loadingTips.empty();
-    });
+            $loadingTips.empty();
+        });
 }
