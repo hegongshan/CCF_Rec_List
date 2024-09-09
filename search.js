@@ -237,7 +237,7 @@ function search(fillPaperListCallback) {
 
     function handleYear($year, index) {
         let currentYear = new Date().getFullYear()
-        let errorMsg = "年份必须在1和当前年份之间" + currentYear + "之间！";
+        let errorMsg = `年份必须位于 (0, ${currentYear}] 区间内！`;
         let yearStr = $year.val().trim();
         let yearVal = parseInt(yearStr);
         let isYearInvalid = !isEmpty(yearStr) && (yearVal <= 0 || yearVal > currentYear);
