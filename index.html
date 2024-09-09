@@ -344,6 +344,35 @@
         // 全局变量
         let isDarkTheme = false;
 
+        function updateTheme() {   
+            let darkColor = "#87ceeb";
+            if (isDarkTheme) {
+                $("body").css({
+                    "background-color": "#333",
+                    "color": "#fff"
+                });
+                $(".btn-primary, .page-item.active .page-link").css({
+                    "background-color": darkColor,
+                    "border-color": darkColor
+                });
+                $(".badge-primary").css("background-color", darkColor);
+                $("a").css("color", darkColor);
+                $("a.badge-primary, a.dropdown-item").css("color", "");
+            } else {
+                // 清空黑色主题增加的css样式
+                $("body").css({
+                    "background-color": "",
+                    "color": ""
+                });
+                $(".btn-primary, .page-item.active .page-link").css({
+                    "background-color": "",
+                    "border-color": ""
+                });
+                $(".badge-primary").css("background-color", "");
+                $("a").css("color", "")
+            }
+        }
+
         function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
             let categoryVals = $("#category").val();
             let typeVals = $("#type").val();
@@ -409,35 +438,10 @@
             $venue.html(venueHtml);
             $venue.selectpicker("destroy");
             $venue.selectpicker(selectpickerExtendedOptions);
-        }
-
-        function updateTheme() {   
-            let darkColor = "#87ceeb";
-            if (isDarkTheme) {
-                $("body").css({
-                    "background-color": "#333",
-                    "color": "#fff"
-                });
-                $(".btn-primary, .page-item.active .page-link").css({
-                    "background-color": darkColor,
-                    "border-color": darkColor
-                });
-                $(".badge-primary").css("background-color", darkColor);
-                $("a").css("color", darkColor);
-                $("a.badge-primary, a.dropdown-item").css("color", "");
-            } else {
-                // 清空黑色主题增加的css样式
-                $("body").css({
-                    "background-color": "",
-                    "color": ""
-                });
-                $(".btn-primary, .page-item.active .page-link").css({
-                    "background-color": "",
-                    "border-color": ""
-                });
-                $(".badge-primary").css("background-color", "");
-                $("a").css("color", "")
-            }
+            // 更新主题样式
+            $venue.on("show.bs.select changed.bs.select", function (e, clickedIndex, isSelected, previousValue) {
+                updateTheme();
+            });
         }
 
         function updatePaperList(currentPageStr = '1') {
@@ -567,6 +571,9 @@
             });
             $("#themeDark").click(function () {
                 isDarkTheme = true;
+                updateTheme();
+            });
+            $category.add($type).add($rank).on("show.bs.select changed.bs.select", function (e, clickedIndex, isSelected, previousValue) {
                 updateTheme();
             });
 
