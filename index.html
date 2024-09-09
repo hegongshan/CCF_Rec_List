@@ -341,9 +341,28 @@
         </ol>
     </script>
     <script type="text/javascript">
-        // 全局变量
+        /* 
+         * -----------------------------------------------------------------------------
+         *                                  全局变量
+         * -----------------------------------------------------------------------------
+         */
+        // 主题切换变量
         let isDarkTheme = false;
 
+        // 分页变量
+        let pagination = {
+            paperList: [],
+            pageList: [],
+            pageSize: 10,
+            pageSizeStr: "10",
+            navigatePages: 10
+        };
+
+        /* 
+         * -----------------------------------------------------------------------------
+         *                                  自定义函数
+         * -----------------------------------------------------------------------------
+         */
         function updateTheme() {   
             let darkColor = "#87ceeb";
             if (isDarkTheme) {
@@ -446,12 +465,12 @@
 
         function updatePaperList(currentPageStr = '1') {
             let tips = template.render($("#responseTipsTemplate").html(), {
-                count: PAGINATION.paperList.length,
+                count: pagination.paperList.length,
             });
             $("#tips").html(tips);
 
             // 如果没有匹配的论文，则直接返回
-            if (PAGINATION.paperList.length == 0) {
+            if (pagination.paperList.length == 0) {
                 return;
             }
 
@@ -459,51 +478,57 @@
             let currentPage = parseInt(currentPageStr);
 
             // 显示全部的论文
-            if (PAGINATION.pageSizeStr == "All") {
-                PAGINATION.pageSize = PAGINATION.paperList.length;
+            if (pagination.pageSizeStr == "All") {
+                pagination.pageSize = pagination.paperList.length;
             } else {
-                PAGINATION.pageSize = parseInt(PAGINATION.pageSizeStr);
+                pagination.pageSize = parseInt(pagination.pageSizeStr);
             }
 
             // 计算总页数和页列表
-            let totalPage = Math.floor((PAGINATION.paperList.length + PAGINATION.pageSize - 1) / PAGINATION.pageSize);
-            PAGINATION.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
+            let totalPage = Math.floor((pagination.paperList.length + pagination.pageSize - 1) / pagination.pageSize);
+            pagination.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
 
             // 计算开始论文索引和结束论文索引
-            let startPaperIndex = (currentPage - 1) * PAGINATION.pageSize;
-            let endPaperIndex = Math.min(currentPage * PAGINATION.pageSize, PAGINATION.paperList.length);
+            let startPaperIndex = (currentPage - 1) * pagination.pageSize;
+            let endPaperIndex = Math.min(currentPage * pagination.pageSize, pagination.paperList.length);
 
             // 计算开始页码和结束页码
             let startPageIndex;
-            if (currentPage % PAGINATION.navigatePages == 0) {
-                startPageIndex = parseInt((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
+            if (currentPage % pagination.navigatePages == 0) {
+                startPageIndex = parseInt((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
             } else {
-                startPageIndex = Math.floor((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
+                startPageIndex = Math.floor((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
             }
-            let endPageIndex = Math.min(startPageIndex + PAGINATION.navigatePages, PAGINATION.pageList.length);
+            let endPageIndex = Math.min(startPageIndex + pagination.navigatePages, pagination.pageList.length);
 
             // 渲染分页代码
             let paperHtml = template.render($("#paperTemplate").html(), {
-                paperList: PAGINATION.paperList.slice(startPaperIndex, endPaperIndex),
+                paperList: pagination.paperList.slice(startPaperIndex, endPaperIndex),
                 startPaperNumber: startPaperIndex + 1,
 
                 pageInfo: {
                     firstPage: 1,
                     lastPage: totalPage,
-                    pageList: PAGINATION.pageList.slice(startPageIndex, endPageIndex),
+                    pageList: pagination.pageList.slice(startPageIndex, endPageIndex),
 
                     previousPage: currentPage - 1,
                     currentPage: currentPage,
                     nextPage: currentPage + 1,
 
                     pageSizeList: ["10", "20", "50", "100", "All"],
-                    pageSizeStr: PAGINATION.pageSizeStr // 处理All
+                    pageSizeStr: pagination.pageSizeStr // 处理All
                 }
             });
             $("#result").html(paperHtml);
 
             // 更新主题样式
             updateTheme();
+        }
+        
+        // 论文检索回调函数
+        function fillPaperListCallback(paperList) {
+            pagination.paperList = paperList;
+            updatePaperList();
         }
 
         $(function () {
@@ -588,27 +613,27 @@
             // 搜索
             $("#search").click(function () {
                 // 重置pageSize，避免影响不同查询
-                PAGINATION.pageSizeStr = "10";
-                search(updatePaperList);
+                pagination.pageSizeStr = "10";
+                search(fillPaperListCallback);
             });
             $("#q").keydown(function (event) {
                 // 重置pageSize，避免影响不同查询
-                PAGINATION.pageSizeStr = "10";
+                pagination.pageSizeStr = "10";
                 if (event.keyCode == 13) {
-                    search(updatePaperList);
+                    search(fillPaperListCallback);
                 }
             });
 
             // 选择pageSize
             $("body").on("change", "#pageSizeSelect", function () {
-                let oldPageSize = PAGINATION.pageSize;
+                let oldPageSize = pagination.pageSize;
 
-                PAGINATION.pageSizeStr = $(this).val();
+                pagination.pageSizeStr = $(this).val();
 
                 // 避免不必要的页面更新操作
-                if (PAGINATION.paperList.length <= oldPageSize
-                    && (PAGINATION.pageSizeStr == "All"
-                        || PAGINATION.paperList.length <= parseInt(PAGINATION.pageSizeStr))) {
+                if (pagination.paperList.length <= oldPageSize
+                    && (pagination.pageSizeStr == "All"
+                        || pagination.paperList.length <= parseInt(pagination.pageSizeStr))) {
                     return;
                 }
 

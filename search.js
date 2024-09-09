@@ -1,11 +1,3 @@
-let PAGINATION = {
-    paperList: [],
-    pageList: [],
-    pageSize: 10,
-    pageSizeStr: "10",
-    navigatePages: 10
-};
-
 function isCategoryMatch(venueDBLPURL, categoryList) {
     let match = false;
     if (categoryList.length == 0) {
@@ -193,10 +185,9 @@ function doSearch(query, firstHit, pageSize, total, paperList, filter, fillPaper
             }
             return a.title.localeCompare(b.title);
         });
-        PAGINATION.paperList = paperList;
 
         // 执行回调函数，填充论文列表
-        fillPaperListCallback();
+        fillPaperListCallback(paperList);
     })
         .fail(function (jqXHR, textStatus, errorThrown) {
             let alertHtml = template.render($("#alertTemplate").html(), {
