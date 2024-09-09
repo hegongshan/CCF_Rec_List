@@ -16,6 +16,10 @@
             font-size: 1rem;
         }
 
+        .row {
+            margin-top: 5px;
+        }
+
         .red-text {
             color: #f00;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
@@ -348,6 +352,7 @@
          */
         // 主题切换变量
         let isDarkTheme = false;
+        let darkColor = "#87ceeb";
 
         // 分页变量
         let pagination = {
@@ -363,7 +368,26 @@
          *                                  自定义函数
          * -----------------------------------------------------------------------------
          */
-        function updateTheme() {   
+
+        function updateModalTheme() {
+            if (isDarkTheme) {
+                $(".modal-content").css({
+                    "background-color": "#555",
+                    "color": "#fff"
+                });
+                $("button.close").css("color", "#fff");
+                $(".modal-footer .btn-primary").css("background-color", darkColor);
+            } else {
+                $(".modal-content").css({
+                    "background-color": "",
+                    "color": ""
+                });
+                $("button.close").css("color", "");
+                $(".modal-footer .btn-primary").css("background-color", "");
+            }
+        }
+
+        function updateTheme() {
             let darkColor = "#87ceeb";
             if (isDarkTheme) {
                 $("body").css({
@@ -388,7 +412,7 @@
                     "border-color": ""
                 });
                 $(".badge-primary").css("background-color", "");
-                $("a").css("color", "")
+                $("a").css("color", "");
             }
         }
 
@@ -400,6 +424,10 @@
 
             // 如果三者均没有值，则禁用venue
             if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
+                // 清空venue的值，避免影响搜索结果
+                if ($venue.val().length > 0) {
+                    $venue.selectpicker("deselectAll");
+                }
                 $venue.prop("disabled", true);
                 $venue.selectpicker("destroy");
                 $venue.selectpicker(selectpickerExtendedOptions);
@@ -650,6 +678,10 @@
                 $alert.html(faqHtml);
                 $alert.modal();
             });
+
+            $("#alert").on("show.bs.modal", function () {
+                updateModalTheme();
+            })
 
             // 回到顶部
             let $backToTopBtn = $("#backToTopBtn");
