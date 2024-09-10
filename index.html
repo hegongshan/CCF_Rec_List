@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="./dark-theme.css">
     <style type="text/css">
         #app {
             font-size: 1rem;
@@ -350,10 +351,6 @@
          *                                  全局变量
          * -----------------------------------------------------------------------------
          */
-        // 主题切换变量
-        let isDarkTheme = false;
-        let darkColor = "#87ceeb";
-
         // 分页变量
         let pagination = {
             paperList: [],
@@ -368,53 +365,6 @@
          *                                  自定义函数
          * -----------------------------------------------------------------------------
          */
-        function updateModalTheme() {
-            if (isDarkTheme) {
-                $(".modal-content").css({
-                    "background-color": "#555",
-                    "color": "#fff"
-                });
-                $("button.close").css("color", "#fff");
-                $(".modal-footer .btn-primary").css("background-color", darkColor);
-            } else {
-                $(".modal-content").css({
-                    "background-color": "",
-                    "color": ""
-                });
-                $("button.close").css("color", "");
-                $(".modal-footer .btn-primary").css("background-color", "");
-            }
-        }
-
-        function updateTheme() {
-            let darkColor = "#87ceeb";
-            if (isDarkTheme) {
-                $("body").css({
-                    "background-color": "#333",
-                    "color": "#fff"
-                });
-                $(".btn-primary, .page-item.active .page-link").css({
-                    "background-color": darkColor,
-                    "border-color": darkColor
-                });
-                $(".badge-primary").css("background-color", darkColor);
-                $("a").css("color", darkColor);
-                $("a.badge-primary, a.dropdown-item").css("color", "");
-            } else {
-                // 清空黑色主题增加的css样式
-                $("body").css({
-                    "background-color": "",
-                    "color": ""
-                });
-                $(".btn-primary, .page-item.active .page-link").css({
-                    "background-color": "",
-                    "border-color": ""
-                });
-                $(".badge-primary").css("background-color", "");
-                $("a").css("color", "");
-            }
-        }
-
         function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
             let categoryVals = $("#category").val();
             let typeVals = $("#type").val();
@@ -543,9 +493,6 @@
                 }
             });
             $("#result").html(paperHtml);
-
-            // 更新主题样式
-            updateTheme();
         }
         
         // 论文检索回调函数
@@ -614,16 +561,10 @@
 
             // 主题切换
             $("#themeLight").click(function () {
-                isDarkTheme = false;
-                updateTheme();
+                $("body").removeClass("dark-theme");
             });
             $("#themeDark").click(function () {
-                isDarkTheme = true;
-                updateTheme();
-            });
-            // 更新bootstrap-select的样式
-            $("body").on("DOMNodeInserted", ".bootstrap-select", function () {
-                updateTheme();
+                $("body").addClass("dark-theme");
             });
 
             // 添加和删除新关键词
@@ -674,10 +615,6 @@
                 $alert.html(faqHtml);
                 $alert.modal();
             });
-
-            $("#alert").on("show.bs.modal", function () {
-                updateModalTheme();
-            })
 
             // 回到顶部
             let $backToTopBtn = $("#backToTopBtn");

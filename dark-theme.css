@@ -1,0 +1,72 @@
+/* 黑色主题 */
+:root {
+    --dark-main-color: #fff;
+    --dark-blue-color: #87ceeb;
+}
+
+.dark-theme {
+    background-color: #333;
+    color: var(--dark-main-color);
+}
+
+.dark-theme .form-control, 
+.dark-theme .bootstrap-select .btn-light,
+.dark-theme .bootstrap-select .dropdown-menu {
+    background-color: #444;
+    color: var(--dark-main-color);
+}
+
+.dark-theme a, .dark-theme .bootstrap-select .check-mark {
+    color: var(--dark-blue-color);
+}
+
+.dark-theme a.dropdown-item {
+    color: #333;
+}
+
+/* 样式来自于Bootstrap .btn-light */
+.dark-theme .btn-primary {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.dark-theme .btn-primary:hover {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+.dark-theme .btn-primary.foucs, .dark-theme .btn-primary:foucs {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+    box-shadow: 0 0 0 .2rem rgba(216, 217, 219, .5)
+}
+
+/* 样式来自于Bootstrap .badge-light */
+.dark-theme .badge-primary {
+    color: #212529;
+    background-color: #f8f9fa;
+}
+.dark-theme a.badge-primary.focus, .dark-theme a.badge-primary:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(248, 249, 250, .5);
+}
+.dark-theme a.badge-primary:focus, .dark-theme a.badge-primary:hover {
+    color: #212529;
+    background-color: #dae0e5;
+}
+
+/* 分页 */
+.dark-theme .page-item.active .page-link {
+    background-color: var(--dark-blue-color);
+    border-color: var(--dark-blue-color);
+}
+
+/* 模态框 */
+.dark-theme .modal-content {
+    background-color: #555;
+    color: var(--dark-main-color);
+}
+.dark-theme button.close {
+    color: var(--dark-main-color);
+}
