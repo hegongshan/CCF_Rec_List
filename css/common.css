@@ -1,0 +1,95 @@
+#app {
+    font-size: 1rem;
+}
+
+.row {
+    margin-top: 5px;
+}
+
+.red-text {
+    color: #f00;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* 将文本分散对齐 */
+.dist-align {
+    text-align: justify;
+    text-align-last: justify;
+    text-justify: distribute-all-lines;
+}
+
+/* 在小屏幕上将文本左对齐 */
+@media (max-width: 768px) {
+    .dist-align {
+        text-align: left;
+    }
+}
+
+/* 在bootstrap-select渲染结束前，不要显示原始的select */
+select.form-control {
+    display: none !important;
+}
+
+.keyword {
+    margin: 5px 0;
+}
+
+/* 当文本太长时，避免溢出 */
+.text-wrap {
+    white-space: normal;
+    word-break: break-all;
+    text-align: left;
+}
+
+/* 论文列表 */
+#paperList>li {
+    line-height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.abstract-link {
+    text-decoration: underline;
+    font-family: bold;
+    color: inherit !important;
+}
+
+.list-clear-style {
+    list-style: none;
+}
+
+/* 相关链接 */
+.list-clear-other {
+    margin: 0;
+    padding: 0;
+}
+
+.list-clear-other li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* FAQ */
+.list li {
+    margin-top: 5px;
+}
+
+.borderless {
+    border: none;
+}
+
+#backToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+}

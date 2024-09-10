@@ -8,101 +8,13 @@
     <meta name="description" content="Description">
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- 外部css -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="./dark-theme.css">
-    <style type="text/css">
-        #app {
-            font-size: 1rem;
-        }
-
-        .row {
-            margin-top: 5px;
-        }
-
-        .red-text {
-            color: #f00;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-        }
-
-        /* 将文本分散对齐 */
-        .dist-align {
-            text-align: justify;
-            text-align-last: justify;
-            text-justify: distribute-all-lines;
-        }
-
-        /* 在小屏幕上将文本左对齐 */
-        @media (max-width: 768px) {
-            .dist-align {
-                text-align: left;
-            }
-        }
-
-        /* 在bootstrap-select渲染结束前，不要显示原始的select */
-        select {
-            display: none;
-        }
-
-        .keyword {
-            margin: 5px 0;
-        }
-
-        /* 当文本太长时，避免溢出 */
-        .text-wrap {
-            white-space: normal;
-            word-break: break-all;
-            text-align: left;
-        }
-
-        /* 论文列表 */
-        #paperList>li {
-            line-height: 40px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            padding-left: 20px;
-            border: 1px solid black;
-            border-radius: 4px;
-        }
-
-        .list-clear-style {
-            list-style: none;
-        }
-
-        /* 相关链接 */
-        .list-clear-other {
-            margin: 0;
-            padding: 0;
-        }
-
-        .list-clear-other li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        /* FAQ */
-        .list li {
-            margin-top: 5px;
-        }
-
-        .borderless {
-            border: none;
-        }
-
-        #backToTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
+    <!-- 自定义css -->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/dark-theme.css">
 </head>
 
 <body>
@@ -184,12 +96,16 @@
         <div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
         <footer></footer>
     </div>
+    <!-- 外部依赖 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-    <script src="ccf_rec_list.js"></script>
-    <script src="search.js"></script>
+    <!-- 自定义脚本 -->
+    <script src="./js/ccf_rec_list.js"></script>
+    <script src="./js/search.js"></script>
+    <script src="./js/index.js"></script>
+    <!-- 模板信息 -->
     <script id="responseTipsTemplate" type="text/html">
         共匹配到<strong class="red-text">{{count}}</strong>条记录
     </script>
@@ -239,10 +155,9 @@
                 {{paper.venue}}'{{paper.year}}, 
                 <a href="{{paper.url}}">URL</a>
                 <br/>
-                <a style="text-decoration:underline;font-family:bold;" 
-                    onclick="queryAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
+                <a class="abstract-link" onclick="fillAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
                 <br/>
-                <span id="{{paper.abstractId}}tips"></span>
+                <span id="{{paper.abstractId}}Tips"></span>
                 <p id="{{paper.abstractId}}"></p>
             </li>
         {{/each}}
@@ -310,7 +225,7 @@
         Copyright &copy; {{year.start}} &minus; {{year.current}} Gongshan He and Zhihai He All Rights Reserved.
     </script>
     <script id="loadingTipsTemplate" type="text/html">
-        <img src="loading.gif" width="30" height="30" style="vertical-align: middle;"/>
+        <img src="./img/loading.gif" width="30" height="30" style="vertical-align: middle;"/>
     </script>
     <script id="alertTemplate" type="text/html">
         <div class="modal-dialog">
@@ -344,293 +259,6 @@
                 答：当使用多个关键词进行查询时，OR的优先级更高。换句话说，"A" AND "B" OR "C"实际上是"A" AND ("B" OR "C")。
             </li>
         </ol>
-    </script>
-    <script type="text/javascript">
-        /* 
-         * -----------------------------------------------------------------------------
-         *                                  全局变量
-         * -----------------------------------------------------------------------------
-         */
-        // 分页变量
-        let pagination = {
-            paperList: [],
-            pageList: [],
-            pageSize: 10,
-            pageSizeStr: "10",
-            navigatePages: 10
-        };
-
-        /* 
-         * -----------------------------------------------------------------------------
-         *                                  自定义函数
-         * -----------------------------------------------------------------------------
-         */
-        function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
-            let categoryVals = $("#category").val();
-            let typeVals = $("#type").val();
-            let rankVals = $("#rank").val();
-            let $venue = $("#venue");
-
-            // 如果三者均没有值，则禁用venue
-            if (categoryVals.length == 0 && typeVals.length == 0 && rankVals.length == 0) {
-                // 清空venue的值，避免影响搜索结果
-                if ($venue.val().length > 0) {
-                    $venue.selectpicker("deselectAll");
-                }
-                $venue.prop("disabled", true);
-                $venue.selectpicker("destroy");
-                $venue.selectpicker(selectpickerExtendedOptions);
-                return;
-            }
-
-            // 如果该元素当前和之前均没有值，则无需更新venue
-            if ($(currentSelector).val().length == 0 && previousVals[currentSelector].length == 0) {
-                return;
-            }
-
-            // 更新上一次选中的值
-            previousVals[currentSelector] = $(currentSelector).val();
-
-            // 清空列表
-            $venue.prop("disabled", false);
-            $venue.empty();
-
-            // 重新填充列表
-            let venueList = [];
-            let categoryList = {};
-            if (categoryVals.length == 0) {
-                categoryList = CATEGORY_LIST;
-            } else {
-                // 将选择的分类转换为JSON对象
-                categoryVals.forEach(function (element, index) {
-                    categoryList[element] = "";
-                });
-            }
-            // 根据分类过滤
-            for (let category in categoryList) {
-                for (let venueDBLPUrl in CATEGORY_LIST[category]) {
-                    // 根据类型过滤
-                    if (!isTypeMatch(venueDBLPUrl, typeVals)) {
-                        continue;
-                    }
-
-                    // 根据级别过滤
-                    if (!isRankMatch(venueDBLPUrl, rankVals)) {
-                        continue;
-                    }
-
-                    venueList.push({
-                        url: venueDBLPUrl,
-                        name: CATEGORY_LIST[category][venueDBLPUrl].venue,
-                        type: venueDBLPUrl.startsWith("journals") ? "期刊" : "会议",
-                        rank: CATEGORY_LIST[category][venueDBLPUrl].rank
-                    });
-                }
-            }
-
-            let venueHtml = template.render($("#venueTemplate").html(), {
-                venueList: venueList
-            });
-            $venue.html(venueHtml);
-            $venue.selectpicker("destroy");
-            $venue.selectpicker(selectpickerExtendedOptions);
-        }
-
-        function updatePaperList(currentPageStr = '1') {
-            let tips = template.render($("#responseTipsTemplate").html(), {
-                count: pagination.paperList.length,
-            });
-            $("#tips").html(tips);
-
-            // 如果没有匹配的论文，则直接返回
-            if (pagination.paperList.length == 0) {
-                return;
-            }
-
-            // currentPage从1开始，其索引为currentPage - 1
-            let currentPage = parseInt(currentPageStr);
-
-            // 显示全部的论文
-            if (pagination.pageSizeStr == "All") {
-                pagination.pageSize = pagination.paperList.length;
-            } else {
-                pagination.pageSize = parseInt(pagination.pageSizeStr);
-            }
-
-            // 计算总页数和页列表
-            let totalPage = Math.floor((pagination.paperList.length + pagination.pageSize - 1) / pagination.pageSize);
-            pagination.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
-
-            // 计算开始论文索引和结束论文索引
-            let startPaperIndex = (currentPage - 1) * pagination.pageSize;
-            let endPaperIndex = Math.min(currentPage * pagination.pageSize, pagination.paperList.length);
-
-            // 计算开始页码和结束页码
-            let startPageIndex;
-            if (currentPage % pagination.navigatePages == 0) {
-                startPageIndex = parseInt((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
-            } else {
-                startPageIndex = Math.floor((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
-            }
-            let endPageIndex = Math.min(startPageIndex + pagination.navigatePages, pagination.pageList.length);
-
-            // 渲染分页代码
-            let paperHtml = template.render($("#paperTemplate").html(), {
-                paperList: pagination.paperList.slice(startPaperIndex, endPaperIndex),
-                startPaperNumber: startPaperIndex + 1,
-
-                pageInfo: {
-                    firstPage: 1,
-                    lastPage: totalPage,
-                    pageList: pagination.pageList.slice(startPageIndex, endPageIndex),
-
-                    previousPage: currentPage - 1,
-                    currentPage: currentPage,
-                    nextPage: currentPage + 1,
-
-                    pageSizeList: ["10", "20", "50", "100", "All"],
-                    pageSizeStr: pagination.pageSizeStr // 处理All
-                }
-            });
-            $("#result").html(paperHtml);
-        }
-        
-        // 论文检索回调函数
-        function fillPaperListCallback(paperList) {
-            pagination.paperList = paperList;
-            updatePaperList();
-        }
-
-        $(function () {
-            // 版权信息
-            let footerHtml = template.render($("#footerTemplate").html(), {
-                year: {
-                    start: 2022,
-                    current: new Date().getFullYear()
-                },
-            });
-            $("footer").html(footerHtml);
-
-            let $category = $("#category");
-            let $type = $("#type");
-            let $rank = $("#rank");
-            let $venue = $("#venue");
-
-            // 填充分类
-            let categoryList = [];
-            for (let venueDBLPUrl in CATEGORY_LIST) {
-                categoryList.push({ "name": venueDBLPUrl });
-            }
-            let categoryHtml = template.render($("#categoryTemplate").html(), {
-                categoryList: categoryList,
-            });
-            $category.html(categoryHtml);
-
-            // bootstrap-select初始化
-            let selectpickerOptions = {
-                actionsBox: true,
-                selectAllText: "全选",
-                deselectAllText: "取消全选",
-                noneResultsText: "未找到匹配的结果"
-            };
-            let selectpickerExtendedOptions = Object.assign({}, selectpickerOptions, {
-                liveSearch: true,
-                selectedTextFormat: "count > 3",
-                countSelectedText: "选择了{0}项"
-            });
-            $category.selectpicker(selectpickerExtendedOptions);
-            $type.selectpicker(selectpickerOptions);
-            $rank.selectpicker(selectpickerOptions);
-            $venue.prop("disabled", true);
-            $venue.selectpicker(selectpickerExtendedOptions);
-
-            var previousVals = {
-                "#category": [],
-                "#type": [],
-                "#rank": []
-            };
-            $category.on("hidden.bs.select", function () {
-                updateVenue("#category", previousVals, selectpickerExtendedOptions);
-            });
-            $type.on("hidden.bs.select", function () {
-                updateVenue("#type", previousVals, selectpickerExtendedOptions);
-            });
-            $rank.on("hidden.bs.select", function () {
-                updateVenue("#rank", previousVals, selectpickerExtendedOptions);
-            });
-
-            // 主题切换
-            $("#themeLight").click(function () {
-                $("body").removeClass("dark-theme");
-            });
-            $("#themeDark").click(function () {
-                $("body").addClass("dark-theme");
-            });
-
-            // 添加和删除新关键词
-            $("#addKeyword").click(function () {
-                $(".custom-switch").before($("#keywordTemplate").html());
-            });
-            $("body").on("click", ".remove-keyword", function () {
-                $(this).parent().parent().remove();
-            });
-
-            // 搜索
-            $("#search").click(function () {
-                // 重置pageSize，避免影响不同查询
-                pagination.pageSizeStr = "10";
-                search(fillPaperListCallback);
-            });
-            $("#q").keydown(function (event) {
-                // 重置pageSize，避免影响不同查询
-                pagination.pageSizeStr = "10";
-                if (event.keyCode == 13) {
-                    search(fillPaperListCallback);
-                }
-            });
-
-            // 选择pageSize
-            $("body").on("change", "#pageSizeSelect", function () {
-                let oldPageSize = pagination.pageSize;
-
-                pagination.pageSizeStr = $(this).val();
-
-                // 避免不必要的页面更新操作
-                if (pagination.paperList.length <= oldPageSize
-                    && (pagination.pageSizeStr == "All"
-                        || pagination.paperList.length <= parseInt(pagination.pageSizeStr))) {
-                    return;
-                }
-
-                updatePaperList();
-            });
-
-            // 常见问题
-            $("#faq").click(function () {
-                let faqHtml = template.render($("#alertTemplate").html(), {
-                    title: "常见问题",
-                    message: $("#faqTemplate").html()
-                });
-                let $alert = $("#alert");
-                $alert.html(faqHtml);
-                $alert.modal();
-            });
-
-            // 回到顶部
-            let $backToTopBtn = $("#backToTopBtn");
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 100) {
-                    $backToTopBtn.fadeIn();
-                } else {
-                    $backToTopBtn.fadeOut();
-                }
-            });
-            $backToTopBtn.click(function () {
-                $("html, body").animate({scrollTop : 0}, 300);
-                return false;
-            });
-            $backToTopBtn.tooltip()
-        });
     </script>
 </body>
 
