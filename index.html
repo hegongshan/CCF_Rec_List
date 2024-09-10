@@ -368,7 +368,6 @@
          *                                  自定义函数
          * -----------------------------------------------------------------------------
          */
-
         function updateModalTheme() {
             if (isDarkTheme) {
                 $(".modal-content").css({
@@ -480,15 +479,11 @@
             }
 
             let venueHtml = template.render($("#venueTemplate").html(), {
-                venueList: venueList,
+                venueList: venueList
             });
             $venue.html(venueHtml);
             $venue.selectpicker("destroy");
             $venue.selectpicker(selectpickerExtendedOptions);
-            // 更新主题样式
-            $venue.on("show.bs.select changed.bs.select", function (e, clickedIndex, isSelected, previousValue) {
-                updateTheme();
-            });
         }
 
         function updatePaperList(currentPageStr = '1') {
@@ -626,7 +621,8 @@
                 isDarkTheme = true;
                 updateTheme();
             });
-            $category.add($type).add($rank).on("show.bs.select changed.bs.select", function (e, clickedIndex, isSelected, previousValue) {
+            // 更新bootstrap-select的样式
+            $("body").on("DOMNodeInserted", ".bootstrap-select", function () {
                 updateTheme();
             });
 
