@@ -321,6 +321,10 @@ function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
     });
 }
 
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 $(function () {
     // 版权信息
     let footerHtml = template.render($("#footerTemplate").html(), {
@@ -443,7 +447,9 @@ $(function () {
     });
     $backToTopBtn.click(function () {
         $("html, body").animate({ scrollTop: 0 }, 300);
-        return false;
     });
-    $backToTopBtn.tooltip();
+    // 不要在移动端展示提示框
+    if (!isMobileDevice()) {
+        $backToTopBtn.tooltip({trigger: "hover"});
+    }
 });
