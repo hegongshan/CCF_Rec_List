@@ -327,13 +327,13 @@ function isMobileDevice() {
 
 $(function () {
     // 版权信息
-    let footerHtml = template.render($("#footerTemplate").html(), {
+    let footerHtml = template.render($("#copyrightTemplate").html(), {
         year: {
             start: 2022,
             current: new Date().getFullYear()
         },
     });
-    $("footer").html(footerHtml);
+    $("#copyright").html(footerHtml);
 
     let $category = $("#category");
     let $type = $("#type");
