@@ -87,10 +87,12 @@ let ARCH_PDC_SS = {
     },
     "journals/pc": {
         "venue": "Parallel Computing",
+        "fullname": "Parallel Computing",
         "rank": "B"
     },
     "journals/pe": {
         "venue": "Performance Evaluation: An International Journal",
+        "fullname": "Performance Evaluation: An International Journal",
         "rank": "B"
     },
 
@@ -102,6 +104,7 @@ let ARCH_PDC_SS = {
     },
     "journals/concurrency": {
         "venue": "Concurrency and Computation: Practice and Experience",
+        "fullname": "Concurrency and Computation: Practice and Experience",
         "rank": "C"
     },
     "journals/dc": {
@@ -542,6 +545,7 @@ let CN = {
     // Rank C
     "journals/adhoc": {
         "venue": "Ad hoc Networks",
+        "fullname": "Ad hoc Networks",
         "rank": "C"
     },
     "journals/comcom": {
@@ -556,6 +560,7 @@ let CN = {
     },
     "journals/iet-com": {
         "venue": "IET Communications",
+        "fullname": "IET Communications",
         "rank": "C"
     },
     "journals/jnca": {
@@ -570,6 +575,7 @@ let CN = {
     },
     "journals/networks": {
         "venue": "Networks",
+        "fullname": "Networks",
         "rank": "C"
     },
     "journals/ppna": {
@@ -584,6 +590,7 @@ let CN = {
     },
     "journals/winet": {
         "venue": "Wireless Networks",
+        "fullname": "Wireless Networks",
         "rank": "C"
     },
     "journals/iotj": {
@@ -795,6 +802,7 @@ let NIS = {
     },
     "journals/joc": {
         "venue": "Journal of Cryptology",
+        "fullname": "Journal of Cryptology",
         "rank": "A"
     },
 
@@ -806,10 +814,12 @@ let NIS = {
     },
     "journals/compsec": {
         "venue": "Computers & Security",
+        "fullname": "Computers & Security",
         "rank": "B"
     },
     "journals/dcc": {
         "venue": "Designs,Codes and Cryptography",
+        "fullname": "Designs, Codes and Cryptography",
         "rank": "B"
     },
     "journals/jcs": {
@@ -826,10 +836,12 @@ let NIS = {
     },
     "journals/ejisec": {
         "venue": "EURASIP Journal on Information Security",
+        "fullname": "EURASIP Journal on Information Security",
         "rank": "C"
     },
     "journals/iet-ifs": {
         "venue": "IET Information Security",
+        "fullname": "IET Information Security",
         "rank": "C"
     },
     "journals/imcs": {
@@ -859,6 +871,7 @@ let NIS = {
     },
     "journals/cybersec": {
         "venue": "Cybersecurity",
+        "fullname": "Cybersecurity",
         "rank": "C"
     },
 
@@ -1143,6 +1156,7 @@ let SE_SS_PL = {
     },
     "journals/smr": {
         "venue": "Journal of Software: Evolution and Process",
+        "fullname": "Journal of Software: Evolution and Process",
         "rank": "B"
     },
     "journals/jss": {
@@ -1577,6 +1591,7 @@ let DB_DM_CR = {
     },
     "journals/geoinformatica": {
         "venue": "GeoInformatica",
+        "fullname": "GeoInformatica",
         "rank": "B"
     },
     "journals/ipm": {
@@ -1586,6 +1601,7 @@ let DB_DM_CR = {
     },
     "journals/isci": {
         "venue": "Information Sciences",
+        "fullname": "Information Sciences",
         "rank": "B"
     },
     "journals/is": {
@@ -1993,6 +2009,7 @@ let CST = {
     },
     "journals/mst": {
         "venue": "Theory of Computing Systems",
+        "fullname": "Theory of Computing Systems",
         "rank": "C"
     },
 
@@ -2047,6 +2064,7 @@ let CST = {
     },
     "conf/cade": {
         "venue": "International Conference on Automated Deduction/International Joint Conference on Automated Reasoning",
+        "fullname": "International Conference on Automated Deduction/International Joint Conference on Automated Reasoning",
         "rank": "B"
     },
     "conf/concur": {
@@ -2480,6 +2498,7 @@ let AI = {
     },
     "journals/coling": {
         "venue": "Computational Linguistics",
+        "fullname": "Computational Linguistics",
         "rank": "B"
     },
     "journals/cviu": {
@@ -2494,6 +2513,7 @@ let AI = {
     },
     "journals/ec": {
         "venue": "Evolutionary Computation",
+        "fullname": "Evolutionary Computation",
         "rank": "B"
     },
     "journals/taffco": {
@@ -2508,6 +2528,7 @@ let AI = {
     },
     "journals/tcyb": {
         "venue": "IEEE Transactions on Cybernetics",
+        "fullname": "IEEE Transactions on Cybernetics",
         "rank": "B"
     },
     "journals/tec": {
@@ -2537,19 +2558,23 @@ let AI = {
     },
     "journals/jar": {
         "venue": "Journal of Automated Reasoning",
+        "fullname": "Journal of Automated Reasoning",
         "rank": "B"
     },
     // Journal of Speech, Language, and Hearing Research, http://jslhr.pubs.asha.org/
     "journals/ml": {
         "venue": "Machine Learning",
+        "fullname": "Machine Learning",
         "rank": "B"
     },
     "journals/neco": {
         "venue": "Neural Computation",
+        "fullname": "Neural Computation",
         "rank": "B"
     },
     "journals/nn": {
         "venue": "Neural Networks",
+        "fullname": "Neural Networks",
         "rank": "B"
     },
     "journals/par": {
@@ -2571,6 +2596,7 @@ let AI = {
     },
     "journals/apin": {
         "venue": "Applied Intelligence",
+        "fullname": "Applied Intelligence",
         "rank": "C"
     },
     "journals/artmed": {
@@ -2580,18 +2606,22 @@ let AI = {
     },
     "journals/alife": {
         "venue": "Artificial Life",
+        "fullname": "Artificial Life",
         "rank": "C"
     },
     "journals/ci": {
         "venue": "Computational Intelligence",
+        "fullname": "Computational Intelligence",
         "rank": "C"
     },
     "journals/csl": {
         "venue": "Computer Speech & Language",
+        "fullname": "Computer Speech & Language",
         "rank": "C"
     },
     "journals/connection": {
         "venue": "Connection Science",
+        "fullname": "Connection Science",
         "rank": "C"
     },
     "journals/dss": {
@@ -2606,6 +2636,7 @@ let AI = {
     },
     "journals/es": {
         "venue": "Expert Systems",
+        "fullname": "Expert Systems",
         "rank": "C"
     },
     "journals/eswa": {
@@ -2615,6 +2646,7 @@ let AI = {
     },
     "journals/fss": {
         "venue": "Fuzzy Sets and Systems",
+        "fullname": "Fuzzy Sets and Systems",
         "rank": "C"
     },
     "journals/tciaig": {
@@ -2629,6 +2661,7 @@ let AI = {
     },
     "journals/iet-spr": {
         "venue": "IET Signal Processing",
+        "fullname": "IET Signal Processing",
         "rank": "C"
     },
     "journals/ivc": {
@@ -2683,14 +2716,17 @@ let AI = {
     },
     "journals/mt": {
         "venue": "Machine Translation",
+        "fullname": "Machine Translation",
         "rank": "C"
     },
     "journals/mva": {
         "venue": "Machine Vision and Applications",
+        "fullname": "Machine Vision and Applications",
         "rank": "C"
     },
     "journals/nc": {
         "venue": "Natural Computing",
+        "fullname": "Natural Computing",
         "rank": "C"
     },
     "journals/nle": {
@@ -2710,6 +2746,7 @@ let AI = {
     },
     "journals/ijon": {
         "venue": "Neurocomputing",
+        "fullname": "Neurocomputing",
         "rank": "C"
     },
     "journals/paa": {
@@ -2724,6 +2761,7 @@ let AI = {
     },
     "journals/soco": {
         "venue": "Soft Computing",
+        "fullname": "Soft Computing",
         "rank": "C"
     },
     "journals/wias": {
@@ -2981,6 +3019,7 @@ let HCI_UBICOMP = {
     },
     "journals/thms": {
         "venue": "IEEE Transactions on Human-Machine Systems",
+        "fullname": "IEEE Transactions on Human-Machine Systems",
         "rank": "B"
     },
     "journals/iwc": {
@@ -3114,6 +3153,7 @@ let HCI_UBICOMP = {
     },
     "conf/haptics": {
         "venue": "IEEE World Haptics Conference",
+        "fullname": "IEEE World Haptics Conference",
         "rank": "C"
     },
     "conf/interact": {
@@ -3182,10 +3222,12 @@ let INTERDISCIPLINARY_EMERGING = {
     // Rank B
     "journals/bioinformatics": {
         "venue": "Bioinformatics",
+        "fullname": "Bioinformatics",
         "rank": "B"
     },
     "journals/bib": {
         "venue": "Briefings in Bioinformatics",
+        "fullname": "Briefings in Bioinformatics",
         "rank": "B"
     },
     // Cognition, http://www.journals.elsevier.com/cognition/
@@ -3231,10 +3273,12 @@ let INTERDISCIPLINARY_EMERGING = {
     },
     "journals/ploscb": {
         "venue": "PLOS Computational Biology",
+        "fullname": "PLOS Computational Biology",
         "rank": "B"
     },
     "journals/cj": {
         "venue": "The Computer Journal",
+        "fullname": "The Computer Journal",
         "rank": "B"
     },
     "journals/www": {
@@ -3251,14 +3295,17 @@ let INTERDISCIPLINARY_EMERGING = {
     // Rank C
     "journals/bmcbi": {
         "venue": "BMC Bioinformatics",
+        "fullname": "BMC Bioinformatics",
         "rank": "C"
     },
     "journals/cas": {
         "venue": "Cybernetics and Systems",
+        "fullname": "Cybernetics and Systems",
         "rank": "C"
     },
     "journals/lgrs": {
         "venue": "IEEE Geoscience and Remote Sensing Letters",
+        "fullname": "IEEE Geoscience and Remote Sensing Letters",
         "rank": "C"
     },
     "journals/titb": {
@@ -3279,6 +3326,7 @@ let INTERDISCIPLINARY_EMERGING = {
     },
     "journals/mia": {
         "venue": "Medical Image Analysis",
+        "fullname": "Medical Image Analysis",
         "rank": "C"
     },
     "journals/tii": {
@@ -3308,6 +3356,7 @@ let INTERDISCIPLINARY_EMERGING = {
     },
     "journals/tr": {
         "venue": "IEEE Transactions on Reliability",
+        "fullname": "IEEE Transactions on Reliability",
         "rank": "C"
     },
 
