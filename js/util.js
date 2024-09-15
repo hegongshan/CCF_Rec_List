@@ -52,3 +52,7 @@ function isYearRange(year, startYear, endYear) {
 function isEmpty(str) {
     return !str || str.length === 0;
 }
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}

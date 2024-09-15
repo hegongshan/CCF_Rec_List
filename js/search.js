@@ -145,10 +145,6 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
 }
 
 function queryPaper(query, condition, searchSuccessHandler, searchFailHandler) {
-    // 显示加载图片，并清空查询结果
-    $("#tips").html($("#loadingTipsTemplate").html());
-    $("#result").empty();
-
     let firstHit = 0;
     // DBLP允许的最大值为1000
     let pageSize = 1000;

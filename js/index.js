@@ -276,6 +276,11 @@ function fillPaperList() {
         }
     };
 
+    // 显示加载图片，并清空查询结果
+    let $loadingTips = $("#tips");
+    $loadingTips.html($("#loadingTipsTemplate").html());
+    $("#result").empty();
+
     // 搜索并更新论文列表
     queryPaper(
         query,
@@ -285,7 +290,7 @@ function fillPaperList() {
             updatePaperList();
         },
         function () {
-            failHandler($("#tips"));
+            failHandler($loadingTips);
         }
     );
 }
@@ -319,10 +324,6 @@ function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
     }, function () {
         failHandler($loadingTips);
     });
-}
-
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 $(function () {
