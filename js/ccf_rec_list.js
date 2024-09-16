@@ -1198,7 +1198,7 @@ let SE_SS_PL = {
     },
     "journals/ijseke": {
         "venue": "IJSEKE",
-        "fullname": "InternationalJournal of Software Engineering and Knowledge Engineering",
+        "fullname": "International Journal of Software Engineering and Knowledge Engineering",
         "rank": "C"
     },
     "journals/sttt": {
@@ -3079,7 +3079,7 @@ let HCI_UBICOMP = {
     },
     "conf/huc": {
         "venue": "UbiComp",
-        "fullname": "ACM international joint conference on Pervasive and Ubiquitous Computing/ Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+        "fullname": "ACM international joint conference on Pervasive and Ubiquitous Computing",
         "rank": "A"
     },
     "conf/uist": {
