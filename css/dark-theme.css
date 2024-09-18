@@ -51,7 +51,16 @@
     color: var(--dark-blue-color);
 }
 
-.dark-theme a.dropdown-item {
+.dark-theme .theme-menu {
+    background-color: #666;
+    border: 1px solid gray;
+}
+
+.dark-theme .theme-item {
+    color: var(--dark-main-color);
+}
+
+.dark-theme .theme-item:focus, .dark-theme .theme-item:hover {
     color: var(--dark-main-bgcolor);
 }
 
