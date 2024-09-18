@@ -157,6 +157,9 @@ function updatePaperList(currentPageStr = '1') {
         }
     });
     $("#result").html(paperHtml);
+
+    // 回到页面顶部
+    $("html, body").animate({ scrollTop: 0 }, 0);
 }
 
 function fillPaperList() {
