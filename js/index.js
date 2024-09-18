@@ -404,7 +404,7 @@ $(function () {
     $("#search").click(function () {
         fillPaperList();
     });
-    $("#q").keydown(function (event) {
+    $("body").on("keydown", ".q", function (event) {
         if (event.keyCode == 13) {
             fillPaperList();
         }
@@ -451,6 +451,6 @@ $(function () {
     });
     // 不要在移动端展示提示框
     if (!isMobileDevice()) {
-        $backToTopBtn.tooltip({trigger: "hover"});
+        $backToTopBtn.tooltip({ trigger: "hover" });
     }
 });
