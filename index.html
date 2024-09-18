@@ -136,7 +136,8 @@
         {{each venueList}}
             {{set venue = $value}}
             <option data-content="
-                <span class='badge badge-pill badge-primary'>{{venue.name}}</span>
+                <span class='badge badge-pill badge-primary abbr'>{{venue.name}}</span>
+                <span style='display: none'>{{venue.fullname}}</span>
                 <small class='text-muted'>{{venue.type}}, CCF {{venue.rank}}</small>" 
                 value="{{venue.url}}">{{venue.name}}</option>
         {{/each}}

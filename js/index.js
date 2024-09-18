@@ -86,6 +86,7 @@ function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions)
             venueList.push({
                 url: venueDBLPUrl,
                 name: CATEGORY_LIST[category][venueDBLPUrl].venue,
+                fullname: CATEGORY_LIST[category][venueDBLPUrl].fullname,
                 type: venueDBLPUrl.startsWith("journals") ? "期刊" : "会议",
                 rank: CATEGORY_LIST[category][venueDBLPUrl].rank
             });
@@ -452,8 +453,26 @@ $(function () {
     $backToTopBtn.click(function () {
         $("html, body").animate({ scrollTop: 0 }, 300);
     });
+
     // 不要在移动端展示提示框
     if (!isMobileDevice()) {
         $backToTopBtn.tooltip({ trigger: "hover" });
+
+        // 为venue设置title属性
+        $("body").on("mouseenter", "li:has(.abbr)", function () {
+            let $li = $(this);
+
+            // 避免重复设置title
+            if ($li.attr("title")) {
+                return;
+            }
+
+            let fullname = $li.find(".abbr").next().text().trim();
+            if (isEmpty(fullname)) {
+                return;
+            }
+
+            $li.attr("title", fullname);
+        });
     }
 });
