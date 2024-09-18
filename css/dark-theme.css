@@ -55,6 +55,10 @@
     color: var(--dark-main-bgcolor);
 }
 
+.dark-theme option.dropdown-item {
+    color: var(--dark-main-color);
+}
+
 .dark-theme .btn-primary {
     color: var(--dark-blue-color);
     background-color: var(--dark-main-bgcolor);
