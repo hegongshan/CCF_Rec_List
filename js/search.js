@@ -1,5 +1,5 @@
 function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, searchSuccessHandler, searchFailHandler) {
-    let request_url = "https://dblp.uni-trier.de/search/publ/api?callback=?";
+    const DBLP_PUBL_URL = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         q: query,
         c: 0,
@@ -7,7 +7,7 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
         h: pageSize,
         format: "jsonp",
     };
-    $.getJSON(request_url, inputData, function (data) {
+    $.getJSON(DBLP_PUBL_URL, inputData, function (data) {
         let result = data["result"];
         if (parseInt(result["status"]["@code"]) != 200) {
             return;
@@ -103,9 +103,11 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
                 }
 
                 // 一篇论文可能会同时出现在正式刊物和arXiv上，加上venueName，可以避免Id重复
-                let abstractId = (title + venueName).replace(/[^a-zA-Z]+(.)/g, function (match, group1) {
+                let id = (title + venueName).replace(/[^a-zA-Z]+(.)/g, function (match, group1) {
                     return group1.toUpperCase();
                 });
+                id = id.charAt(0).toLowerCase() + id.slice(1);
+
                 paperList.push({
                     ccfRank: ccfRank,
                     key: key,
@@ -115,7 +117,7 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
                     year: paper["year"],
                     url: url,
                     doi: paper["doi"],
-                    abstractId: abstractId
+                    id: id
                 });
             }
 
@@ -197,9 +199,9 @@ function queryAbstract(paperDOI, paperTitle, queryAbstractSuccessHandler, queryA
 }
 
 function queryBibTex(key, successHandler, failHandler) {
-    let dblpBibTexUrl = `https://dblp.uni-trier.de/rec/${key}.bib`
+    const DBLP_BIBTEX_URL = `https://dblp.uni-trier.de/rec/${key}.bib`
 
-    $.get(dblpBibTexUrl, function (bib) {
+    $.get(DBLP_BIBTEX_URL, function (bib) {
         successHandler(bib);
     }).fail(function () {
         failHandler();

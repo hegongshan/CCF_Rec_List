@@ -175,13 +175,13 @@
                     <a href="{{paper.url}}">URL</a>
                 </div>
                 <div>
-                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="fillAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
-                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="getBibTex('{{paper.key}}', '#{{paper.abstractId}}', '#{{paper.abstractId}}Tips', '#{{paper.abstractId}}BibTex')">BibTex</a>
+                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="getAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.id}}')">Abstract</a>
+                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="getBibTex('{{paper.key}}', '#{{paper.id}}')">BibTex</a>
                 </div>
                 <div>
-                    <span id="{{paper.abstractId}}Tips"></span>
-                    <p id="{{paper.abstractId}}"></p>
-                    <pre id="{{paper.abstractId}}BibTex" class="paper-bibtex"></pre>
+                    <span id="{{paper.id}}Tips"></span>
+                    <p id="{{paper.id}}Abstract"></p>
+                    <pre id="{{paper.id}}BibTex" class="paper-bibtex"></pre>
                 </div>
             </li>
         {{/each}}

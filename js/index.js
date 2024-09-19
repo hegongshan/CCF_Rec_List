@@ -1,16 +1,22 @@
 /* 
  * -----------------------------------------------------------------------------
- *                                  全局变量
+ *                                  全局变/常量
  * -----------------------------------------------------------------------------
  */
-// 分页变量
-let pagination = {
+// 分页相关
+const PAGINATION = {
     paperList: [],
     pageList: [],
     pageSize: 10,
     pageSizeStr: "10",
     navigatePages: 10
 };
+const ALL_PAGE = "All";
+
+// 论文列表相关
+const LOADING_SUFFIX = "Tips";
+const ABSTRACT_SUFFIX = "Abstract";
+const BIBTEX_SUFFIX = "BibTex";
 
 /* 
  * -----------------------------------------------------------------------------
@@ -100,7 +106,7 @@ function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions)
 
 function updatePaperList(currentPageStr = '1') {
     // 如果没有匹配的论文，则直接返回
-    if (pagination.paperList.length == 0) {
+    if (PAGINATION.paperList.length == 0) {
         return;
     }
 
@@ -108,45 +114,45 @@ function updatePaperList(currentPageStr = '1') {
     let currentPage = parseInt(currentPageStr);
 
     // 显示全部的论文
-    if (pagination.pageSizeStr == "All") {
-        pagination.pageSize = pagination.paperList.length;
+    if (PAGINATION.pageSizeStr == ALL_PAGE) {
+        PAGINATION.pageSize = PAGINATION.paperList.length;
     } else {
-        pagination.pageSize = parseInt(pagination.pageSizeStr);
+        PAGINATION.pageSize = parseInt(PAGINATION.pageSizeStr);
     }
 
     // 计算总页数和页列表
-    let totalPage = Math.floor((pagination.paperList.length + pagination.pageSize - 1) / pagination.pageSize);
-    pagination.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
+    let totalPage = Math.floor((PAGINATION.paperList.length + PAGINATION.pageSize - 1) / PAGINATION.pageSize);
+    PAGINATION.pageList = Array.from({ length: totalPage }, (_, index) => index + 1);
 
     // 计算开始论文索引和结束论文索引
-    let startPaperIndex = (currentPage - 1) * pagination.pageSize;
-    let endPaperIndex = Math.min(currentPage * pagination.pageSize, pagination.paperList.length);
+    let startPaperIndex = (currentPage - 1) * PAGINATION.pageSize;
+    let endPaperIndex = Math.min(currentPage * PAGINATION.pageSize, PAGINATION.paperList.length);
 
     // 计算开始页码和结束页码
     let startPageIndex;
-    if (currentPage % pagination.navigatePages == 0) {
-        startPageIndex = parseInt((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
+    if (currentPage % PAGINATION.navigatePages == 0) {
+        startPageIndex = parseInt((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
     } else {
-        startPageIndex = Math.floor((currentPage - 1) / pagination.navigatePages) * pagination.navigatePages;
+        startPageIndex = Math.floor((currentPage - 1) / PAGINATION.navigatePages) * PAGINATION.navigatePages;
     }
-    let endPageIndex = Math.min(startPageIndex + pagination.navigatePages, pagination.pageList.length);
+    let endPageIndex = Math.min(startPageIndex + PAGINATION.navigatePages, PAGINATION.pageList.length);
 
     // 渲染分页代码
     let paperHtml = template.render($("#paperTemplate").html(), {
-        paperList: pagination.paperList.slice(startPaperIndex, endPaperIndex),
+        paperList: PAGINATION.paperList.slice(startPaperIndex, endPaperIndex),
         startPaperNumber: startPaperIndex + 1,
 
         pageInfo: {
             firstPage: 1,
             lastPage: totalPage,
-            pageList: pagination.pageList.slice(startPageIndex, endPageIndex),
+            pageList: PAGINATION.pageList.slice(startPageIndex, endPageIndex),
 
             previousPage: currentPage - 1,
             currentPage: currentPage,
             nextPage: currentPage + 1,
 
-            pageSizeList: ["10", "20", "50", "100", "All"],
-            pageSizeStr: pagination.pageSizeStr // 处理All
+            pageSizeList: ["10", "20", "50", "100", ALL_PAGE],
+            pageSizeStr: PAGINATION.pageSizeStr // 处理All
         }
     });
     $("#result").html(paperHtml);
@@ -155,9 +161,9 @@ function updatePaperList(currentPageStr = '1') {
     $("html, body").animate({ scrollTop: 0 }, 0);
 }
 
-function fillPaperList() {
+function getPaperList() {
     // 重置pageSize，避免影响不同查询
-    pagination.pageSizeStr = "10";
+    PAGINATION.pageSizeStr = "10";
 
     let invalidClass = "is-invalid";
     let invalid = false;
@@ -282,13 +288,13 @@ function fillPaperList() {
         query,
         condition,
         function (paperList) {
-            pagination.paperList = paperList;
+            PAGINATION.paperList = paperList;
 
             let tips = template.render($("#responseTipsTemplate").html(), {
-                count: pagination.paperList.length,
+                count: PAGINATION.paperList.length,
             });
             $("#tips").html(tips);
-            
+
             updatePaperList();
         },
         function () {
@@ -298,7 +304,7 @@ function fillPaperList() {
     );
 }
 
-function fillAbstractHandler($abstractTag, $loadingTips, abstract) {
+function getAbstractHandler($abstractTag, abstract) {
     if (isEmpty(abstract)) {
         abstract = "没有找到摘要=_=";
     }
@@ -307,24 +313,22 @@ function fillAbstractHandler($abstractTag, $loadingTips, abstract) {
     $abstractTag.html(abstract);
 }
 
-function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
-    displayBlockToNone(abstractSelector + "BibTex");
+function getAbstract(paperDOI, paperTitle = null, paperSelector) {
+    displayBlockToNone(paperSelector + BIBTEX_SUFFIX);
 
-    let $abstractTag = $(abstractSelector);
-
-    // 读取缓存
+    let $abstractTag = $(paperSelector + ABSTRACT_SUFFIX);
     if ($abstractTag.html()) {
         $abstractTag.toggle();
         return;
     }
 
     // init
-    let $loadingTips = $(abstractSelector + "Tips");
+    let $loadingTips = $(paperSelector + LOADING_SUFFIX);
     $loadingTips.html($("#loadingTipsTemplate").html());
 
     // 查询摘要
     queryAbstract(paperDOI, paperTitle, function (abstract) {
-        fillAbstractHandler($abstractTag, $loadingTips, abstract);
+        getAbstractHandler($abstractTag, abstract);
         $loadingTips.empty();
     }, function () {
         failHandler();
@@ -332,19 +336,20 @@ function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
     });
 }
 
-function getBibTex(key, abstractSelector, tipSelector, bibTexSelector) {
-    displayBlockToNone(abstractSelector);
+function getBibTex(key, paperSelector) {
+    displayBlockToNone(paperSelector + ABSTRACT_SUFFIX);
 
-    if ($(bibTexSelector).text()) {
-        $(bibTexSelector).toggle();
+    let $paperBibTex = $(paperSelector + BIBTEX_SUFFIX);
+    if ($paperBibTex.text()) {
+        $paperBibTex.toggle();
         return;
     }
 
-    let $loadingTips = $(tipSelector);
+    let $loadingTips = $(paperSelector + LOADING_SUFFIX);
     $loadingTips.html($("#loadingTipsTemplate").html());
 
     queryBibTex(key, function (bib) {
-        $(bibTexSelector).text(bib.trim());
+        $paperBibTex.text(bib.trim());
         $loadingTips.empty();
     }, function () {
         failHandler();
@@ -428,24 +433,24 @@ $(function () {
 
     // 搜索
     $("#search").click(function () {
-        fillPaperList();
+        getPaperList();
     });
     $("body").on("keydown", ".q", function (event) {
         if (event.keyCode == 13) {
-            fillPaperList();
+            getPaperList();
         }
     });
 
     // 选择pageSize
     $("body").on("change", "#pageSizeSelect", function () {
-        let oldPageSize = pagination.pageSize;
+        let oldPageSize = PAGINATION.pageSize;
 
-        pagination.pageSizeStr = $(this).val();
+        PAGINATION.pageSizeStr = $(this).val();
 
         // 避免不必要的页面更新操作
-        if (pagination.paperList.length <= oldPageSize
-            && (pagination.pageSizeStr == "All"
-                || pagination.paperList.length <= parseInt(pagination.pageSizeStr))) {
+        if (PAGINATION.paperList.length <= oldPageSize
+            && (PAGINATION.pageSizeStr == ALL_PAGE
+                || PAGINATION.paperList.length <= parseInt(PAGINATION.pageSizeStr))) {
             return;
         }
 
