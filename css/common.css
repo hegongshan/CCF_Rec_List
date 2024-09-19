@@ -42,7 +42,7 @@ select.form-control {
 }
 
 /* 论文列表 */
-.paper-list {
+.paper-item {
     line-height: 40px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -59,28 +59,24 @@ select.form-control {
     line-height: normal;
 }
 
-.list-clear-style {
+.list-style-clear {
     list-style: none;
 }
 
 /* 相关链接 */
-.list-clear-other {
+.related-link {
     margin: 0;
     padding: 0;
 }
 
-.list-clear-other li {
+.list-item {
     display: inline-block;
     margin-right: 10px;
 }
 
 /* FAQ */
-.list li {
+.faq-item {
     margin-top: 5px;
-}
-
-.borderless {
-    border: none;
 }
 
 #backToTopBtn {

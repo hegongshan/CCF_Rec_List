@@ -96,15 +96,15 @@
         <div id="alert" class="modal" data-backdrop="static" tabindex="-1"></div>
         <footer>
             <!-- 相关链接 -->
-            <div class="list-clear-style list-clear-other">
-                <ul>
-                    <li><a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/">中国计算机学会推荐国际学术会议和期刊目录</a></li>
-                    <li><a href="https://www.ccf.org.cn/ccftjgjxskwml/">计算领域高质量科技期刊分级目录</a></li>
-                    <li><a href="https://dblp.uni-trier.de/">DBLP</a></li>
-                    <li><a href="https://scholar.google.com/">Google Scholar</a></li>
-                    <li><a href="https://ieeexplore.ieee.org/">IEEE Xplore</a></li>
-                    <li><a href="https://dl.acm.org/">ACM Digital Library</a></li>
-                    <li><a href="https://arxiv.org/">arXiv</a></li>
+            <div class="related-link">
+                <ul class="list-style-clear">
+                    <li class="list-item"><a href="https://www.ccf.org.cn/Academic_Evaluation/By_category/">中国计算机学会推荐国际学术会议和期刊目录</a></li>
+                    <li class="list-item"><a href="https://www.ccf.org.cn/ccftjgjxskwml/">计算领域高质量科技期刊分级目录</a></li>
+                    <li class="list-item"><a href="https://dblp.uni-trier.de/">DBLP</a></li>
+                    <li class="list-item"><a href="https://scholar.google.com/">Google Scholar</a></li>
+                    <li class="list-item"><a href="https://ieeexplore.ieee.org/">IEEE Xplore</a></li>
+                    <li class="list-item"><a href="https://dl.acm.org/">ACM Digital Library</a></li>
+                    <li class="list-item"><a href="https://arxiv.org/">arXiv</a></li>
                 </ul>
             </div>
             <div id="copyright">
@@ -158,10 +158,10 @@
         </div>
     </script>
     <script id="paperTemplate" type="text/html">
-        <ul class="list-clear-style">
+        <ul class="list-style-clear">
         {{each paperList}}
             {{set paper = $value}}
-            <li class="paper-list">
+            <li class="paper-item">
                 <div>
                     {{startPaperNumber + $index}}. 
                     {{if paper.ccfRank}}
@@ -258,15 +258,15 @@
         </div>
     </script>
     <script id="faqTemplate" type="text/html">
-        <ol class="text-wrap list">
-            <li>
+        <ol class="text-wrap">
+            <li class="faq-item">
                 <strong>为什么返回结果不全？</strong><br>
                 答：原因可能有多种。<br>
                 第一，DBLP只支持返回1万条数据，过于常见的关键词有可能超过该范围；<br>
                 第二，DBLP只支持前缀匹配，不支持后缀匹配。例如，关键词“dataloader”无法匹配“mmdataloader”；<br>
                 第三，部分刊物未被DBLP收录。
             </li>
-            <li>
+            <li class="faq-item">
                 <strong>如何理解"A" AND "B" OR "C"？</strong><br>
                 答：当使用多个关键词进行查询时，OR的优先级更高。换句话说，"A" AND "B" OR "C"实际上是"A" AND ("B" OR "C")。
             </li>
