@@ -123,6 +123,10 @@
     box-shadow: 0 0 0 .2rem rgba(248, 249, 250, .5);
 }
 
+.dark-theme .paper-bibtex {
+    color: var(--dark-main-color);
+}
+
 /* 分页 */
 .dark-theme .page-item.active .page-link,
 .dark-theme .page-item.active .page-link:hover {

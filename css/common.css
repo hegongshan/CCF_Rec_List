@@ -42,7 +42,7 @@ select.form-control {
 }
 
 /* 论文列表 */
-#paperList>li {
+.paper-list {
     line-height: 40px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -51,10 +51,12 @@ select.form-control {
     border-radius: 4px;
 }
 
-.abstract-link {
-    text-decoration: underline;
-    font-family: bold;
-    color: inherit !important;
+.paper-link {
+    margin-right: 5px;
+}
+
+.paper-bibtex {
+    line-height: normal;
 }
 
 .list-clear-style {

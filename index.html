@@ -158,25 +158,31 @@
         </div>
     </script>
     <script id="paperTemplate" type="text/html">
-        <ul id="paperList" class="list-clear-style">
+        <ul class="list-clear-style">
         {{each paperList}}
             {{set paper = $value}}
-            <li>
-                {{startPaperNumber + $index}}. 
-                {{if paper.ccfRank}}
-                <span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
-                {{else}}
-                <span class="badge badge-pill badge-success">No Rank</span>
-                {{/if}}
-                {{paper.firstAuthor}}, et al. 
-                <strong style="font-weight:bold;">{{@paper.title}}</strong>, 
-                {{paper.venue}}'{{paper.year}}, 
-                <a href="{{paper.url}}">URL</a>
-                <br/>
-                <a class="abstract-link" onclick="fillAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
-                <br/>
-                <span id="{{paper.abstractId}}Tips"></span>
-                <p id="{{paper.abstractId}}"></p>
+            <li class="paper-list">
+                <div>
+                    {{startPaperNumber + $index}}. 
+                    {{if paper.ccfRank}}
+                    <span class="badge badge-pill badge-primary">CCF {{paper.ccfRank}}</span>
+                    {{else}}
+                    <span class="badge badge-pill badge-success">No Rank</span>
+                    {{/if}}
+                    {{paper.firstAuthor}}, et al. 
+                    <strong style="font-weight:bold;">{{@paper.title}}</strong>, 
+                    {{paper.venue}}'{{paper.year}}, 
+                    <a href="{{paper.url}}">URL</a>
+                </div>
+                <div>
+                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="fillAbstract('{{paper.doi}}', '{{paper.title}}', '#{{paper.abstractId}}')">Abstract</a>
+                    <a href="javascript:void(0)" class="dropdown-toggle paper-link" onclick="getBibTex('{{paper.key}}', '#{{paper.abstractId}}', '#{{paper.abstractId}}Tips', '#{{paper.abstractId}}BibTex')">BibTex</a>
+                </div>
+                <div>
+                    <span id="{{paper.abstractId}}Tips"></span>
+                    <p id="{{paper.abstractId}}"></p>
+                    <pre id="{{paper.abstractId}}BibTex" class="paper-bibtex"></pre>
+                </div>
             </li>
         {{/each}}
         </ul>

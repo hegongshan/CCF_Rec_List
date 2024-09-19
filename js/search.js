@@ -21,8 +21,9 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
             for (var i = 0; i < curPaperList.length; i++) {
                 let paper = curPaperList[i]["info"];
                 let year = parseInt(paper["year"]);
-                let slashIdx = paper["key"].lastIndexOf("/");
-                let venueDBLPURL = paper["key"].substr(0, slashIdx);
+                let key = paper["key"];
+                let slashIdx = key.lastIndexOf("/");
+                let venueDBLPURL = key.substr(0, slashIdx);
 
                 // Ignore some irrelevant information
                 if (
@@ -107,6 +108,7 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
                 });
                 paperList.push({
                     ccfRank: ccfRank,
+                    key: key,
                     title: title,
                     firstAuthor: firstAuthor,
                     venue: venueName,
@@ -137,11 +139,10 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
 
         // 执行回调函数，填充论文列表
         searchSuccessHandler(paperList);
-    })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            // 执行失败回调函数，显示错误信息
-            searchFailHandler();
-        });
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        // 执行失败回调函数，显示错误信息
+        searchFailHandler();
+    });
 }
 
 function queryPaper(query, condition, searchSuccessHandler, searchFailHandler) {
@@ -189,9 +190,18 @@ function queryAbstract(paperDOI, paperTitle, queryAbstractSuccessHandler, queryA
 
         // 执行成功回调函数，填充论文摘要
         queryAbstractSuccessHandler(abstract);
-    })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-            // 执行失败回调函数，显示错误信息
-            queryAbstractFailHandler();
-        });
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        // 执行失败回调函数，显示错误信息
+        queryAbstractFailHandler();
+    });
+}
+
+function queryBibTex(key, successHandler, failHandler) {
+    let dblpBibTexUrl = `https://dblp.uni-trier.de/rec/${key}.bib`
+
+    $.get(dblpBibTexUrl, function (bib) {
+        successHandler(bib);
+    }).fail(function () {
+        failHandler();
+    });
 }

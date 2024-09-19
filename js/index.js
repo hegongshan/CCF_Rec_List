@@ -24,9 +24,6 @@ function failHandler($loadingTips) {
     });
     $("#alert").html(alertHtml);
     $('#alert').modal();
-
-    // 当请求失败时，不要继续显示加载图片
-    $loadingTips.empty();
 }
 
 function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
@@ -102,11 +99,6 @@ function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions)
 }
 
 function updatePaperList(currentPageStr = '1') {
-    let tips = template.render($("#responseTipsTemplate").html(), {
-        count: pagination.paperList.length,
-    });
-    $("#tips").html(tips);
-
     // 如果没有匹配的论文，则直接返回
     if (pagination.paperList.length == 0) {
         return;
@@ -291,10 +283,17 @@ function fillPaperList() {
         condition,
         function (paperList) {
             pagination.paperList = paperList;
+
+            let tips = template.render($("#responseTipsTemplate").html(), {
+                count: pagination.paperList.length,
+            });
+            $("#tips").html(tips);
+            
             updatePaperList();
         },
         function () {
-            failHandler($loadingTips);
+            failHandler();
+            $loadingTips.empty();
         }
     );
 }
@@ -306,10 +305,11 @@ function fillAbstractHandler($abstractTag, $loadingTips, abstract) {
 
     // 填充摘要
     $abstractTag.html(abstract);
-    $loadingTips.empty();
 }
 
 function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
+    displayBlockToNone(abstractSelector + "BibTex");
+
     let $abstractTag = $(abstractSelector);
 
     // 读取缓存
@@ -325,8 +325,30 @@ function fillAbstract(paperDOI, paperTitle = null, abstractSelector) {
     // 查询摘要
     queryAbstract(paperDOI, paperTitle, function (abstract) {
         fillAbstractHandler($abstractTag, $loadingTips, abstract);
+        $loadingTips.empty();
     }, function () {
-        failHandler($loadingTips);
+        failHandler();
+        $loadingTips.empty();
+    });
+}
+
+function getBibTex(key, abstractSelector, tipSelector, bibTexSelector) {
+    displayBlockToNone(abstractSelector);
+
+    if ($(bibTexSelector).text()) {
+        $(bibTexSelector).toggle();
+        return;
+    }
+
+    let $loadingTips = $(tipSelector);
+    $loadingTips.html($("#loadingTipsTemplate").html());
+
+    queryBibTex(key, function (bib) {
+        $(bibTexSelector).text(bib.trim());
+        $loadingTips.empty();
+    }, function () {
+        failHandler();
+        $loadingTips.empty();
     });
 }
 

@@ -56,3 +56,12 @@ function isEmpty(str) {
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+
+function displayBlockToNone(selector) {
+    let $selector = $(selector);
+    if ($selector.text()) {
+        if ($selector.css("display") == "block") {
+            $selector.css("display", "none");
+        }
+    }
+}
