@@ -2031,7 +2031,7 @@ let CST = {
         "rank": "A"
     },
     "conf/focs": {
-        "venue": "FOCS", 
+        "venue": "FOCS",
         "fullname": "IEEE Annual Symposium on Foundations of Computer Science",
         "rank": "A"
     },
@@ -2120,7 +2120,7 @@ let CST = {
         "rank": "C"
     },
     "conf/rta": {
-        "venue": "RTA", 
+        "venue": "RTA",
         "fullname": "International Conference on Rewriting Techniques and Applications",
         "rank": "C"
     },
@@ -2243,7 +2243,8 @@ let CG_MM = {
     "journals/dcg": {
         "venue": "DCG ",
         "fullname": "Discrete & Computational Geometry",
-        "rank": "C"},
+        "rank": "C"
+    },
     "journals/spl": {
         "venue": "SPL",
         "fullname": "IEEE Signal Processing Letters",
@@ -2277,7 +2278,8 @@ let CG_MM = {
     "journals/spic": {
         "venue": "IMAGE",
         "fullname": "Signal Processing: Image Communication",
-        "rank": "C"},
+        "rank": "C"
+    },
     "journals/vc": {
         "venue": "TVC",
         "fullname": "The Visual Computer",
@@ -2958,7 +2960,7 @@ let AI = {
         "rank": "C"
     },
     "conf/iconip": {
-        "venue":"ICONIP",
+        "venue": "ICONIP",
         "fullname": "International Conference on Neural Information Processing",
         "rank": "C"
     },
@@ -3474,18 +3476,29 @@ let INTERDISCIPLINARY_EMERGING = {
 */
 let OTHERS = {
     // They are equivalent to Rank A.
-    // ACM Computing Surveys
-    "journals/csur": { "venue": "ACM Comput. Surv.", "rank": "A" },
-    // Communications of the ACM
-    "journals/cacm": { "venue": "Commun. ACM", "rank": "A" },
+    "journals/csur": {
+        "venue": "ACM Comput. Surv.",
+        "fullname": "ACM Computing Surveys",
+        "rank": "A"
+    },
+    "journals/cacm": {
+        "venue": "Commun. ACM",
+        "fullname": "Communications of the ACM",
+        "rank": "A"
+    },
     // arXiv preprint (Computing Research Repository)
-    "journals/corr": { "venue": "arXiv", "rank": "A" },
-
-    "conf/iclr": { "venue": "ICLR", "rank": "A" },
+    "journals/corr": {
+        "venue": "arXiv",
+        "fullname": "arXiv",
+        "rank": "A"
+    },
+    "conf/iclr": {
+        "venue": "ICLR",
+        "fullname": "International Conference on Learning Representations",
+        "rank": "A"
+    },
 
     // They are equivalent to Rank B.
-
-
 };
 
 /* 
