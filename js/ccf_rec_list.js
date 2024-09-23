@@ -15,7 +15,7 @@
  * 
  * -----------------------------------------------------------------------------
  */
-let ARCH_PDC_SS = {
+const ARCH_PDC_SS = {
     // Journal
     // Rank A
     "journals/tocs": {
@@ -491,7 +491,7 @@ let ARCH_PDC_SS = {
  * 
  * -----------------------------------------------------------------------------
 */
-let CN = {
+const CN = {
     // Journal
     // Rank A
     "journals/jsac": {
@@ -787,7 +787,7 @@ let CN = {
  * 
  * -----------------------------------------------------------------------------
  */
-let NIS = {
+const NIS = {
     // Journal
     // Rank A
     "journals/tdsc": {
@@ -1104,7 +1104,7 @@ let NIS = {
  * 
  * -----------------------------------------------------------------------------
  */
-let SE_SS_PL = {
+const SE_SS_PL = {
     // Journal
     // Rank A
     "journals/toplas": {
@@ -1529,7 +1529,7 @@ let SE_SS_PL = {
  *
  * -----------------------------------------------------------------------------
  */
-let DB_DM_CR = {
+const DB_DM_CR = {
     // Journal
     // Rank A
     "journals/pvldb": {
@@ -1870,7 +1870,7 @@ let DB_DM_CR = {
  * 
  * -----------------------------------------------------------------------------
  */
-let CST = {
+const CST = {
     // Journal
     // Rank A
     "journals/tit": {
@@ -2156,7 +2156,7 @@ let CST = {
  * 
  * -----------------------------------------------------------------------------
  */
-let CG_MM = {
+const CG_MM = {
     // Journal 
     // Rank A
     "journals/tog": {
@@ -2463,7 +2463,7 @@ let CG_MM = {
  *
  * -----------------------------------------------------------------------------
  */
-let AI = {
+const AI = {
     // Journal
     // Rank A
     "journals/ai": {
@@ -2994,7 +2994,7 @@ let AI = {
  * (Human-Computer Interaction and Ubiquitous Computing)
  * -----------------------------------------------------------------------------
 */
-let HCI_UBICOMP = {
+const HCI_UBICOMP = {
     // Journal
     // Rank A
     "journals/tochi": {
@@ -3202,7 +3202,7 @@ let HCI_UBICOMP = {
  *
  * -----------------------------------------------------------------------------
  */
-let INTERDISCIPLINARY_EMERGING = {
+const INTERDISCIPLINARY_EMERGING = {
     // Journal
     // Rank A
     "journals/jacm": {
@@ -3474,7 +3474,7 @@ let INTERDISCIPLINARY_EMERGING = {
  *
  * -----------------------------------------------------------------------------
 */
-let OTHERS = {
+const OTHERS = {
     // They are equivalent to Rank A.
     "journals/csur": {
         "venue": "ACM Comput. Surv.",
@@ -3509,7 +3509,7 @@ let OTHERS = {
  * -----------------------------------------------------------------------------
  */
 
-let CATEGORY_LIST = {
+const CATEGORY_LIST = {
     "计算机体系结构/并行与分布计算/存储系统": ARCH_PDC_SS,
     "计算机网络": CN,
     "网络与信息安全": NIS,
@@ -3523,7 +3523,7 @@ let CATEGORY_LIST = {
     "其他": OTHERS
 };
 
-let CCF_LIST = {};
+const CCF_LIST = {};
 
 for (let category in CATEGORY_LIST) {
     let venuesOfCategory = CATEGORY_LIST[category];
