@@ -134,7 +134,7 @@ let ARCH_PDC_SS = {
     },
     "journals/grid": {
         "venue": "JGC",
-        "fullname": "Journal of Grid computing",
+        "fullname": "Journal of Grid Computing",
         "rank": "C"
     },
     "journals/rts": {
@@ -544,8 +544,8 @@ let CN = {
 
     // Rank C
     "journals/adhoc": {
-        "venue": "Ad hoc Networks",
-        "fullname": "Ad hoc Networks",
+        "venue": "Ad Hoc Networks",
+        "fullname": "Ad Hoc Networks",
         "rank": "C"
     },
     "journals/comcom": {
@@ -570,7 +570,7 @@ let CN = {
     },
     "journals/monet": {
         "venue": "MONET",
-        "fullname": "Mobile Networks andApplications",
+        "fullname": "Mobile Networks and Applications",
         "rank": "C"
     },
     "journals/networks": {
@@ -671,7 +671,7 @@ let CN = {
     },
     "conf/imc": {
         "venue": "IMC",
-        "fullname": "ACM Internet MeasurementConference",
+        "fullname": "ACM Internet Measurement Conference",
         "rank": "B"
     },
 
@@ -748,7 +748,7 @@ let CN = {
     },
     "conf/im": {
         "venue": "IM",
-        "fullname": "IFIP/IEEE International Symposium on Integrated NetworkManagement",
+        "fullname": "IFIP/IEEE International Symposium on Integrated Network Management",
         "rank": "C"
     },
     "conf/msn": {
@@ -818,7 +818,7 @@ let NIS = {
         "rank": "B"
     },
     "journals/dcc": {
-        "venue": "Designs,Codes and Cryptography",
+        "venue": "Designs, Codes and Cryptography",
         "fullname": "Designs, Codes and Cryptography",
         "rank": "B"
     },
@@ -856,7 +856,7 @@ let NIS = {
     },
     "journals/ijisp": {
         "venue": "IJISP",
-        "fullname": "InternationalJournal of Information Security and Privacy",
+        "fullname": "International Journal of Information Security and Privacy",
         "rank": "C"
     },
     "journals/istr": {
@@ -1912,7 +1912,7 @@ let CST = {
     },
     "journals/cc": {
         "venue": "CC",
-        "fullname": "Computational complexity",
+        "fullname": "Computational Complexity",
         "rank": "B"
     },
     "journals/fac": {
@@ -2545,7 +2545,7 @@ let AI = {
     },
     "journals/tnn": {
         "venue": "TNNLS",
-        "fullname": "IEEE Transactions on Neural Networks and learning systems",
+        "fullname": "IEEE Transactions on Neural Networks and Learning Systems",
         "rank": "B"
     },
     "journals/ijar": {
@@ -2941,7 +2941,7 @@ let AI = {
     },
     "conf/fgr": {
         "venue": "FG",
-        "fullname": "IEEE International Conference on AutomaticFace and Gesture Recognition",
+        "fullname": "IEEE International Conference on Automatic Face and Gesture Recognition",
         "rank": "C"
     },
     "conf/icdar": {
@@ -2956,7 +2956,7 @@ let AI = {
     },
     "conf/ksem": {
         "venue": "KSEM",
-        "fullname": "International conference on Knowledge Science,Engineering and Management",
+        "fullname": "International Conference on Knowledge Science, Engineering and Management",
         "rank": "C"
     },
     "conf/iconip": {
@@ -3399,12 +3399,12 @@ let INTERDISCIPLINARY_EMERGING = {
     },
     "conf/ismb": {
         "venue": "ISMB",
-        "fullname": "International conference on Intelligent Systems for Molecular Biology",
+        "fullname": "International Conference on Intelligent Systems for Molecular Biology",
         "rank": "B"
     },
     "conf/recomb": {
         "venue": "RECOMB",
-        "fullname": "Annual International Conference on Research inComputational Molecular Biology",
+        "fullname": "Annual International Conference on Research in Computational Molecular Biology",
         "rank": "B"
     },
     "conf/miccai": {
