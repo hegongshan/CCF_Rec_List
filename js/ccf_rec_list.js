@@ -604,7 +604,7 @@ let CN = {
     // Rank A
     "conf/sigcomm": {
         "venue": "SIGCOMM",
-        "fullname": "ACM InternationalConference on Applications, Technologies, Architectures, and Protocols for Computer Communication",
+        "fullname": "ACM International Conference on Applications, Technologies, Architectures, and Protocols for Computer Communication",
         "rank": "A"
     },
     "conf/mobicom": {
@@ -768,7 +768,7 @@ let CN = {
     },
     "conf/hotnets": {
         "venue": "HotNets",
-        "fullname": "ACM The Workshop on Hot Topics in Networks",
+        "fullname": "ACM Workshop on Hot Topics in Networks",
         "rank": "C"
     },
     "conf/apnet": {
@@ -1328,7 +1328,7 @@ let SE_SS_PL = {
     },
     "conf/models": {
         "venue": "MoDELS",
-        "fullname": "ACM/IEEE International Conference on Model Driven EngineeringLanguages and Systems",
+        "fullname": "ACM/IEEE International Conference on Model Driven Engineering Languages and Systems",
         "rank": "B"
     },
     "conf/cp": {
@@ -1395,7 +1395,7 @@ let SE_SS_PL = {
     },
     "conf/paste": {
         "venue": "PASTE",
-        "fullname": "ACMSIGPLAN-SIGSOFT Workshop on Program Analysis for Software Tools and Engineering",
+        "fullname": "ACM SIGPLAN-SIGSOFT Workshop on Program Analysis for Software Tools and Engineering",
         "rank": "C"
     },
     "conf/aplas": {
@@ -2178,7 +2178,7 @@ let CG_MM = {
     // Rank B
     "journals/tomccap": {
         "venue": "TOMM",
-        "fullname": "ACM Transactions on Multimedia Computing,Communications and Applications",
+        "fullname": "ACM Transactions on Multimedia Computing, Communications and Applications",
         "rank": "B"
     },
     "journals/cagd": {
@@ -2358,7 +2358,7 @@ let CG_MM = {
     },
     "conf/icassp": {
         "venue": "ICASSP",
-        "fullname": "IEEE International Conference on Acoustics,Speech and Signal Processing",
+        "fullname": "IEEE International Conference on Acoustics, Speech and Signal Processing",
         "rank": "B"
     },
     "conf/icmcs": {
@@ -2698,7 +2698,7 @@ let AI = {
     },
     "journals/ijufks": {
         "venue": "IJUFKS",
-        "fullname": "International Journal of Uncertainty,Fuzziness and Knowledge-Based Systems",
+        "fullname": "International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems",
         "rank": "C"
     },
     "journals/ijdar": {
@@ -2926,7 +2926,7 @@ let AI = {
     },
     "conf/iros": {
         "venue": "IROS",
-        "fullname": "IEEE\\RSJ International Conference on Intelligent Robots and Systems",
+        "fullname": "IEEE/RSJ International Conference on Intelligent Robots and Systems",
         "rank": "C"
     },
     "conf/alt": {
@@ -3081,7 +3081,7 @@ let HCI_UBICOMP = {
     },
     "conf/huc": {
         "venue": "UbiComp",
-        "fullname": "ACM international joint conference on Pervasive and Ubiquitous Computing",
+        "fullname": "ACM International Joint Conference on Pervasive and Ubiquitous Computing",
         "rank": "A"
     },
     "conf/uist": {
@@ -3160,7 +3160,7 @@ let HCI_UBICOMP = {
     },
     "conf/interact": {
         "venue": "INTERACT",
-        "fullname": "International Conference on Human- Computer Interaction of International Federation for Information Processing",
+        "fullname": "International Conference on Human-Computer Interaction of International Federation for Information Processing",
         "rank": "C"
     },
     "conf/acmidc": {
@@ -3170,7 +3170,7 @@ let HCI_UBICOMP = {
     },
     "conf/colcom": {
         "venue": "CollaborateCom",
-        "fullname": "International Conference on Collaborative Computing:Networking, Applications and Worksharing",
+        "fullname": "International Conference on Collaborative Computing: Networking, Applications and Worksharing",
         "rank": "C"
     },
     "conf/cscwd": {
@@ -3185,7 +3185,7 @@ let HCI_UBICOMP = {
     },
     "conf/mobiquitous": {
         "venue": "MobiQuitous",
-        "fullname": "International Conference on Mobile and Ubiquitous Systems: Computing,Networking and Services",
+        "fullname": "International Conference on Mobile and Ubiquitous Systems: Computing, Networking and Services",
         "rank": "C"
     },
     "conf/avi": {
@@ -3260,7 +3260,7 @@ let INTERDISCIPLINARY_EMERGING = {
     },
     "journals/tcbb": {
         "venue": "TCBB",
-        "fullname": "IEEE-ACM Transactions on Computational Biology and Bioinformatics",
+        "fullname": "IEEE/ACM Transactions on Computational Biology and Bioinformatics",
         "rank": "B"
     },
     "journals/jcst": {
