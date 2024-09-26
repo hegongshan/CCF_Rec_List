@@ -462,6 +462,11 @@ $(function () {
         }
     });
 
+    // 验证年份
+    $("#startYear, #endYear").change(function () {
+        validateYear();
+    });
+
     // 搜索
     $("#search").click(function () {
         getPaperList();
