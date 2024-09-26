@@ -278,6 +278,7 @@ function getPaperList() {
     let queryValid = validateQuery();
     let yearValid = validateYear();
     if (!queryValid || !yearValid) {
+        $loadingTips.empty();
         return;
     }
 
