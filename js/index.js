@@ -270,8 +270,9 @@ function getQueryString() {
 }
 
 function getPaperList() {
-    // 重置pageSize，避免影响不同查询
-    PAGINATION.pageSizeStr = "10";
+    // 显示加载图片
+    let $loadingTips = $("#tips");
+    $loadingTips.html($("#loadingTipsTemplate").html());
 
     // 如果关键词和起止年份存在问题，则提前返回
     let queryValid = validateQuery();
@@ -279,6 +280,12 @@ function getPaperList() {
     if (!queryValid || !yearValid) {
         return;
     }
+
+    // 清空查询结果
+    $("#result").empty();
+
+    // 重置pageSize，避免影响不同查询
+    PAGINATION.pageSizeStr = "10";
 
     let query = getQueryString();
     let condition = {
@@ -291,11 +298,6 @@ function getPaperList() {
             end: $("#endYear").val()
         }
     };
-
-    // 显示加载图片，并清空查询结果
-    let $loadingTips = $("#tips");
-    $loadingTips.html($("#loadingTipsTemplate").html());
-    $("#result").empty();
 
     // 搜索并更新论文列表
     queryPaper(
