@@ -1,5 +1,5 @@
 function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, searchSuccessHandler, searchFailHandler) {
-    const DBLP_PUBL_URL = "https://dblp.uni-trier.de/search/publ/api?callback=?";
+    const dblpPublUrl = "https://dblp.uni-trier.de/search/publ/api?callback=?";
     let inputData = {
         q: query,
         c: 0,
@@ -7,7 +7,7 @@ function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, se
         h: pageSize,
         format: "jsonp",
     };
-    $.getJSON(DBLP_PUBL_URL, inputData, function (data) {
+    $.getJSON(dblpPublUrl, inputData, function (data) {
         let result = data["result"];
         if (parseInt(result["status"]["@code"]) != 200) {
             return;
@@ -199,9 +199,9 @@ function queryAbstract(paperDOI, paperTitle, queryAbstractSuccessHandler, queryA
 }
 
 function queryBibTex(key, successHandler, failHandler) {
-    const DBLP_BIBTEX_URL = `https://dblp.uni-trier.de/rec/${key}.bib`
+    const dblpBibTexUrl = `https://dblp.uni-trier.de/rec/${key}.bib`
 
-    $.get(DBLP_BIBTEX_URL, function (bib) {
+    $.get(dblpBibTexUrl, function (bib) {
         successHandler(bib);
     }).fail(function () {
         failHandler();
