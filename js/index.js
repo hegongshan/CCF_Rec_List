@@ -26,13 +26,12 @@ const BIBTEX_SUFFIX = "BibTex";
  *                                  自定义函数
  * -----------------------------------------------------------------------------
  */
-function failHandler($loadingTips) {
+function failHandler() {
     let alertHtml = template.render($("#alertTemplate").html(), {
         title: "提示信息",
         message: "请求失败，请重新尝试！"
     });
-    $("#alert").html(alertHtml);
-    $('#alert').modal();
+    $("#alert").html(alertHtml).modal();
 }
 
 function updateVenue(currentSelector, previousVals, selectpickerExtendedOptions) {
@@ -502,9 +501,7 @@ $(function () {
             title: "常见问题",
             message: $("#faqTemplate").html()
         });
-        let $alert = $("#alert");
-        $alert.html(faqHtml);
-        $alert.modal();
+        $("#alert").html(faqHtml).modal();
     });
 
     // 回到顶部
