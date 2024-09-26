@@ -3,6 +3,9 @@
  *                                  全局变/常量
  * -----------------------------------------------------------------------------
  */
+// 表单验证
+const INVALID_CLASS = "is-invalid";
+
 // 分页相关
 const PAGINATION = {
     paperList: [],
@@ -161,12 +164,8 @@ function updatePaperList(currentPageStr = '1') {
     $("html, body").animate({ scrollTop: 0 }, 0);
 }
 
-function getPaperList() {
-    // 重置pageSize，避免影响不同查询
-    PAGINATION.pageSizeStr = "10";
-
-    let invalidClass = "is-invalid";
-    let invalid = false;
+function validateQuery() {
+    let queryValid = true;
 
     // 验证关键词
     let $searchFeedback = $(".search-feedback");
@@ -178,70 +177,77 @@ function getPaperList() {
         let hasChineseCharacter = query.match(/[\u4E00-\u9FA5]|[\uF900-\uFA2D]/);
 
         if (isEmpty || hasChineseCharacter) {
-            invalid = true;
-            $input.addClass(invalidClass);
+            $input.addClass(INVALID_CLASS);
 
             let errorMsg = isEmpty ? "关键词不能为空！" : "DBLP不支持中文关键词！";
             $feedback = $searchFeedback.eq(index);
             $feedback.text(errorMsg);
+
+            queryValid = false;
         } else {
-            $input.removeClass(invalidClass);
+            $input.removeClass(INVALID_CLASS);
         }
     });
 
+    return queryValid;
+}
+
+function validateYear() {
     // 验证起止年份
     let $startYear = $("#startYear");
     let $endYear = $("#endYear");
+    let $yearFeedback = $(".year-feedback");
+
     let startYearStr = $startYear.val().trim();
     let endYearStr = $endYear.val().trim();
     let isStartYearEmpty = isEmpty(startYearStr);
     let isEndYearEmpty = isEmpty(endYearStr);
 
-    function handleYear($year, index) {
+    function handleYear($year, $feedback) {
         let currentYear = new Date().getFullYear()
         let errorMsg = `年份必须位于 (0, ${currentYear}] 区间内！`;
         let yearStr = $year.val().trim();
         let yearVal = parseInt(yearStr);
         let isYearInvalid = !isEmpty(yearStr) && (yearVal <= 0 || yearVal > currentYear);
-        let $yearFeedback = $(".year-feedback").eq(index);
 
         if (isYearInvalid) {
-            $year.addClass(invalidClass);
-            $yearFeedback.text(errorMsg);
+            $year.addClass(INVALID_CLASS);
+            $feedback.text(errorMsg);
         } else {
-            $year.removeClass(invalidClass);
-            $yearFeedback.empty();
+            $year.removeClass(INVALID_CLASS);
+            $feedback.empty();
         }
 
         return isYearInvalid;
     }
 
     if (!isStartYearEmpty || !isEndYearEmpty) {
-        let isStartYearInvalid = handleYear($startYear, 0);
-        let isEndYearInvalid = handleYear($endYear, 1);
+        let isStartYearInvalid = handleYear($startYear, $yearFeedback.eq(0));
+        let isEndYearInvalid = handleYear($endYear, $yearFeedback.eq(1));
         if (isStartYearInvalid || isEndYearInvalid) {
-            invalid = true;
-        } else if (!isStartYearEmpty && !isEndYearEmpty
-            && parseInt(startYearStr) > parseInt(endYearStr)) {
-            $startYear.addClass(invalidClass);
-            $endYear.addClass(invalidClass);
-            $(".year-feedback").eq(0).text("开始年份必须≤结束年份！");
+            return false;
+        }
 
-            invalid = true;
+        if (!isStartYearEmpty && !isEndYearEmpty
+            && parseInt(startYearStr) > parseInt(endYearStr)) {
+            $startYear.addClass(INVALID_CLASS);
+            $endYear.addClass(INVALID_CLASS);
+            $yearFeedback.eq(0).text("开始年份必须≤结束年份！");
+
+            return false;
         }
     } else {
-        $startYear.removeClass(invalidClass);
-        $endYear.removeClass(invalidClass);
-        $(".year-feedback").each(function (index) {
+        $startYear.removeClass(INVALID_CLASS);
+        $endYear.removeClass(INVALID_CLASS);
+        $yearFeedback.each(function (index) {
             $(this).empty();
         });
     }
 
-    // 如果关键词和起止年份存在问题，则提前返回
-    if (invalid) {
-        return;
-    }
+    return true;
+}
 
+function getQueryString() {
     // 拼接查询字符串
     let query = "";
     $(".q").each(function (index) {
@@ -260,21 +266,29 @@ function getPaperList() {
             }
         }
     });
-    // 判断是否需要显示查询字符串
-    if ($("#queryStringInput").prop("checked")) {
-        $("#queryString").text(query);
-    } else {
-        $("#queryString").empty();
+    return query;
+}
+
+function getPaperList() {
+    // 重置pageSize，避免影响不同查询
+    PAGINATION.pageSizeStr = "10";
+
+    // 如果关键词和起止年份存在问题，则提前返回
+    let queryValid = validateQuery();
+    let yearValid = validateYear();
+    if (!queryValid || !yearValid) {
+        return;
     }
 
+    let query = getQueryString();
     let condition = {
         categoryList: $("#category").val(),
         typeList: $("#type").val(),
         rankList: $("#rank").val(),
         venueList: $("#venue").val(),
         year: {
-            start: startYearStr,
-            end: endYearStr
+            start: $("#startYear").val(),
+            end: $("#endYear").val()
         }
     };
 
@@ -423,12 +437,29 @@ $(function () {
         $("body").addClass("dark-theme");
     });
 
-    // 添加和删除新关键词
+    // 添加和删除新关键词，并处理查询字符串
     $("#addKeyword").click(function () {
         $(".custom-switch").before($("#keywordTemplate").html());
     });
+    let $queryString = $("#queryString");
     $("body").on("click", ".remove-keyword", function () {
         $(this).parent().parent().remove();
+
+        if (validateQuery()) {
+            $queryString.text(getQueryString());
+        }
+    });
+    $("body").on("change", ".condition, .q", function () {
+        if (validateQuery()) {
+            $queryString.text(getQueryString());
+            $queryString.addClass("badge");
+        }
+    });
+    $("#queryStringCheckbox").change(function () {
+        $queryString.toggle();
+        if (!$queryString.text()) {
+            $queryString.removeClass("badge");
+        }
     });
 
     // 搜索
