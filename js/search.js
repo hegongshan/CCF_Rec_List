@@ -1,5 +1,5 @@
 function doQueryPaper(query, firstHit, pageSize, total, paperList, condition, searchSuccessHandler, searchFailHandler) {
-    const dblpPublUrl = "https://dblp.uni-trier.de/search/publ/api?callback=?";
+    const dblpPublUrl = "https://dblp.org/search/publ/api?callback=?";
     let inputData = {
         q: query,
         c: 0,
