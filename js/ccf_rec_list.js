@@ -95,6 +95,11 @@ const ARCH_PDC_SS = {
         "fullname": "Performance Evaluation: An International Journal",
         "rank": "B"
     },
+    "journals/tcc": {
+        "venue": "TCC",
+        "fullname": "IEEE Transactions on Cloud Computing",
+        "rank": "B"
+    },
 
     // Rank C
     "journals/jetc": {
@@ -115,11 +120,6 @@ const ARCH_PDC_SS = {
     "journals/fgcs": {
         "venue": "FGCS",
         "fullname": "Future Generation Computer Systems",
-        "rank": "C"
-    },
-    "journals/tcc": {
-        "venue": "TCC",
-        "fullname": "IEEE Transactions on Cloud Computing",
         "rank": "C"
     },
     "journals/integration": {
@@ -207,13 +207,18 @@ const ARCH_PDC_SS = {
         "rank": "A"
     },
     "conf/usenix": {
-        "venue": "USENIX ATC",
-        "fullname": "USENIX Annual Technical Conference",
+        "venue": "ACM SIGOPS ATC (USENIX ATC)",
+        "fullname": "ACM SIGOPS Annual Technical Conference",
         "rank": "A"
     },
     "conf/eurosys": {
         "venue": "EuroSys",
         "fullname": "European Conference on Computer Systems",
+        "rank": "A"
+    },
+    "conf/hpdc": {
+        "venue": "HPDC",
+        "fullname": "International Symposium on High-Performance Parallel and Distributed Computing",
         "rank": "A"
     },
 
@@ -318,11 +323,6 @@ const ARCH_PDC_SS = {
         "fullname": "International Symposium on Computer Performance, Modeling, Measurements and Evaluation",
         "rank": "B"
     },
-    "conf/hpdc": {
-        "venue": "HPDC",
-        "fullname": "The International ACM Symposium on High-Performance Parallel and Distributed Computing",
-        "rank": "B"
-    },
     "conf/itc": {
         "venue": "ITC",
         "fullname": "International Test Conference",
@@ -346,6 +346,11 @@ const ARCH_PDC_SS = {
     "conf/europar": {
         "venue": "Euro-Par",
         "fullname": "European Conference on Parallel and Distributed Computing",
+        "rank": "B"
+    },
+    "conf/iscas": {
+        "venue": "ISCAS",
+        "fullname": "IEEE International Symposium on Circuits and Systems",
         "rank": "B"
     },
 
@@ -450,11 +455,6 @@ const ARCH_PDC_SS = {
         "fullname": "International Conference on Parallel and Distributed Systems",
         "rank": "C"
     },
-    "conf/iscas": {
-        "venue": "ISCAS",
-        "fullname": "IEEE International Symposium on Circuits and Systems",
-        "rank": "C"
-    },
     "conf/islped": {
         "venue": "ISLPED",
         "fullname": "International Symposium on Low Power Electronics and Design",
@@ -480,6 +480,27 @@ const ARCH_PDC_SS = {
         "fullname": "International Test Conference in Asia",
         "rank": "C"
     },
+    "conf/ieeesec": {
+        "venue": "SEC",
+        "fullname": "ACM/IEEE Symposium on Edge Computing",
+        "rank": "C"
+    },
+    "conf/nas": {
+        "venue": "NAS",
+        "fullname": "International Conference on Networking, Architecture and Storages",
+        "rank": "C"
+    },
+    "conf/hotstorage": {
+        "venue": "HotStorage",
+        "fullname": "ACM/USENIX Workshop on Hot Topics in Storage and File Systems",
+        "rank": "C"
+    },
+    "conf/appt": {
+        "venue": "APPT",
+        "fullname": "International Symposium on Advanced Parallel Processing Technology",
+        "rank": "C"
+    },
+    // International Conference on JointCloud Computing (JCC)
 };
 
 /* 
@@ -596,6 +617,11 @@ const CN = {
     "journals/iotj": {
         "venue": "IOT",
         "fullname": "IEEE Internet of Things Journal",
+        "rank": "C"
+    },
+    "journals/tiot": {
+        "venue": "TIOT",
+        "fullname": "ACM Transactions on Internet of Things",
         "rank": "C"
     },
 
@@ -827,6 +853,11 @@ const NIS = {
         "fullname": "Journal of Computer Security",
         "rank": "B"
     },
+    "journals/cybersec": {
+        "venue": "Cybersecurity",
+        "fullname": "Cybersecurity",
+        "rank": "B"
+    },
 
     // Rank C
     "journals/clsr": {
@@ -869,11 +900,7 @@ const NIS = {
         "fullname": "Security and Communication Networks",
         "rank": "C"
     },
-    "journals/cybersec": {
-        "venue": "Cybersecurity",
-        "fullname": "Cybersecurity",
-        "rank": "C"
-    },
+    // High-Confidence Computing (HCC)
 
 
     // Conference
@@ -1091,6 +1118,21 @@ const NIS = {
     "conf/cisc": {
         "venue": "Inscrypt",
         "fullname": "International Conference on Information Security and Cryptology",
+        "rank": "C"
+    },
+    "conf/codaspy": {
+        "venue": "CODASPY",
+        "fullname": "Conference on Data and Application Security and Privacy",
+        "rank": "C"
+    },
+    "conf/blocksys": {
+        "venue": "BlockSys",
+        "fullname": "International Conference on Blockchain, Artificial Intelligence, and Trustworthy Systems",
+        "rank": "C"
+    },
+    "conf/cscloud": {
+        "venue": "CSCloud",
+        "fullname": "International Conference on Cyber Security and Cloud Computing",
         "rank": "C"
     },
 }
@@ -1318,7 +1360,7 @@ const SE_SS_PL = {
     },
     "conf/icfp": {
         "venue": "ICFP",
-        "fullname": "ACM SIGPLAN International Conference on Function Programming",
+        "fullname": "ACM SIGPLAN International Conference on Functional Programming",
         "rank": "B"
     },
     "conf/lctrts": {
@@ -1384,6 +1426,11 @@ const SE_SS_PL = {
     "conf/hotos": {
         "venue": "HotOS",
         "fullname": "USENIX Workshop on Hot Topics in Operating Systems",
+        "rank": "B"
+    },
+    "conf/cc": {
+        "venue": "CC",
+        "fullname": "International Conference on Compiler Construction",
         "rank": "B"
     },
 
@@ -1518,6 +1565,11 @@ const SE_SS_PL = {
         "fullname": "International Conference on Runtime Verification",
         "rank": "C"
     },
+    "conf/memocode": {
+        "venue": "MEMOCODE",
+        "fullname": "International Conference on Formal Methods and Models for Co-Design",
+        "rank": "C"
+    },
 };
 
 /* 
@@ -1624,6 +1676,11 @@ const DB_DM_CR = {
         "fullname": "Knowledge and Information Systems",
         "rank": "B"
     },
+    "journals/dase": {
+        "venue": "DSE",
+        "fullname": "Data Science and Engineering",
+        "rank": "B"
+    },
 
     // Rank C
     "journals/dpd": {
@@ -1696,9 +1753,14 @@ const DB_DM_CR = {
         "fullname": "The Journal of Strategic Information Systems",
         "rank": "C"
     },
-    "journals/dase": {
-        "venue": "DSE",
-        "fullname": "Data Science and Engineering",
+    "journals/tist": {
+        "venue": "TIST",
+        "fullname": "ACM Transactions on Intelligent Systems and Technology",
+        "rank": "C"
+    },
+    "journals/tors": {
+        "venue": "TORS",
+        "fullname": "ACM Transactions on Recommender Systems",
         "rank": "C"
     },
 
@@ -1792,6 +1854,11 @@ const DB_DM_CR = {
         "fullname": "ACM Conference on Recommender Systems",
         "rank": "B"
     },
+    "conf/wise": {
+        "venue": "WISE",
+        "fullname": "Web Information Systems Engineering Conference",
+        "rank": "B"
+    },
 
     // Rank C
     "conf/apweb": {
@@ -1849,14 +1916,14 @@ const DB_DM_CR = {
         "fullname": "Pacific-Asia Conference on Knowledge Discovery and Data Mining",
         "rank": "C"
     },
-    "conf/wise": {
-        "venue": "WISE",
-        "fullname": "Web Information Systems Engineering",
-        "rank": "C"
-    },
     "conf/adma": {
         "venue": "ADMA",
         "fullname": "International Conference on Advanced Data Mining and Applications",
+        "rank": "C"
+    },
+    "conf/wisa": {
+        "venue": "WISA",
+        "fullname": "Web Information Systems and Applications",
         "rank": "C"
     },
 };
@@ -2012,6 +2079,11 @@ const CST = {
         "fullname": "Theory of Computing Systems",
         "rank": "C"
     },
+    "journals/tqc": {
+        "venue": "TQC",
+        "fullname": "ACM Transactions in Quantum Computing",
+        "rank": "C"
+    },
 
     // Conference
     // Rank A
@@ -2087,16 +2159,16 @@ const CST = {
         "fullname": "International Computing and Combinatorics Conference",
         "rank": "B"
     },
+    "conf/fmcad": {
+        "venue": "FMCAD",
+        "fullname": "Formal Methods in Computer-Aided Design",
+        "rank": "B"
+    },
 
     // Rank C
     "conf/csl": {
         "venue": "CSL",
         "fullname": "Computer Science Logic",
-        "rank": "C"
-    },
-    "conf/fmcad": {
-        "venue": "FMCAD",
-        "fullname": "Formal Method in Computer-Aided Design",
         "rank": "C"
     },
     "conf/fsttcs": {
@@ -2120,8 +2192,8 @@ const CST = {
         "rank": "C"
     },
     "conf/rta": {
-        "venue": "RTA",
-        "fullname": "International Conference on Rewriting Techniques and Applications",
+        "venue": "FSCD (RTA)",
+        "fullname": "International Conference on Formal Structures for Computation and Deduction",
         "rank": "C"
     },
     "conf/isaac": {
@@ -2174,6 +2246,11 @@ const CG_MM = {
         "fullname": "IEEE Transactions on Visualization and Computer Graphics",
         "rank": "A"
     },
+    "journals/tmm": {
+        "venue": "TMM",
+        "fullname": "IEEE Transactions on Multimedia",
+        "rank": "A"
+    },
 
     // Rank B
     "journals/tomccap": {
@@ -2197,19 +2274,9 @@ const CG_MM = {
         "fullname": "Computer-Aided Design",
         "rank": "B"
     },
-    "journals/cvgip": {
-        "venue": "CM",
-        "fullname": "Graphical Models",
-        "rank": "B"
-    },
     "journals/tcsv": {
         "venue": "TCSVT",
         "fullname": "IEEE Transactions on Circuits and Systems for Video Technology",
-        "rank": "B"
-    },
-    "journals/tmm": {
-        "venue": "TMM",
-        "fullname": "IEEE Transactions on Multimedia",
         "rank": "B"
     },
     // The Journal of the Acoustical Society of America, http://scitation.aip.org/content/asa/journal/jasa
@@ -2221,6 +2288,11 @@ const CG_MM = {
     "journals/speech": {
         "venue": "SPECOM",
         "fullname": "Speech Communication",
+        "rank": "B"
+    },
+    "journals/cvm": {
+        "venue": "CVMJ",
+        "fullname": "Computational Visual Media",
         "rank": "B"
     },
 
@@ -2285,9 +2357,19 @@ const CG_MM = {
         "fullname": "The Visual Computer",
         "rank": "C"
     },
-    "journals/cvm": {
-        "venue": "CVMJ",
-        "fullname": "Computational Visual Media",
+    "journals/vi": {
+        "venue": "VI",
+        "fullname": "Visual Informatics",
+        "rank": "C"
+    },
+    "journals/vrih": {
+        "venue": "VRIH",
+        "fullname": "Virtual Reality & Intelligent Hardware",
+        "rank": "C"
+    },
+    "journals/cvgip": {
+        "venue": "GMOD",
+        "fullname": "Graphical Models",
         "rank": "C"
     },
 
@@ -2381,6 +2463,11 @@ const CG_MM = {
         "fullname": "Symposium on Solid and Physical Modeling",
         "rank": "B"
     },
+    "conf/interspeech": {
+        "venue": "INTERSPEECH",
+        "fullname": "Conference of the International Speech Communication Association",
+        "rank": "B"
+    },
 
     // Rank C
     "conf/vrst": {
@@ -2396,11 +2483,6 @@ const CG_MM = {
     "conf/cgi": {
         "venue": "CGI",
         "fullname": "Computer Graphics International",
-        "rank": "C"
-    },
-    "conf/interspeech": {
-        "venue": "INTERSPEECH",
-        "fullname": "Conference of the International Speech Communication Association",
         "rank": "C"
     },
     "conf/gmp": {
@@ -2443,7 +2525,6 @@ const CG_MM = {
         "fullname": "Shape Modeling International",
         "rank": "C"
     },
-    // International Conference on Virtual Reality and Visualization, https://www.computer.org/csdl/proceedings/1800579
     "conf/cvm": {
         "venue": "CVM",
         "fullname": "Computational Visual Media",
@@ -2452,6 +2533,22 @@ const CG_MM = {
     "conf/prcv": {
         "venue": "PRCV",
         "fullname": "Chinese Conference on Pattern Recognition and Computer Vision",
+        "rank": "C"
+    },
+    "conf/icig": {
+        "venue": "ICIG",
+        "fullname": "International Conference on Image and Graphics",
+        "rank": "C"
+    },
+    // National Conference on Man-Machine Speech Communication (NCMMSC)
+    "conf/asru": {
+        "venue": "ASRU",
+        "fullname": "Automatic Speech Recognition and Understanding Workshop",
+        "rank": "C"
+    },
+    "conf/slt": {
+        "venue": "SLT",
+        "fullname": "Spoken Language Technology",
         "rank": "C"
     },
 }
@@ -2776,6 +2873,12 @@ const AI = {
         "fullname": "ACM Transactions on Interactive Intelligent Systems",
         "rank": "C"
     },
+    "journals/telo": {
+        "venue": "TELO",
+        "fullname": "ACM Transactions on Evolutionary Learning and Optimization",
+        "rank": "C"
+    },
+    // ACM Journal on Autonomous Transportation Systems (JATS)
 
 
     // Conference
@@ -2810,9 +2913,9 @@ const AI = {
         "fullname": "International Conference on Machine Learning",
         "rank": "A"
     },
-    "conf/ijcai": {
-        "venue": "IJCAI",
-        "fullname": "International Joint Conference on Artificial Intelligence",
+    "conf/iclr": {
+        "venue": "ICLR",
+        "fullname": "International Conference on Learning Representations",
         "rank": "A"
     },
 
@@ -2880,6 +2983,11 @@ const AI = {
     "conf/naacl": {
         "venue": "NAACL",
         "fullname": "North American Chapter of the Associationfor Computational Linguistics",
+        "rank": "B"
+    },
+    "conf/ijcai": {
+        "venue": "IJCAI",
+        "fullname": "International Joint Conference on Artificial Intelligence",
         "rank": "B"
     },
 
@@ -2984,6 +3092,16 @@ const AI = {
         "fullname": "Pacific Rim International Conference on Artificial Intelligence",
         "rank": "C"
     },
+    "conf/cec": {
+        "venue": "IEEE CEC",
+        "fullname": "Congress on Evolutionary Computation",
+        "rank": "C"
+    },
+    "conf/dai2": {
+        "venue": "DAI",
+        "fullname": "International Conference on Distributed Artificial Intelligence",
+        "rank": "C"
+    },
 };
 
 /* 
@@ -3044,6 +3162,11 @@ const HCI_UBICOMP = {
         "fullname": "IEEE Transactions on Systems, Man, and Cybernetics: Systems",
         "rank": "B"
     },
+    "journals/ccftpci": {
+        "venue": "CCF TPCI",
+        "fullname": "CCF Transactions on Pervasive Computing and Interaction",
+        "rank": "B"
+    },
 
     // Rank C
     "journals/behaviourIT": {
@@ -3064,6 +3187,11 @@ const HCI_UBICOMP = {
     "journals/pacmhci": {
         "venue": "PACMHCI",
         "fullname": "Proceedings of the ACM on Human-Computer Interaction",
+        "rank": "C"
+    },
+    "journals/thri": {
+        "venue": "THRI",
+        "fullname": "ACM Transactions on Human-Robot Interaction",
         "rank": "C"
     },
 
@@ -3193,6 +3321,16 @@ const HCI_UBICOMP = {
         "fullname": "International Working Conference on Advanced Visual Interfaces",
         "rank": "C"
     },
+    "conf/gpc": {
+        "venue": "GPC",
+        "fullname": "Conference on Green, Pervasive and Cloud Computing",
+        "rank": "C"
+    },
+    "conf/icxr": {
+        "venue": "ICXR",
+        "fullname": "CCF International Conference on Extended Reality",
+        "rank": "C"
+    },
 }
 
 /* 
@@ -3220,13 +3358,13 @@ const INTERDISCIPLINARY_EMERGING = {
         "fullname": "Science China Information Sciences",
         "rank": "A"
     },
-
-    // Rank B
     "journals/bioinformatics": {
         "venue": "Bioinformatics",
         "fullname": "Bioinformatics",
-        "rank": "B"
+        "rank": "A"
     },
+
+    // Rank B
     "journals/bib": {
         "venue": "Briefings in Bioinformatics",
         "fullname": "Briefings in Bioinformatics",
@@ -3361,6 +3499,16 @@ const INTERDISCIPLINARY_EMERGING = {
         "fullname": "IEEE Transactions on Reliability",
         "rank": "C"
     },
+    "journals/health": {
+        "venue": "HEALTH",
+        "fullname": "ACM Transactions on Computing for Healthcare",
+        "rank": "C"
+    },
+    "journals/distribledger": {
+        "venue": "ACM DLT",
+        "fullname": "ACM Distributed Ledger Technologies: Research and Practice",
+        "rank": "C"
+    },
 
 
     // Conference
@@ -3373,11 +3521,6 @@ const INTERDISCIPLINARY_EMERGING = {
     "conf/rtss": {
         "venue": "RTSS",
         "fullname": "IEEE Real-Time Systems Symposium",
-        "rank": "A"
-    },
-    "conf/wine": {
-        "venue": "WINE",
-        "fullname": "Conference on Web and Internet Economics",
         "rank": "A"
     },
 
@@ -3410,6 +3553,11 @@ const INTERDISCIPLINARY_EMERGING = {
     "conf/miccai": {
         "venue": "MICCAI",
         "fullname": "International Conference on Medical Image Computing and Computer-Assisted Intervention",
+        "rank": "B"
+    },
+    "conf/wine": {
+        "venue": "WINE",
+        "fullname": "Conference on Web and Internet Economics",
         "rank": "B"
     },
 
@@ -3464,6 +3612,21 @@ const INTERDISCIPLINARY_EMERGING = {
         "fullname": "International Conference on Intelligent Computing",
         "rank": "C"
     },
+    "conf/service": {
+        "venue": "ICSS",
+        "fullname": "International Conference on Service Science",
+        "rank": "C"
+    },
+    "conf/aft": {
+        "venue": "AFT",
+        "fullname": "Advances in Financial Technologies",
+        "rank": "C"
+    },
+    "conf/faw": {
+        "venue": "IJTCS-FAW",
+        "fullname": "International Joint Conference on Theoretical Computer Science - Frontier of Algorithmic Wisdom",
+        "rank": "C"
+    },
 };
 
 /* 
@@ -3490,11 +3653,6 @@ const OTHERS = {
     "journals/corr": {
         "venue": "arXiv",
         "fullname": "arXiv",
-        "rank": "A"
-    },
-    "conf/iclr": {
-        "venue": "ICLR",
-        "fullname": "International Conference on Learning Representations",
         "rank": "A"
     },
 
