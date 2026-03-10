@@ -2191,7 +2191,7 @@ const CST = {
         "fullname": "International Conference on Integer Programming and Combinatorial Optimization",
         "rank": "C"
     },
-    "conf/rta": {
+    "conf/fscd": {
         "venue": "FSCD (RTA)",
         "fullname": "International Conference on Formal Structures for Computation and Deduction",
         "rank": "C"
