@@ -299,25 +299,56 @@ function getPaperList() {
         }
     };
 
-    // 搜索并更新论文列表
-    queryPaper(
-        query,
-        condition,
-        function (paperList) {
-            PAGINATION.paperList = paperList;
+    function queryHelper(query, condition, failFunc) {
+        // 搜索并更新论文列表
+        queryPaper(
+            query,
+            condition,
+            function (paperList) {
+                PAGINATION.paperList = paperList;
 
-            let tips = template.render($("#responseTipsTemplate").html(), {
-                count: PAGINATION.paperList.length,
-            });
-            $("#tips").html(tips);
+                let tips = template.render($("#responseTipsTemplate").html(), {
+                    count: PAGINATION.paperList.length,
+                });
+                $("#tips").html(tips);
 
-            updatePaperList();
-        },
-        function () {
-            failHandler();
-            $loadingTips.empty();
-        }
-    );
+                updatePaperList();
+            },
+            function() {
+                failFunc();
+            }
+        );
+    }
+
+    if (condition.venueList.length == 1) {
+        let newQuery = `${query} streamid:${condition.venueList[0]}:`;
+        queryHelper(
+            newQuery,
+            condition,
+            $loadingTips,
+            function() {
+                queryHelper(
+                    query,
+                    condition,
+                    $loadingTips,
+                    function () {
+                        failHandler();
+                        $loadingTips.empty();
+                    }
+                );
+            }
+        );
+    } else {
+        queryHelper(
+            query,
+            condition,
+            $loadingTips,
+            function () {
+                failHandler();
+                $loadingTips.empty();
+            }
+        )
+    }
 }
 
 function getAbstractHandler($abstractTag, abstract) {
