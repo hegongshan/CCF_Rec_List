@@ -314,9 +314,7 @@ function getPaperList() {
 
                 updatePaperList();
             },
-            function() {
-                failFunc();
-            }
+            failFunc
         );
     }
 
@@ -325,12 +323,10 @@ function getPaperList() {
         queryHelper(
             newQuery,
             condition,
-            $loadingTips,
             function() {
                 queryHelper(
                     query,
                     condition,
-                    $loadingTips,
                     function () {
                         failHandler();
                         $loadingTips.empty();
@@ -342,7 +338,6 @@ function getPaperList() {
         queryHelper(
             query,
             condition,
-            $loadingTips,
             function () {
                 failHandler();
                 $loadingTips.empty();
