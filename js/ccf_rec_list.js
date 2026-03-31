@@ -2135,8 +2135,8 @@ const CST = {
         "rank": "B"
     },
     "conf/cade": {
-        "venue": "International Conference on Automated Deduction/International Joint Conference on Automated Reasoning",
-        "fullname": "International Conference on Automated Deduction/International Joint Conference on Automated Reasoning",
+        "venue": "CADE",
+        "fullname": "Conference on Automated Deduction",
         "rank": "B"
     },
     "conf/concur": {
