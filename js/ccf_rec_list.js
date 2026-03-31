@@ -527,7 +527,7 @@ const CN = {
     },
     "journals/ton": {
         "venue": "TON",
-        "fullname": "IEEE/ACM Transactions on Networking",
+        "fullname": "IEEE Transactions on Networking",
         "rank": "A"
     },
 
@@ -1700,7 +1700,7 @@ const DB_DM_CR = {
     },
     "journals/ir": {
         "venue": "IR",
-        "fullname": "Information Retrieval Journal",
+        "fullname": "Discover Computing (Information Retrieval Journal)",
         "rank": "C"
     },
     "journals/ijcis": {
@@ -2388,7 +2388,7 @@ const CG_MM = {
     },
     "conf/vr": {
         "venue": "VR",
-        "fullname": "IEEE Virtual Reality",
+        "fullname": "IEEE Conference on Virtual Reality and 3D User Interfaces (IEEE Virtual Reality)",
         "rank": "A"
     },
     "conf/visualization": {
@@ -2476,8 +2476,8 @@ const CG_MM = {
         "rank": "C"
     },
     "conf/ca": {
-        "venue": "CASA",
-        "fullname": "International Conference on Computer Animation and Social Agents",
+        "venue": "CASAXR (CASA)",
+        "fullname": "International Conference on Computer Animation, Social Agents, and Extended Reality (International Conference on Computer Animation and Social Agents)",
         "rank": "C"
     },
     "conf/cgi": {
@@ -2622,7 +2622,7 @@ const AI = {
     },
     "journals/taslp": {
         "venue": "TASLP",
-        "fullname": "IEEE/ACM Transactions on Audio, Speech and Language Processing",
+        "fullname": "IEEE Transactions on Audio, Speech and Language Processing",
         "rank": "B"
     },
     "journals/tcyb": {
@@ -3485,8 +3485,8 @@ const INTERDISCIPLINARY_EMERGING = {
         "rank": "C"
     },
     "journals/jzusc": {
-        "venue": "FITEE",
-        "fullname": "Frontiers of Information Technology & Electronic Engineering",
+        "venue": "EITEE (FITEE)",
+        "fullname": "ENGINEERING Information Technology & Electronic Engineering (Frontiers of Information Technology & Electronic Engineering)",
         "rank": "C"
     },
     "journals/tcss": {
@@ -3515,7 +3515,7 @@ const INTERDISCIPLINARY_EMERGING = {
     // Rank A
     "conf/www": {
         "venue": "WWW",
-        "fullname": "International World Wide Web Conference",
+        "fullname": "The Web Conference (International World Wide Web Conference)",
         "rank": "A"
     },
     "conf/rtss": {
